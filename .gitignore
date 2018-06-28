@@ -1,0 +1,11 @@
+
+.idea/
+bookstore-starter-flow-ui/bookstore-starter-flow-ui.iml
+bookstore-starter-flow-ui/target/
+bookstore-starter-flow-production/bookstore-starter-flow-production.iml
+bookstore-starter-flow-backend/bookstore-starter-flow-backend.iml
+bookstore-starter-flow-backend/target/
+bookstore-starter-flow-widgetset/bookstore-starter-flow-widgetset.iml
+bookstore-starter-flow-widgetset/target/
+BookStoreStarterFlow.iml
+bookstore-starter-flow.iml
