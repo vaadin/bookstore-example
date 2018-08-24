@@ -28,24 +28,8 @@
             <artifactId>vaadin-push</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>bookstore-starter-flow-backend</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- Custom components -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>bookstore-starter-flow-widgetset</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -54,6 +38,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.1.0.CR1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+            <version>10.0.4</version>
         </dependency>
 
         <!-- Testing -->
@@ -94,23 +84,25 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
-                <configuration>
-                    <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-                    <webappDirectory>${basedir}/target/classes/VAADIN/widgetsets</webappDirectory>
-                    <draftCompile>false</draftCompile>
-                    <compileReport>false</compileReport>
-                    <style>OBF</style>
-                    <strict>true</strict>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>update-theme</goal>
-                            <!-- Comment out compile-theme goal to use on-the-fly theme compilation -->
-                            <goal>compile-theme</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <!--<configuration>-->
+                    <!--<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>-->
+                    <!--<webappDirectory>-->
+                        <!--${basedir}/target/classes/VAADIN/widgetsets-->
+                    <!--</webappDirectory>-->
+                    <!--<draftCompile>false</draftCompile>-->
+                    <!--<compileReport>false</compileReport>-->
+                    <!--<style>OBF</style>-->
+                    <!--<strict>true</strict>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>update-theme</goal>-->
+                            <!--&lt;!&ndash; Comment out compile-theme goal to use on-the-fly theme compilation &ndash;&gt;-->
+                            <!--<goal>compile-theme</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
             </plugin>
             <!-- TODO remove? -->
             <plugin>

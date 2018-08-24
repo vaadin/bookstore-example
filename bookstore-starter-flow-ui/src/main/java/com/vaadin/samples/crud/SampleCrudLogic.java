@@ -5,7 +5,6 @@ import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
 import java.io.Serializable;
-import com.vaadin.server.Page;
 
 /**
  * This class provides an interface for the logical operations between the CRUD
@@ -48,10 +47,11 @@ public class SampleCrudLogic implements Serializable {
             fragmentParameter = productId;
         }
 
-        Page page = MyUI.get().getPage();
-        page.setUriFragment(
-                "!" + SampleCrudView.VIEW_NAME + "/" + fragmentParameter,
-                false);
+        //TODO must be converted to Flow version in next steps
+//        Page page = MyUI.get().getPage();
+//        page.setUriFragment(
+//                "!" + SampleCrudView.VIEW_NAME + "/" + fragmentParameter,
+//                false);
     }
 
     public void enter(String productId) {

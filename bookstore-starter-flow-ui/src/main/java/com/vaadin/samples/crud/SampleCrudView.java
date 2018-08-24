@@ -1,6 +1,5 @@
 package com.vaadin.samples.crud;
 
-import com.vaadin.samples.ResetButtonForTextField;
 import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
@@ -65,7 +64,6 @@ public class SampleCrudView extends CssLayout implements View {
         filter = new TextField();
         filter.setStyleName("filter-textfield");
         filter.setPlaceholder("Filter name, availability or category");
-        ResetButtonForTextField.extend(filter);
         // Apply the filter to grid's data provider. TextField value is never null
         filter.addValueChangeListener(event -> dataProvider.setFilter(event.getValue()));
 

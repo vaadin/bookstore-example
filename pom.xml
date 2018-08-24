@@ -131,7 +131,6 @@
 		</profile>
 	</profiles>
   <modules>
-    <module>bookstore-starter-flow-widgetset</module>
     <module>bookstore-starter-flow-backend</module>
     <module>bookstore-starter-flow-ui</module>
     <module>bookstore-starter-flow-production</module>

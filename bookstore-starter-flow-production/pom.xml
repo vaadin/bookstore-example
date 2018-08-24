@@ -33,13 +33,6 @@
             <classifier>classes</classifier>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>bookstore-starter-flow-widgetset</artifactId>
-            <version>${project.version}</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <profiles>

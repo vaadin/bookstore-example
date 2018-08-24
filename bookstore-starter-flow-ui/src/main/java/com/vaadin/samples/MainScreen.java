@@ -1,11 +1,6 @@
 package com.vaadin.samples;
 
 import com.vaadin.MyUI;
-import com.vaadin.samples.about.AboutView;
-import com.vaadin.samples.crud.SampleCrudView;
-
-import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -27,15 +22,16 @@ public class MainScreen extends HorizontalLayout {
         viewContainer.addStyleName("valo-content");
         viewContainer.setSizeFull();
 
-        final Navigator navigator = new Navigator(ui, viewContainer);
-        navigator.setErrorView(ErrorView.class);
-        menu = new Menu(navigator);
-        menu.addView(new SampleCrudView(), SampleCrudView.VIEW_NAME,
-                SampleCrudView.VIEW_NAME, VaadinIcons.EDIT);
-        menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
-                VaadinIcons.INFO_CIRCLE);
-
-        navigator.addViewChangeListener(viewChangeListener);
+        //TODO must be converted to Flow version in next steps
+//        final Navigator navigator = new Navigator(ui, viewContainer);
+//        navigator.setErrorView(ErrorView.class);
+//        menu = new Menu(navigator);
+//        menu.addView(new SampleCrudView(), SampleCrudView.VIEW_NAME,
+//                SampleCrudView.VIEW_NAME, VaadinIcons.EDIT);
+//        menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
+//                VaadinIcons.INFO_CIRCLE);
+//
+//        navigator.addViewChangeListener(viewChangeListener);
 
         addComponent(menu);
         addComponent(viewContainer);

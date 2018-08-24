@@ -6,7 +6,6 @@ import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.Locale;
 
-import com.vaadin.samples.AttributeExtension;
 import com.vaadin.samples.backend.data.Availability;
 import com.vaadin.samples.backend.data.Category;
 import com.vaadin.samples.backend.data.Product;
@@ -64,12 +63,6 @@ public class ProductForm extends ProductFormDesign {
         super();
         addStyleName("product-form");
         viewLogic = sampleCrudLogic;
-
-        // Mark the stock count field as numeric.
-        // This affects the virtual keyboard shown on mobile devices.
-        AttributeExtension stockFieldExtension = new AttributeExtension();
-        stockFieldExtension.extend(stockCount);
-        stockFieldExtension.setAttribute("type", "number");
 
         availability.setItems(Availability.values());
         availability.setEmptySelectionAllowed(false);
