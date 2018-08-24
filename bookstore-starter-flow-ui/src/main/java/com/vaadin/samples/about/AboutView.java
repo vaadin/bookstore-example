@@ -1,39 +1,28 @@
 package com.vaadin.samples.about;
 
-import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.shared.Version;
-import com.vaadin.shared.ui.ContentMode;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.CustomLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.server.Version;
+import com.vaadin.samples.MainScreen;
 
-public class AboutView extends VerticalLayout implements View {
+@Route(value = "About", layout = MainScreen.class)
+@RouteAlias(value = "", layout = MainScreen.class)
+@PageTitle("About")
+public class AboutView extends HorizontalLayout {
 
     public static final String VIEW_NAME = "About";
 
     public AboutView() {
-        CustomLayout aboutContent = new CustomLayout("aboutview");
-        aboutContent.setStyleName("about-content");
-
-        // you can add Vaadin components in predefined slots in the custom
-        // layout
-        aboutContent.addComponent(
-                new Label(VaadinIcons.INFO_CIRCLE.getHtml()
-                        + " This application is using Vaadin "
-                        + Version.getFullVersion(), ContentMode.HTML), "info");
+        add(VaadinIcon.INFO_CIRCLE.create());
+        add(new Span(" This application is using Vaadin "
+                + Version.getFullVersion()));
 
         setSizeFull();
-        setMargin(false);
-        setStyleName("about-view");
-        addComponent(aboutContent);
-        setComponentAlignment(aboutContent, Alignment.MIDDLE_CENTER);
+        setJustifyContentMode(JustifyContentMode.CENTER);
+        setAlignItems(Alignment.CENTER);
     }
-
-    @Override
-    public void enter(ViewChangeEvent event) {
-    }
-
 }
