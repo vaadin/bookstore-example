@@ -1,6 +1,5 @@
 package com.vaadin.samples;
 
-import com.vaadin.MyUI;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -13,7 +12,7 @@ import com.vaadin.ui.HorizontalLayout;
 public class MainScreen extends HorizontalLayout {
     private Menu menu;
 
-    public MainScreen(MyUI ui) {
+    public MainScreen() {
 
         setSpacing(false);
         setStyleName("main-screen");

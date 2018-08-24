@@ -1,7 +1,7 @@
 package com.vaadin.samples.authentication;
 
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinService;
+import com.vaadin.flow.server.VaadinRequest;
+import com.vaadin.flow.server.VaadinService;
 
 /**
  * Class for retrieving and setting the name of the current user of the current
@@ -9,7 +9,7 @@ import com.vaadin.server.VaadinService;
  * {@link VaadinRequest} is bound to the current thread.
  * 
  * 
- * @see com.vaadin.server.VaadinService#getCurrentRequest()
+ * @see VaadinService#getCurrentRequest()
  */
 public final class CurrentUser {
 

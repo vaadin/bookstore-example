@@ -1,138 +1,127 @@
 package com.vaadin.samples.authentication;
 
-import java.io.Serializable;
-
-import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.Page;
-import com.vaadin.shared.ui.ContentMode;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 /**
  * UI content when the user is not logged in yet.
  */
-public class LoginScreen extends CssLayout {
+@Route("Login")
+@PageTitle("Login")
+public class LoginScreen extends FlexLayout {
 
     private TextField username;
     private PasswordField password;
     private Button login;
     private Button forgotPassword;
-    private LoginListener loginListener;
     private AccessControl accessControl;
 
-    public LoginScreen(AccessControl accessControl, LoginListener loginListener) {
-        this.loginListener = loginListener;
-        this.accessControl = accessControl;
+    public LoginScreen() {
+        accessControl = AccessControlFactory.getInstance().createAccessControl();
         buildUI();
         username.focus();
     }
 
     private void buildUI() {
-        addStyleName("login-screen");
+        setSizeFull();
 
         // login form, centered in the available part of the screen
         Component loginForm = buildLoginForm();
 
         // layout to center login form when there is sufficient screen space
-        // - see the theme for how this is made responsive for various screen
-        // sizes
-        VerticalLayout centeringLayout = new VerticalLayout();
-        centeringLayout.setMargin(false);
-        centeringLayout.setSpacing(false);
-        centeringLayout.setStyleName("centering-layout");
-        centeringLayout.addComponent(loginForm);
-        centeringLayout.setComponentAlignment(loginForm,
-                Alignment.MIDDLE_CENTER);
+        FlexLayout centeringLayout = new FlexLayout();
+        centeringLayout.setSizeFull();
+        centeringLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+        centeringLayout.setAlignItems(Alignment.CENTER);
+        centeringLayout.add(loginForm);
 
         // information text about logging in
-        CssLayout loginInformation = buildLoginInformation();
+        Component loginInformation = buildLoginInformation();
 
-        addComponent(centeringLayout);
-        addComponent(loginInformation);
+        add(loginInformation);
+        add(centeringLayout);
+
+        setFlexGrow(1, loginInformation);
     }
 
     private Component buildLoginForm() {
         FormLayout loginForm = new FormLayout();
 
-        loginForm.addStyleName("login-form");
-        loginForm.setSizeUndefined();
-        loginForm.setMargin(false);
+        loginForm.setWidth("310px");
 
-        loginForm.addComponent(username = new TextField("Username", "admin"));
-        username.setWidth(15, Unit.EM);
-        loginForm.addComponent(password = new PasswordField("Password"));
-        password.setWidth(15, Unit.EM);
-        password.setDescription("Write anything");
-        CssLayout buttons = new CssLayout();
-        buttons.setStyleName("buttons");
-        loginForm.addComponent(buttons);
+        loginForm.addFormItem(username = new TextField(), "Username");
+        username.setWidth("15em");
+        username.setValue("admin");
+        loginForm.add(new Html("<br/>"));
+        loginForm.addFormItem(password = new PasswordField(), "Password");
+        password.setWidth("15em");
 
-        buttons.addComponent(login = new Button("Login"));
-        login.setDisableOnClick(true);
-        login.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                try {
-                    login();
-                } finally {
-                    login.setEnabled(true);
-                }
-            }
-        });
-        login.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        login.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        HorizontalLayout buttons = new HorizontalLayout();
+        loginForm.add(new Html("<br/>"));
+        loginForm.add(buttons);
 
-        buttons.addComponent(forgotPassword = new Button("Forgot password?"));
-        forgotPassword.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                showNotification(new Notification("Hint: Try anything"));
-            }
-        });
-        forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
+        buttons.add(login = new Button("Login"));
+        login.addClickListener(event -> login());
+        loginForm.getElement().addEventListener("keypress", event -> login()).setFilter("event.key == 'Enter'");
+        login.getElement().getThemeList().add("success primary");
+
+        buttons.add(forgotPassword = new Button("Forgot password?"));
+        forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: Try anything")));
+        forgotPassword.getElement().getThemeList().add("tertiary");
+
         return loginForm;
     }
 
-    private CssLayout buildLoginInformation() {
-        CssLayout loginInformation = new CssLayout();
-        loginInformation.setStyleName("login-information");
-        Label loginInfoText = new Label(
-                "<h1>Login Information</h1>"
-                        + "Log in as &quot;admin&quot; to have full access. Log in with any other username to have read-only access. For all users, any password is fine",
-                ContentMode.HTML);
-        loginInfoText.setSizeFull();
-        loginInformation.addComponent(loginInfoText);
+    private Component buildLoginInformation() {
+        VerticalLayout loginInformation = new VerticalLayout();
+
+        H1 loginInfoHeader = new H1("Login Information");
+        Span loginInfoText = new Span(
+                "Log in as \"admin\" to have full access. Log in with any other username to have read-only access. For all users, any password is fine");
+        loginInformation.add(loginInfoHeader);
+        loginInformation.add(loginInfoText);
+
+        // To set a fixed minimum width
+        loginInformation.getStyle().set("min-width", "300px");
+
+        // To avoid it growing with its parent
+        loginInformation.getStyle().set("flex", "0");
+
         return loginInformation;
     }
 
     private void login() {
-        if (accessControl.signIn(username.getValue(), password.getValue())) {
-            loginListener.loginSuccessful();
-        } else {
-            showNotification(new Notification("Login failed",
-                    "Please check your username and password and try again.",
-                    Notification.Type.HUMANIZED_MESSAGE));
-            username.focus();
+        login.setEnabled(false);
+        try {
+            if (accessControl.signIn(username.getValue(), password.getValue())) {
+                getUI().get().navigate("");
+            } else {
+                showNotification(new Notification("Login failed. " +
+                        "Please check your username and password and try again."));
+                username.focus();
+            }
+        } finally {
+            login.setEnabled(true);
         }
     }
 
     private void showNotification(Notification notification) {
         // keep the notification visible a little while after moving the
         // mouse, or until clicked
-        notification.setDelayMsec(2000);
-        notification.show(Page.getCurrent());
-    }
-
-    public interface LoginListener extends Serializable {
-        void loginSuccessful();
+        notification.setDuration(2000);
+        notification.open();
     }
 }

@@ -1,6 +1,6 @@
 package com.vaadin.samples.crud;
 
-import com.vaadin.MyUI;
+import com.vaadin.samples.authentication.AccessControlFactory;
 import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
@@ -26,7 +26,7 @@ public class SampleCrudLogic implements Serializable {
     public void init() {
         editProduct(null);
         // Hide and disable if not admin
-        if (!MyUI.get().getAccessControl().isUserInRole("admin")) {
+        if (!AccessControlFactory.getInstance().createAccessControl().isUserInRole("admin")) {
             view.setNewProductEnabled(false);
         }
     }
@@ -107,7 +107,7 @@ public class SampleCrudLogic implements Serializable {
     }
 
     public void rowSelected(Product product) {
-        if (MyUI.get().getAccessControl().isUserInRole("admin")) {
+        if (AccessControlFactory.getInstance().createAccessControl().isUserInRole("admin")) {
             view.editProduct(product);
         }
     }
