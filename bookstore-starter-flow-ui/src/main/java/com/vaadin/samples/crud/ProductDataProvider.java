@@ -1,15 +1,13 @@
 package com.vaadin.samples.crud;
 
-import java.util.Locale;
-import java.util.Objects;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
+import com.vaadin.flow.data.provider.AbstractDataProvider;
+import com.vaadin.flow.data.provider.Query;
 import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
-import com.vaadin.data.provider.AbstractDataProvider;
-import com.vaadin.data.provider.Query;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class ProductDataProvider
         extends AbstractDataProvider<Product, String> {
@@ -83,12 +81,14 @@ public class ProductDataProvider
     @Override
     public Stream<Product> fetch(Query<Product, String> query) {
         if (filterText.isEmpty()) {
-            return DataService.get().getAllProducts().stream();
+            return DataService.get().getAllProducts().stream()
+                    .skip(query.getOffset()).limit(query.getLimit());
         }
         return DataService.get().getAllProducts().stream().filter(
                 product -> passesFilter(product.getProductName(), filterText)
                         || passesFilter(product.getAvailability(), filterText)
-                        || passesFilter(product.getCategory(), filterText));
+                        || passesFilter(product.getCategory(), filterText))
+                .skip(query.getOffset()).limit(query.getLimit());
     }
 
     private boolean passesFilter(Object object, String filterText) {

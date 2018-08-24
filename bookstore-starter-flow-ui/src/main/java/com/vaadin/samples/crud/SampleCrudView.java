@@ -1,20 +1,18 @@
 package com.vaadin.samples.crud;
 
-import com.vaadin.samples.backend.DataService;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.OptionalParameter;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.samples.MainScreen;
 import com.vaadin.samples.backend.data.Product;
-
-import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * A view for performing create-read-update-delete operations on products.
@@ -22,11 +20,14 @@ import com.vaadin.ui.themes.ValoTheme;
  * See also {@link SampleCrudLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
-public class SampleCrudView extends CssLayout implements View {
+@Route(value = "Inventory", layout = MainScreen.class)
+@RouteAlias(value = "", layout = MainScreen.class)
+public class SampleCrudView extends HorizontalLayout
+        implements HasUrlParameter<String> {
 
     public static final String VIEW_NAME = "Inventory";
     private ProductGrid grid;
-    private ProductForm form;
+    // private ProductForm form;
     private TextField filter;
 
     private SampleCrudLogic viewLogic = new SampleCrudLogic(this);
@@ -36,7 +37,6 @@ public class SampleCrudView extends CssLayout implements View {
 
     public SampleCrudView() {
         setSizeFull();
-        addStyleName("crud-view");
         HorizontalLayout topLayout = createTopBar();
 
         grid = new ProductGrid();
@@ -44,55 +44,49 @@ public class SampleCrudView extends CssLayout implements View {
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
 
-        form = new ProductForm(viewLogic);
-        form.setCategories(DataService.get().getAllCategories());
+        // form = new ProductForm(viewLogic);
+        // form.setCategories(DataService.get().getAllCategories());
 
         VerticalLayout barAndGridLayout = new VerticalLayout();
-        barAndGridLayout.addComponent(topLayout);
-        barAndGridLayout.addComponent(grid);
+        barAndGridLayout.add(topLayout);
+        barAndGridLayout.add(grid);
+        barAndGridLayout.setFlexGrow(1, grid);
+        barAndGridLayout.setFlexGrow(0, topLayout);
         barAndGridLayout.setSizeFull();
-        barAndGridLayout.setExpandRatio(grid, 1);
-        barAndGridLayout.setStyleName("crud-main-layout");
+        barAndGridLayout.expand(grid);
 
-        addComponent(barAndGridLayout);
-        addComponent(form);
+        add(barAndGridLayout);
+        // add(form);
 
         viewLogic.init();
     }
 
     public HorizontalLayout createTopBar() {
         filter = new TextField();
-        filter.setStyleName("filter-textfield");
         filter.setPlaceholder("Filter name, availability or category");
         // Apply the filter to grid's data provider. TextField value is never null
         filter.addValueChangeListener(event -> dataProvider.setFilter(event.getValue()));
 
         newProduct = new Button("New product");
-        newProduct.addStyleName(ValoTheme.BUTTON_PRIMARY);
-        newProduct.setIcon(VaadinIcons.PLUS_CIRCLE);
+        newProduct.getElement().getThemeList().add("primary");
+        newProduct.setIcon(VaadinIcon.PLUS_CIRCLE.create());
         newProduct.addClickListener(click -> viewLogic.newProduct());
 
         HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
-        topLayout.addComponent(filter);
-        topLayout.addComponent(newProduct);
-        topLayout.setComponentAlignment(filter, Alignment.MIDDLE_LEFT);
-        topLayout.setExpandRatio(filter, 1);
-        topLayout.setStyleName("top-bar");
+        topLayout.add(filter);
+        topLayout.add(newProduct);
+        topLayout.setVerticalComponentAlignment(Alignment.START, filter);
+        topLayout.expand(filter);
         return topLayout;
     }
 
-    @Override
-    public void enter(ViewChangeEvent event) {
-        viewLogic.enter(event.getParameters());
-    }
-
     public void showError(String msg) {
-        Notification.show(msg, Type.ERROR_MESSAGE);
+        Notification.show(msg);
     }
 
     public void showSaveNotification(String msg) {
-        Notification.show(msg, Type.TRAY_NOTIFICATION);
+        Notification.show(msg);
     }
 
     public void setNewProductEnabled(boolean enabled) {
@@ -113,7 +107,6 @@ public class SampleCrudView extends CssLayout implements View {
 
     public void updateProduct(Product product) {
         dataProvider.save(product);
-        // FIXME: Grid used to scroll to the updated item
     }
 
     public void removeProduct(Product product) {
@@ -121,13 +114,19 @@ public class SampleCrudView extends CssLayout implements View {
     }
 
     public void editProduct(Product product) {
-        if (product != null) {
-            form.addStyleName("visible");
-            form.setEnabled(true);
-        } else {
-            form.removeStyleName("visible");
-            form.setEnabled(false);
-        }
-        form.editProduct(product);
+        // if (product != null) {
+        // form.setVisible(true);
+        // form.getElement().setEnabled(true);
+        // } else {
+        // form.setVisible(false);
+        // form.getElement().setEnabled(false);
+        // }
+        // form.editProduct(product);
+    }
+
+    @Override
+    public void setParameter(BeforeEvent event,
+                             @OptionalParameter String parameter) {
+        viewLogic.enter(parameter);
     }
 }
