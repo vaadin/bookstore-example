@@ -1,13 +1,13 @@
 package com.vaadin.samples.crud;
 
+import com.vaadin.flow.data.binder.Result;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.converter.StringToBigDecimalConverter;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
-
-import com.vaadin.data.Result;
-import com.vaadin.data.converter.StringToBigDecimalConverter;
-import com.vaadin.data.ValueContext;
 
 /**
  * A converter that adds/removes the euro sign and formats currencies with two
@@ -34,8 +34,8 @@ public class EuroConverter extends StringToBigDecimalConverter {
         // Always display currency with two decimals
         NumberFormat format = super.getFormat(locale);
         if (format instanceof DecimalFormat) {
-            ((DecimalFormat) format).setMaximumFractionDigits(2);
-            ((DecimalFormat) format).setMinimumFractionDigits(2);
+            format.setMaximumFractionDigits(2);
+            format.setMinimumFractionDigits(2);
         }
         return format;
     }

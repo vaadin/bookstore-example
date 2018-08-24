@@ -1,32 +1,36 @@
 package com.vaadin.samples;
 
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.ErrorParameter;
+import com.vaadin.flow.router.HasErrorParameter;
+import com.vaadin.flow.router.NotFoundException;
+import com.vaadin.flow.router.ParentLayout;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * View shown when trying to navigate to a view that does not exist using
- * {@link com.vaadin.navigator.Navigator}.
- * 
- * 
  */
-public class ErrorView extends VerticalLayout implements View {
+@ParentLayout(MainScreen.class)
+public class ErrorView extends VerticalLayout implements HasErrorParameter<NotFoundException> {
 
-    private Label explanation;
+    private Span explanation;
 
     public ErrorView() {
-        Label header = new Label("The view could not be found");
-        header.addStyleName(ValoTheme.LABEL_H1);
-        addComponent(header);
-        addComponent(explanation = new Label());
+        H1 header = new H1("The view could not be found");
+        add(header);
+
+        explanation = new Span();
+        add(explanation);
     }
 
     @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-        explanation.setValue(String.format(
-                "You tried to navigate to a view ('%s') that does not exist.",
-                event.getViewName()));
+    public int setErrorParameter(BeforeEnterEvent event, ErrorParameter<NotFoundException> parameter) {
+        explanation.setText("Could not navigate to '"
+                + event.getLocation().getPath() + "'");
+        return HttpServletResponse.SC_NOT_FOUND;
     }
 }

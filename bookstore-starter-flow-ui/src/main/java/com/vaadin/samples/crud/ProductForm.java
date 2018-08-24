@@ -1,21 +1,28 @@
 package com.vaadin.samples.crud;
 
-import java.lang.reflect.InvocationTargetException;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.Result;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
+import com.vaadin.flow.templatemodel.TemplateModel;
+import com.vaadin.samples.backend.data.Availability;
+import com.vaadin.samples.backend.data.Category;
+import com.vaadin.samples.backend.data.Product;
+import org.vaadin.pekka.CheckboxGroup;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.Locale;
-
-import com.vaadin.samples.backend.data.Availability;
-import com.vaadin.samples.backend.data.Category;
-import com.vaadin.samples.backend.data.Product;
-
-import com.vaadin.data.BeanValidationBinder;
-import com.vaadin.data.Binder;
-import com.vaadin.data.Result;
-import com.vaadin.data.converter.StringToIntegerConverter;
-import com.vaadin.data.ValueContext;
-import com.vaadin.server.Page;
 
 /**
  * A form for editing a single product.
@@ -24,7 +31,39 @@ import com.vaadin.server.Page;
  * side of the view or filling the whole screen - see the theme for the related
  * CSS rules.
  */
-public class ProductForm extends ProductFormDesign {
+@HtmlImport("frontend://com/vaadin/samples/ProductFormDesign.html")
+@Tag("product-form")
+public class ProductForm extends PolymerTemplate<TemplateModel> {
+    @Id("productName")
+    protected TextField productName;
+
+    @Id("price")
+    private TextField price;
+
+    @Id("stockCount")
+    private TextField stockCount;
+
+    @Id("availability")
+    private ComboBox<Availability> availability;
+
+    @Id("categoryContainer")
+    private Div categoryContainer;
+
+    // Since this CheckboxGroup does not have an equivalent web
+    // component there is no @Id annotation here.
+    private CheckboxGroup<Category> category;
+
+    @Id("save")
+    private Button save;
+
+    @Id("discard")
+    private Button discard;
+
+    @Id("cancel")
+    private Button cancel;
+
+    @Id("delete")
+    private Button delete;
 
     private SampleCrudLogic viewLogic;
     private Binder<Product> binder;
@@ -61,11 +100,11 @@ public class ProductForm extends ProductFormDesign {
 
     public ProductForm(SampleCrudLogic sampleCrudLogic) {
         super();
-        addStyleName("product-form");
+
         viewLogic = sampleCrudLogic;
 
         availability.setItems(Availability.values());
-        availability.setEmptySelectionAllowed(false);
+        availability.setAllowCustomValue(false);
 
         binder = new BeanValidationBinder<>(Product.class);
         binder.forField(price).withConverter(new EuroConverter())
@@ -73,7 +112,10 @@ public class ProductForm extends ProductFormDesign {
         binder.forField(stockCount).withConverter(new StockPriceConverter())
                 .bind("stockCount");
 
-        category.setItemCaptionGenerator(Category::getName);
+        category = new CheckboxGroup<>();
+        category.getContent().getStyle().set("flex-direction", "column");
+        categoryContainer.add(category);
+
         binder.forField(category).bind("category");
         binder.bindInstanceFields(this);
 
@@ -114,11 +156,5 @@ public class ProductForm extends ProductFormDesign {
         }
         currentProduct = product;
         binder.readBean(product);
-
-        // Scroll to the top
-        // As this is not a Panel, using JavaScript
-        String scrollScript = "window.document.getElementById('" + getId()
-                + "').scrollTop = 0;";
-        Page.getCurrent().getJavaScript().execute(scrollScript);
     }
 }

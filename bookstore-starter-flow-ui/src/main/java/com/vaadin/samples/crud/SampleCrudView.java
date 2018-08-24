@@ -12,6 +12,7 @@ import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.samples.MainScreen;
+import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
 /**
@@ -27,7 +28,7 @@ public class SampleCrudView extends HorizontalLayout
 
     public static final String VIEW_NAME = "Inventory";
     private ProductGrid grid;
-    // private ProductForm form;
+    private ProductForm form;
     private TextField filter;
 
     private SampleCrudLogic viewLogic = new SampleCrudLogic(this);
@@ -44,8 +45,8 @@ public class SampleCrudView extends HorizontalLayout
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
 
-        // form = new ProductForm(viewLogic);
-        // form.setCategories(DataService.get().getAllCategories());
+        form = new ProductForm(viewLogic);
+        form.setCategories(DataService.get().getAllCategories());
 
         VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
@@ -56,7 +57,7 @@ public class SampleCrudView extends HorizontalLayout
         barAndGridLayout.expand(grid);
 
         add(barAndGridLayout);
-        // add(form);
+        add(form);
 
         viewLogic.init();
     }
@@ -114,14 +115,14 @@ public class SampleCrudView extends HorizontalLayout
     }
 
     public void editProduct(Product product) {
-        // if (product != null) {
-        // form.setVisible(true);
-        // form.getElement().setEnabled(true);
-        // } else {
-        // form.setVisible(false);
-        // form.getElement().setEnabled(false);
-        // }
-        // form.editProduct(product);
+        if (product != null) {
+            form.setVisible(true);
+            form.getElement().setEnabled(true);
+        } else {
+            form.setVisible(false);
+            form.getElement().setEnabled(false);
+        }
+        form.editProduct(product);
     }
 
     @Override
