@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  * items. This version uses an in-memory data source that is suitable for small
  * data sets.
  */
-@StyleSheet("css/grid.css")
 public class ProductGrid extends Grid<Product> {
 
     public ProductGrid() {
@@ -40,7 +39,7 @@ public class ProductGrid extends Grid<Product> {
 
         // Add an traffic light icon in front of availability
         // Three css classes with the same names of three availability values,
-        // Available, Coming and Discontinued, are defined in grid.css and are
+        // Available, Coming and Discontinued, are defined in shared-styles.css and are
         // used here in availabilityTemplate.
         final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability]]\"></iron-icon> [[item.availability]]";
         addColumn(TemplateRenderer.<Product>of(availabilityTemplate)

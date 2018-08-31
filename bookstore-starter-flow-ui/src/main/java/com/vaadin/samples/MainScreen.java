@@ -1,5 +1,6 @@
 package com.vaadin.samples;
 
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouterLayout;
@@ -9,6 +10,7 @@ import com.vaadin.samples.crud.SampleCrudView;
 /**
  * The layout of the pages e.g. About and Inventory.
  */
+@StyleSheet("css/shared-styles.css")
 public class MainScreen extends HorizontalLayout implements RouterLayout {
     private Menu menu;
 
