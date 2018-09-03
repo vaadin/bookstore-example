@@ -11,7 +11,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.vaadin.samples.MainScreen;
+import com.vaadin.samples.MainLayout;
 import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
@@ -21,8 +21,8 @@ import com.vaadin.samples.backend.data.Product;
  * See also {@link SampleCrudLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
-@Route(value = "Inventory", layout = MainScreen.class)
-@RouteAlias(value = "", layout = MainScreen.class)
+@Route(value = "Inventory", layout = MainLayout.class)
+@RouteAlias(value = "", layout = MainLayout.class)
 public class SampleCrudView extends HorizontalLayout
         implements HasUrlParameter<String> {
 

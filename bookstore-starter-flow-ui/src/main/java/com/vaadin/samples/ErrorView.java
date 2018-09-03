@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * View shown when trying to navigate to a view that does not exist using
  */
-@ParentLayout(MainScreen.class)
+@ParentLayout(MainLayout.class)
 public class ErrorView extends VerticalLayout implements HasErrorParameter<NotFoundException> {
 
     private Span explanation;

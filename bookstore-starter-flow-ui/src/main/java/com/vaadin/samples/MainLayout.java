@@ -11,10 +11,10 @@ import com.vaadin.samples.crud.SampleCrudView;
  * The layout of the pages e.g. About and Inventory.
  */
 @StyleSheet("css/shared-styles.css")
-public class MainScreen extends HorizontalLayout implements RouterLayout {
+public class MainLayout extends HorizontalLayout implements RouterLayout {
     private Menu menu;
 
-    public MainScreen() {
+    public MainLayout() {
 
         setSpacing(false);
         setSizeFull();
