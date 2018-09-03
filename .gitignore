@@ -9,3 +9,8 @@ bookstore-starter-flow-widgetset/bookstore-starter-flow-widgetset.iml
 bookstore-starter-flow-widgetset/target/
 BookStoreStarterFlow.iml
 bookstore-starter-flow.iml
+
+# Eclipse
+.settings
+.classpath
+.project

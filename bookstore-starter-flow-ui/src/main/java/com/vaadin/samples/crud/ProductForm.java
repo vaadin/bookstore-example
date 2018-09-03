@@ -12,6 +12,7 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.Result;
 import com.vaadin.flow.data.binder.ValueContext;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.samples.backend.data.Availability;
 import com.vaadin.samples.backend.data.Category;
 import com.vaadin.samples.backend.data.Product;
@@ -81,13 +82,16 @@ public class ProductForm extends VerticalLayout {
         productName = new TextField("Product name");
         productName.setWidth("100%");
         productName.setRequired(true);
+        productName.setValueChangeMode(ValueChangeMode.EAGER);
         add(productName);
 
         price = new TextField("Price");
         price.setWidth("44%");
+        price.setValueChangeMode(ValueChangeMode.EAGER);
 
         stockCount = new TextField("In Stock");
         stockCount.setWidth("43%");
+        stockCount.setValueChangeMode(ValueChangeMode.EAGER);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout(price,
                 stockCount);
