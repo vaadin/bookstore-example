@@ -66,6 +66,8 @@ public class SampleCrudLogic implements Serializable {
                 } catch (NumberFormatException e) {
                 }
             }
+        } else {
+            view.showForm(false);
         }
     }
 

@@ -115,14 +115,13 @@ public class SampleCrudView extends HorizontalLayout
     }
 
     public void editProduct(Product product) {
-        if (product != null) {
-            form.setVisible(true);
-            form.getElement().setEnabled(true);
-        } else {
-            form.setVisible(false);
-            form.getElement().setEnabled(false);
-        }
+        showForm(product != null);
         form.editProduct(product);
+    }
+
+    public void showForm(boolean show) {
+        form.setVisible(show);
+        form.getElement().setEnabled(show);
     }
 
     @Override
