@@ -173,6 +173,7 @@ public class ProductForm extends VerticalLayout {
         if (product == null) {
             product = new Product();
         }
+        delete.setVisible(!product.isNewProduct());
         currentProduct = product;
         binder.readBean(product);
     }

@@ -22,8 +22,8 @@ public class ProductDataProvider
      *            the updated or new product
      */
     public void save(Product product) {
-        boolean newProduct = product.getId() == -1;
-        
+        boolean newProduct = product.isNewProduct();
+
         DataService.get().updateProduct(product);
         if (newProduct) {
             refreshAll();

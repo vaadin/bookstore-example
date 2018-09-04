@@ -71,4 +71,8 @@ public class Product implements Serializable {
         this.availability = availability;
     }
 
+    public boolean isNewProduct() {
+        return getId() == -1;
+    }
+
 }
