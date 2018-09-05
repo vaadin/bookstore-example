@@ -79,7 +79,7 @@ public class LoginScreen extends FlexLayout {
         login.getElement().getThemeList().add("success primary");
 
         buttons.add(forgotPassword = new Button("Forgot password?"));
-        forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: Try anything")));
+        forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: try anything")));
         forgotPassword.getElement().getThemeList().add("tertiary");
 
         return loginForm;
@@ -90,7 +90,7 @@ public class LoginScreen extends FlexLayout {
 
         H1 loginInfoHeader = new H1("Login Information");
         Span loginInfoText = new Span(
-                "Log in as \"admin\" to have full access. Log in with any other username to have read-only access. For all users, any password is fine");
+                "Log in as \"admin\" to have full access. Log in with any other username to have read-only access. For all users, any password is fine.");
         loginInformation.add(loginInfoHeader);
         loginInformation.add(loginInfoText);
 

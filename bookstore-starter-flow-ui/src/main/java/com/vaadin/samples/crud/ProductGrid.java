@@ -22,7 +22,7 @@ public class ProductGrid extends Grid<Product> {
         setSizeFull();
 
         addColumn(Product::getId).setHeader("Id").setFlexGrow(1);
-        addColumn(Product::getProductName).setHeader("Product Name").setFlexGrow(20);
+        addColumn(Product::getProductName).setHeader("Product name").setFlexGrow(20);
 
         // Format and add " €" to price
         final DecimalFormat decimalFormat = new DecimalFormat();
@@ -52,7 +52,7 @@ public class ProductGrid extends Grid<Product> {
         final String stockCountTemplate = "<div style='text-align: right'>[[item.stockCount]]</div>";
         addColumn(TemplateRenderer.<Product>of(stockCountTemplate)
                 .withProperty("stockCount", product -> product.getStockCount() == 0 ? "-" : Integer.toString(product.getStockCount())))
-                .setHeader("Stock Count")
+                .setHeader("Stock count")
                 .setComparator(Comparator.comparingInt(Product::getStockCount))
                 .setFlexGrow(3);
 

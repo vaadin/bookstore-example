@@ -89,7 +89,7 @@ public class ProductForm extends VerticalLayout {
         price.setWidth("44%");
         price.setValueChangeMode(ValueChangeMode.EAGER);
 
-        stockCount = new TextField("In Stock");
+        stockCount = new TextField("In stock");
         stockCount.setWidth("43%");
         stockCount.setValueChangeMode(ValueChangeMode.EAGER);
 
@@ -140,7 +140,7 @@ public class ProductForm extends VerticalLayout {
             }
         });
 
-        discard = new Button("Discard Changes");
+        discard = new Button("Discard changes");
         discard.setWidth("100%");
         discard.addClickListener(
                 event -> viewLogic.editProduct(currentProduct));

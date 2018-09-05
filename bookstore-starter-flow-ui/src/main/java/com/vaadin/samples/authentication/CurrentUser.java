@@ -60,7 +60,7 @@ public final class CurrentUser {
         VaadinRequest request = VaadinService.getCurrentRequest();
         if (request == null) {
             throw new IllegalStateException(
-                    "No request bound to current thread");
+                    "No request bound to current thread.");
         }
         return request;
     }
