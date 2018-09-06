@@ -1,19 +1,20 @@
 package com.vaadin.samples.crud;
 
-import com.vaadin.flow.data.provider.AbstractDataProvider;
-import com.vaadin.flow.data.provider.Query;
+import java.util.Locale;
+import java.util.Objects;
+
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Product;
 
-import java.util.Locale;
-import java.util.Objects;
-import java.util.stream.Stream;
+public class ProductDataProvider extends ListDataProvider<Product> {
 
-public class ProductDataProvider
-        extends AbstractDataProvider<Product, String> {
-    
     /** Text filter that can be changed separately. */
     private String filterText = "";
+
+    public ProductDataProvider() {
+        super(DataService.get().getAllProducts());
+    }
 
     /**
      * Store given product to the backing data service.
@@ -42,53 +43,33 @@ public class ProductDataProvider
         DataService.get().deleteProduct(product.getId());
         refreshAll();
     }
-    
+
     /**
-     * Sets the filter to use for the this data provider and refreshes data.
+     * Sets the filter to use for this data provider and refreshes data.
      * <p>
      * Filter is compared for product name, availability and category.
      * 
      * @param filterText
-     *           the text to filter by, never null
+     *            the text to filter by, never null
      */
     public void setFilter(String filterText) {
-        Objects.requireNonNull(filterText, "Filter text cannot be null");
+        Objects.requireNonNull(filterText, "Filter text cannot be null.");
         if (Objects.equals(this.filterText, filterText.trim())) {
             return;
         }
         this.filterText = filterText.trim();
-        
-        refreshAll();
+
+        setFilter(product -> passesFilter(product.getProductName(), filterText)
+                || passesFilter(product.getAvailability(), filterText)
+                || passesFilter(product.getCategory(), filterText));
     }
-    
+
     @Override
     public Integer getId(Product product) {
-        Objects.requireNonNull(product, "Cannot provide an id for a null product.");
-        
+        Objects.requireNonNull(product,
+                "Cannot provide an id for a null product.");
+
         return product.getId();
-    }
-    
-    @Override
-    public boolean isInMemory() {
-        return true;
-    }
-
-    @Override
-    public int size(Query<Product, String> t) {
-        return (int) fetch(t).count();
-    }
-
-    @Override
-    public Stream<Product> fetch(Query<Product, String> query) {
-        if (filterText.isEmpty()) {
-            return DataService.get().getAllProducts().stream()
-                    .skip(query.getOffset()).limit(query.getLimit());
-        }
-        return DataService.get().getAllProducts().stream().filter(
-                product -> passesFilter(product.getProductName(), filterText)
-                        || passesFilter(product.getAvailability(), filterText)
-                        || passesFilter(product.getCategory(), filterText))
-                .skip(query.getOffset()).limit(query.getLimit());
     }
 
     private boolean passesFilter(Object object, String filterText) {
