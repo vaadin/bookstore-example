@@ -19,8 +19,10 @@ public class ProductGrid extends Grid<Product> {
     public ProductGrid() {
         setSizeFull();
 
-        addColumn(Product::getId).setHeader("Id").setFlexGrow(1);
-        addColumn(Product::getProductName).setHeader("Product name").setFlexGrow(20);
+        addColumn(Product::getProductName)
+                .setHeader("Product name")
+                .setFlexGrow(20)
+                .setSortable(true);
 
         // Format and add " €" to price
         final DecimalFormat decimalFormat = new DecimalFormat();
@@ -57,7 +59,6 @@ public class ProductGrid extends Grid<Product> {
         // Show all categories the product is in, separated by commas
         addColumn(this::formatCategories)
                 .setHeader("Category")
-                .setSortable(false)
                 .setFlexGrow(12);
     }
 
