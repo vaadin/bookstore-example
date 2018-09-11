@@ -2,8 +2,8 @@ package com.vaadin.samples.authentication;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
@@ -21,6 +21,7 @@ import com.vaadin.flow.router.Route;
  */
 @Route("Login")
 @PageTitle("Login")
+@StyleSheet("css/shared-styles.css")
 public class LoginScreen extends FlexLayout {
 
     private TextField username;
@@ -37,6 +38,7 @@ public class LoginScreen extends FlexLayout {
 
     private void buildUI() {
         setSizeFull();
+        setClassName("login-screen");
 
         // login form, centered in the available part of the screen
         Component loginForm = buildLoginForm();
@@ -53,8 +55,6 @@ public class LoginScreen extends FlexLayout {
 
         add(loginInformation);
         add(centeringLayout);
-
-        setFlexGrow(1, loginInformation);
     }
 
     private Component buildLoginForm() {
@@ -87,18 +87,13 @@ public class LoginScreen extends FlexLayout {
 
     private Component buildLoginInformation() {
         VerticalLayout loginInformation = new VerticalLayout();
+        loginInformation.setClassName("login-information");
 
         H1 loginInfoHeader = new H1("Login Information");
         Span loginInfoText = new Span(
                 "Log in as \"admin\" to have full access. Log in with any other username to have read-only access. For all users, any password is fine.");
         loginInformation.add(loginInfoHeader);
         loginInformation.add(loginInfoText);
-
-        // To set a fixed minimum width
-        loginInformation.getStyle().set("min-width", "300px");
-
-        // To avoid it growing with its parent
-        loginInformation.getStyle().set("flex", "0");
 
         return loginInformation;
     }

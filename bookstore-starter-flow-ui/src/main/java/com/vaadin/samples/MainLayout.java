@@ -2,8 +2,10 @@ package com.vaadin.samples;
 
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.samples.about.AboutView;
 import com.vaadin.samples.crud.SampleCrudView;
 
@@ -11,13 +13,13 @@ import com.vaadin.samples.crud.SampleCrudView;
  * The layout of the pages e.g. About and Inventory.
  */
 @StyleSheet("css/shared-styles.css")
-public class MainLayout extends HorizontalLayout implements RouterLayout {
+@Theme(value = Lumo.class, variant = Lumo.DARK)
+public class MainLayout extends FlexLayout implements RouterLayout {
     private Menu menu;
 
     public MainLayout() {
-
-        setSpacing(false);
         setSizeFull();
+        setClassName("main-layout");
 
         menu = new Menu();
         menu.addView(SampleCrudView.class, SampleCrudView.VIEW_NAME,

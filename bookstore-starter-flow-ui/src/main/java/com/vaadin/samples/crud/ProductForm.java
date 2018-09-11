@@ -1,5 +1,14 @@
 package com.vaadin.samples.crud;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Locale;
+
+import org.vaadin.pekka.CheckboxGroup;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
@@ -16,19 +25,14 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.samples.backend.data.Availability;
 import com.vaadin.samples.backend.data.Category;
 import com.vaadin.samples.backend.data.Product;
-import org.vaadin.pekka.CheckboxGroup;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Locale;
 
 /**
  * A form for editing a single product.
  */
-public class ProductForm extends VerticalLayout {
+public class ProductForm extends Div {
+
+    private VerticalLayout content;
+
     private TextField productName;
     private TextField price;
     private TextField stockCount;
@@ -64,7 +68,8 @@ public class ProductForm extends VerticalLayout {
     private static class StockCountConverter extends StringToIntegerConverter {
 
         public StockCountConverter() {
-            super(0, "Could not convert value to " + Integer.class.getName() + ".");
+            super(0, "Could not convert value to " + Integer.class.getName()
+                    + ".");
         }
 
         @Override
@@ -83,55 +88,54 @@ public class ProductForm extends VerticalLayout {
     }
 
     public ProductForm(SampleCrudLogic sampleCrudLogic) {
-        super();
+        setClassName("product-form");
+
+        content = new VerticalLayout();
+        content.setSizeUndefined();
+        add(content);
 
         viewLogic = sampleCrudLogic;
-
-        setHeight("100%");
-        setWidth("397px");
 
         productName = new TextField("Product name");
         productName.setWidth("100%");
         productName.setRequired(true);
         productName.setValueChangeMode(ValueChangeMode.EAGER);
-        add(productName);
+        content.add(productName);
 
         price = new TextField("Price");
-        price.setWidth("44%");
         price.setSuffixComponent(new Span("€"));
         price.getElement().getThemeList().add("align-right");
         price.setValueChangeMode(ValueChangeMode.EAGER);
 
         stockCount = new TextField("In stock");
-        stockCount.setWidth("43%");
         stockCount.getElement().getThemeList().add("align-right");
         stockCount.setValueChangeMode(ValueChangeMode.EAGER);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout(price,
                 stockCount);
-        add(horizontalLayout);
+        horizontalLayout.setWidth("100%");
+        horizontalLayout.setFlexGrow(1, price, stockCount);
+        content.add(horizontalLayout);
 
         availability = new ComboBox<>("Availability");
         availability.setWidth("100%");
         availability.setRequired(true);
         availability.setItems(Availability.values());
         availability.setAllowCustomValue(false);
-        add(availability);
+        content.add(availability);
 
         category = new CheckboxGroup<>();
         category.setId("category");
-        category.getContent().getStyle().set("flex-direction", "column");
+        category.getContent().getStyle().set("flex-direction", "column")
+                .set("margin", "0");
         Label categoryLabel = new Label("Categories");
         categoryLabel.setClassName("vaadin-label");
         categoryLabel.setFor(category);
-        add(categoryLabel, category);
-
-        Div expander = new Div();
-        add(expander);
-        setFlexGrow(1, expander);
+        content.add(categoryLabel, category);
 
         binder = new BeanValidationBinder<>(Product.class);
-        binder.forField(price).withConverter(new PriceConverter()).bind("price");
+        binder.forField(price).withConverter(new PriceConverter())
+                .bind("price");
         binder.forField(stockCount).withConverter(new StockCountConverter())
                 .bind("stockCount");
         binder.bindInstanceFields(this);
@@ -176,7 +180,7 @@ public class ProductForm extends VerticalLayout {
             }
         });
 
-        add(save, discard, delete, cancel);
+        content.add(save, discard, delete, cancel);
     }
 
     public void setCategories(Collection<Category> categories) {
