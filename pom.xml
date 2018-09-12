@@ -9,7 +9,7 @@
 	<name>bookstore-starter-flow-parent</name>
 
     <properties>
-        <vaadin.version>10.0.4</vaadin.version>
+        <vaadin.version>12.0-SNAPSHOT</vaadin.version>
         <jetty.plugin.version>9.4.11.v20180605</jetty.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8
@@ -42,9 +42,15 @@
     </dependencyManagement>
 
     <repositories>
+        <!-- Repository used by many Vaadin add-ons -->
         <repository>
             <id>vaadin-addons</id>
             <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+        <!-- Repository needed for the snapshot versions of Vaadin -->
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
         </repository>
     </repositories>
 
