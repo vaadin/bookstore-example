@@ -10,7 +10,6 @@
 
     <properties>
         <vaadin.version>10.0.4</vaadin.version>
-        <vaadin.plugin.version>10.0.4</vaadin.plugin.version>
         <jetty.plugin.version>9.4.11.v20180605</jetty.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8
