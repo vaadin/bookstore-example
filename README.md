@@ -1,11 +1,16 @@
-bookstore-starter-flow
-==============
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin-flow/Lobby#?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Template for a full-blown Vaadin application that only requires a Servlet 3.0 container to run (no other JEE dependencies).
+# Bookstore App Starter for Vaadin Flow
 
+A project example for a Vaadin application that only requires a Servlet 3.1 container to run (no other JEE dependencies). The UI is built with Java only.
 
-Project Structure
-=================
+The easiest way of using it is via [https://vaadin.com/start](https://vaadin.com/start) - you can choose the package naming you want.
+
+## Prerequisites
+
+The project can be imported into the IDE of your choice, with Java 8 installed, as a Maven project.
+
+## Project Structure
 
 The project consists of the following three modules:
 
@@ -13,8 +18,7 @@ The project consists of the following three modules:
 - bookstore-starter-flow-ui: main application module, development time
 - bookstore-starter-flow-backend: POJO classes and mock services being used in ui
 
-Workflow
-========
+## Workflow
 
 To compile the entire project, run "mvn install" in the parent project.
 
@@ -29,3 +33,8 @@ Other basic workflow steps:
   - open http://localhost:8080/
 - creating a production mode war
   - run "mvn -Pproduction package" in the ui module or in the parent module
+
+### Branching information:
+* `master` the latest version of the starter, using latest platform snapshot
+* `V10` the version for Vaadin 10
+* `V11` the version for Vaadin 11
