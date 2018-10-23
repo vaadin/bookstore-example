@@ -1,4 +1,4 @@
-package com.vaadin;
+package com.vaadin.samples;
 
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
