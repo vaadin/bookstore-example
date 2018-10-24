@@ -78,7 +78,7 @@
             </activation>
 
             <properties>
-                <transpilation.output>${project.build.directory}/build</transpilation.output>
+                <vaadin.productionMode>true</vaadin.productionMode>
             </properties>
 
             <dependencies>
@@ -100,24 +100,8 @@
                                     <goal>copy-production-files</goal>
                                     <goal>package-for-production</goal>
                                 </goals>
-                                <configuration>
-                                    <transpileOutputDirectory>${transpilation.output}</transpileOutputDirectory>
-                                </configuration>
                             </execution>
                         </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <configuration>
-                            <webResources>
-                                <resource>
-                                    <directory>${transpilation.output}</directory>
-                                </resource>
-                            </webResources>
-                        </configuration>
                     </plugin>
 
                     <plugin>
@@ -127,7 +111,8 @@
                         <configuration>
                             <webAppConfig>
                                 <resourceBases>
-                                    <resourceBase>${transpilation.output}</resourceBase>
+                                    <!-- add the default transpileOutputDirectory as resourceBase for jetty -->
+                                    <resourceBase>${project.build.directory}/${project.build.finalName}</resourceBase>
                                 </resourceBases>
                             </webAppConfig>
                         </configuration>
