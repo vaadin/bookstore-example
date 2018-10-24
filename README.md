@@ -26,13 +26,16 @@ Other basic workflow steps:
 
 - getting started
 - compiling the whole project
-  - run "mvn install" in parent project
+  - run `mvn install` in parent project
 - developing the application
   - edit code in the ui module
-  - run "mvn jetty:run" in ui module
+  - run `mvn jetty:run` in ui module
   - open http://localhost:8080/
 - creating a production mode war
-  - run "mvn -Pproduction package" in the ui module or in the parent module
+  - run `mvn package -Dvaadin.productionMode ` in the ui module or in the parent module
+- running in production mode
+  - run `mvn jetty:run -Dvaadin.productionMode` in ui module
+  - open http://localhost:8080/
 
 ### Branching information:
 * `master` the latest version of the starter, using latest platform snapshot
