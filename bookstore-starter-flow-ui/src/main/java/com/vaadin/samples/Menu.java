@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.VaadinServletService;
 import com.vaadin.flow.server.VaadinSession;
 
 public class Menu extends FlexLayout {
@@ -42,7 +43,14 @@ public class Menu extends FlexLayout {
         top.setClassName("menu-header");
 
         Label title = new Label("My CRUD");
-        Image image = new Image("frontend/img/table-logo.png", "");
+
+        // Note! Image resource url is resolved here as it is dependent on the
+        // execution mode (development or production) and browser ES level support
+        String resolvedImage = VaadinServletService.getCurrent()
+                .resolveResource("frontend://img/table-logo.png",
+                        VaadinSession.getCurrent().getBrowser());
+
+        Image image = new Image(resolvedImage, "");
         top.add(image);
         top.add(title);
         add(top);
@@ -69,11 +77,11 @@ public class Menu extends FlexLayout {
      * Add a view to the navigation menu
      *
      * @param viewClass
-     *            that has a {@code Route} annotation
+     *         that has a {@code Route} annotation
      * @param caption
-     *            view caption in the menu
+     *         view caption in the menu
      * @param icon
-     *            view icon in the menu
+     *         view icon in the menu
      */
     public void addView(Class<? extends Component> viewClass, String caption,
             Icon icon) {
