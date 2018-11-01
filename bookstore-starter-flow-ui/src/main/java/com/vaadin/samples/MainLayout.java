@@ -14,7 +14,7 @@ import com.vaadin.samples.crud.SampleCrudView;
  * The layout of the pages e.g. About and Inventory.
  */
 @HtmlImport("css/shared-styles.html")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
+@Theme(value = Lumo.class)
 @PWA(name = "Bookstore Starter", shortName = "Bookstore")
 public class MainLayout extends FlexLayout implements RouterLayout {
     private Menu menu;

@@ -31,13 +31,13 @@
             flex-direction: row;
 
             /* Used by the menu and form overlays */
-            --overlay-box-shadow: 0 0 3px 2px var(--lumo-shade);
+            --overlay-box-shadow: 0 0 3px 2px var(--lumo-contrast-10pct);
         }
 
         .menu-bar {
             flex-direction: column;
             flex-shrink: 0;
-            background: var(--lumo-shade);
+            background: var(--lumo-base-color);
             box-shadow: var(--overlay-box-shadow);
         }
 
@@ -68,7 +68,7 @@
             bottom: 0;
             height: 100%;
             overflow: auto;
-            background: var(--lumo-shade);
+            background: var(--lumo-base-color);
             box-shadow: var(--overlay-box-shadow);
         }
 
@@ -101,7 +101,7 @@
                 height: calc(100% - var(--top-bar-height));
                 z-index: 100;
                 box-shadow: var(--overlay-box-shadow);
-                background: var(--lumo-shade);
+                background: var(--lumo-base-color);
             }
 
             .menu-bar .show-tabs {
