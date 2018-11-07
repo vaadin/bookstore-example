@@ -3,6 +3,7 @@ package com.vaadin.samples;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
@@ -33,7 +34,7 @@ public class Menu extends FlexLayout {
             }
         });
         showMenu.setClassName("menu-button");
-        showMenu.getElement().getThemeList().add("small");
+        showMenu.addThemeVariants(ButtonVariant.LUMO_SMALL);
         showMenu.setIcon(new Icon(VaadinIcon.MENU));
         add(showMenu);
 
@@ -69,7 +70,7 @@ public class Menu extends FlexLayout {
             UI.getCurrent().getPage().reload();
         });
 
-        logoutButton.getElement().getThemeList().add("tertiary-inline");
+        logoutButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
         add(logoutButton);
     }
 

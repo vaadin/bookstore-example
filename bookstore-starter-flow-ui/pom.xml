@@ -37,11 +37,6 @@
             <artifactId>vaadin-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.vaadin.pekka</groupId>
-            <artifactId>checkbox-group-java</artifactId>
-            <version>1.0.0.alpha1</version>
-        </dependency>
-        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>2.0.1.Final</version>
