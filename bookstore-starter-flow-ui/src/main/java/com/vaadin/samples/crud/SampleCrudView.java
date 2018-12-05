@@ -122,7 +122,12 @@ public class SampleCrudView extends HorizontalLayout
 
     public void showForm(boolean show) {
         form.setVisible(show);
-        form.getElement().setEnabled(show);
+
+        /* FIXME The following line should be uncommented when the CheckboxGroup
+         * issue is resolved. The category CheckboxGroup throws an
+         * IllegalArgumentException when the form is disabled.
+         */
+        //form.setEnabled(show);
     }
 
     @Override
