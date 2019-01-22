@@ -1,5 +1,8 @@
 package com.vaadin.samples;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
@@ -8,6 +11,7 @@ import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.samples.about.AboutView;
+import com.vaadin.samples.authentication.AccessControlFactory;
 import com.vaadin.samples.crud.SampleCrudView;
 
 /**
@@ -30,5 +34,10 @@ public class MainLayout extends FlexLayout implements RouterLayout {
                 VaadinIcon.INFO_CIRCLE.create());
 
         add(menu);
+
+        UI.getCurrent().addShortcut(
+                () -> AccessControlFactory.getInstance().createAccessControl()
+                        .signOut(),
+                Key.KEY_L, KeyModifier.CONTROL);
     }
 }

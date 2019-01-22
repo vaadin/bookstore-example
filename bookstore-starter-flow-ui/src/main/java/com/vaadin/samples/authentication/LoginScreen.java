@@ -2,6 +2,8 @@ package com.vaadin.samples.authentication;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.Shortcuts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.HtmlImport;
@@ -67,9 +69,13 @@ public class LoginScreen extends FlexLayout {
         loginForm.addFormItem(username = new TextField(), "Username");
         username.setWidth("15em");
         username.setValue("admin");
+        Shortcuts.addShortcut(username, username, () -> password.focus(),
+                Key.ENTER);
+
         loginForm.add(new Html("<br/>"));
         loginForm.addFormItem(password = new PasswordField(), "Password");
         password.setWidth("15em");
+        Shortcuts.addShortcut(password, password, this::login, Key.ENTER);
 
         HorizontalLayout buttons = new HorizontalLayout();
         loginForm.add(new Html("<br/>"));
@@ -77,7 +83,6 @@ public class LoginScreen extends FlexLayout {
 
         buttons.add(login = new Button("Login"));
         login.addClickListener(event -> login());
-        loginForm.getElement().addEventListener("keypress", event -> login()).setFilter("event.key == 'Enter'");
         login.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
 
         buttons.add(forgotPassword = new Button("Forgot password?"));

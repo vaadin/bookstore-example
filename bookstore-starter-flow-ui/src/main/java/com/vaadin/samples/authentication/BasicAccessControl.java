@@ -1,5 +1,8 @@
 package com.vaadin.samples.authentication;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.server.VaadinSession;
+
 /**
  * Default mock implementation of {@link AccessControl}. This implementation
  * accepts any string as a password, and considers the user "admin" as the only
@@ -37,4 +40,9 @@ public class BasicAccessControl implements AccessControl {
         return CurrentUser.get();
     }
 
+    @Override
+    public void signOut() {
+        VaadinSession.getCurrent().getSession().invalidate();
+        UI.getCurrent().getPage().reload();
+    }
 }

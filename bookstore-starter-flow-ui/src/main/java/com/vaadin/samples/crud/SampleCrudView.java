@@ -1,5 +1,7 @@
 package com.vaadin.samples.crud;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -68,11 +70,14 @@ public class SampleCrudView extends HorizontalLayout
         filter.setPlaceholder("Filter name, availability or category");
         // Apply the filter to grid's data provider. TextField value is never null
         filter.addValueChangeListener(event -> dataProvider.setFilter(event.getValue()));
+        filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
         newProduct = new Button("New product");
         newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         newProduct.setIcon(VaadinIcon.PLUS_CIRCLE.create());
         newProduct.addClickListener(click -> viewLogic.newProduct());
+        // CTRL+N will create a new window which is unavoidable
+        newProduct.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
 
         HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");

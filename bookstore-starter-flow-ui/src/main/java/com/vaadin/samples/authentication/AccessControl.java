@@ -10,11 +10,13 @@ public interface AccessControl extends Serializable {
     String ADMIN_ROLE_NAME = "admin";
     String ADMIN_USERNAME = "admin";
 
-    public boolean signIn(String username, String password);
+    boolean signIn(String username, String password);
 
-    public boolean isUserSignedIn();
+    boolean isUserSignedIn();
 
-    public boolean isUserInRole(String role);
+    boolean isUserInRole(String role);
 
-    public String getPrincipalName();
+    String getPrincipalName();
+
+    void signOut();
 }

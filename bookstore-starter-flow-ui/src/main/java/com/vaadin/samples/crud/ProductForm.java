@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
@@ -158,6 +160,7 @@ public class ProductForm extends Div {
                 viewLogic.saveProduct(currentProduct);
             }
         });
+        save.addClickShortcut(Key.KEY_S, KeyModifier.CONTROL);
 
         discard = new Button("Discard changes");
         discard.setWidth("100%");
@@ -167,6 +170,7 @@ public class ProductForm extends Div {
         cancel = new Button("Cancel");
         cancel.setWidth("100%");
         cancel.addClickListener(event -> viewLogic.cancelProduct());
+        cancel.addClickShortcut(Key.ESCAPE);
         getElement()
                 .addEventListener("keydown", event -> viewLogic.cancelProduct())
                 .setFilter("event.key == 'Escape'");
