@@ -35,7 +35,7 @@ public class MainLayout extends FlexLayout implements RouterLayout {
 
         add(menu);
 
-        UI.getCurrent().addShortcut(
+        UI.getCurrent().addShortcutListener(
                 () -> AccessControlFactory.getInstance().createAccessControl()
                         .signOut(),
                 Key.KEY_L, KeyModifier.CONTROL);
