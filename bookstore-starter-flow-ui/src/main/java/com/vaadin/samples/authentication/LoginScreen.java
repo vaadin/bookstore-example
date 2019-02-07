@@ -3,11 +3,9 @@ package com.vaadin.samples.authentication;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.Shortcuts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
@@ -69,24 +67,25 @@ public class LoginScreen extends FlexLayout {
         loginForm.addFormItem(username = new TextField(), "Username");
         username.setWidth("15em");
         username.setValue("admin");
-        Shortcuts.addShortcutListener(username, () -> password.focus(),
-                Key.ENTER);
 
         loginForm.add(new Html("<br/>"));
         loginForm.addFormItem(password = new PasswordField(), "Password");
         password.setWidth("15em");
-        Shortcuts.addShortcutListener(password, this::login, Key.ENTER);
+        password.addFocusShortcut(Key.ENTER).listenOn(username);
 
         HorizontalLayout buttons = new HorizontalLayout();
         loginForm.add(new Html("<br/>"));
         loginForm.add(buttons);
 
         buttons.add(login = new Button("Login"));
-        login.addClickListener(event -> login());
         login.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
+        login.addClickListener(event -> login());
+        // allowBrowserDefault enables enter-key to pass the password
+        // to the server
+        login.addClickShortcut(Key.ENTER).allowBrowserDefault();
 
         buttons.add(forgotPassword = new Button("Forgot password?"));
-        forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: try anything")));
+        forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: same as username")));
         forgotPassword.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
         return loginForm;
@@ -98,7 +97,9 @@ public class LoginScreen extends FlexLayout {
 
         H1 loginInfoHeader = new H1("Login Information");
         Span loginInfoText = new Span(
-                "Log in as \"admin\" to have full access. Log in with any other username to have read-only access. For all users, any password is fine.");
+                "Log in as \"admin\" to have full access. Log in with any " +
+                        "other username to have read-only access. For all " +
+                        "users, the password is same as the username.");
         loginInformation.add(loginInfoHeader);
         loginInformation.add(loginInfoText);
 

@@ -15,6 +15,9 @@ public class BasicAccessControl implements AccessControl {
         if (username == null || username.isEmpty())
             return false;
 
+        if (!username.equals(password))
+            return false;
+
         CurrentUser.set(username);
         return true;
     }
