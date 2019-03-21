@@ -50,8 +50,13 @@
             transition: transform 300ms;
         }
 
+        .menu-bar vaadin-tab {
+            padding: 0;
+        }
+
         .menu-link {
             margin: 0 auto;
+            padding: 10px 37px;
         }
 
         .menu-link > span {
@@ -139,30 +144,6 @@
 
         .Discontinued {
             color: #f54993;
-        }
-
-        /* Replicating the labels of official Vaadin components
-         * for the CheckBoxGroup add-on.
-        */
-        .vaadin-label {
-            align-self: flex-start;
-            color: var(--lumo-secondary-text-color);
-            font-weight: 500;
-            font-size: var(--lumo-font-size-s);
-            margin-left: calc(var(--lumo-border-radius) / 4);
-            transition: color 0.2s;
-            line-height: 1;
-            padding-bottom: 0.5em;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            position: relative;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .vaadin-label:hover {
-            color: var(--lumo-body-text-color);
         }
 
     </style>

@@ -1,14 +1,14 @@
 package com.vaadin.samples.backend.data;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 public class Category implements Serializable {
 
     @NotNull
-    private int id;
-    @NotNull
+    private int id = -1;
+    @Size(min = 2, message = "Category name must be at least two characters")
     private String name;
 
     public int getId() {

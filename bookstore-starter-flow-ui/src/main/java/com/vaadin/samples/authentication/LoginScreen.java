@@ -17,6 +17,9 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.samples.AdminView;
+import com.vaadin.samples.MainLayout;
 
 /**
  * UI content when the user is not logged in yet.
@@ -67,11 +70,11 @@ public class LoginScreen extends FlexLayout {
         loginForm.addFormItem(username = new TextField(), "Username");
         username.setWidth("15em");
         username.setValue("admin");
+        username.setAutofocus(true);
 
         loginForm.add(new Html("<br/>"));
         loginForm.addFormItem(password = new PasswordField(), "Password");
         password.setWidth("15em");
-        password.addFocusShortcut(Key.ENTER).listenOn(username);
 
         HorizontalLayout buttons = new HorizontalLayout();
         loginForm.add(new Html("<br/>"));
@@ -80,9 +83,7 @@ public class LoginScreen extends FlexLayout {
         buttons.add(login = new Button("Login"));
         login.addThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_PRIMARY);
         login.addClickListener(event -> login());
-        // allowBrowserDefault enables enter-key to pass the password
-        // to the server
-        login.addClickShortcut(Key.ENTER).allowBrowserDefault();
+        login.addClickShortcut(Key.ENTER).listenOn(password);
 
         buttons.add(forgotPassword = new Button("Forgot password?"));
         forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: same as username")));
@@ -110,21 +111,33 @@ public class LoginScreen extends FlexLayout {
         login.setEnabled(false);
         try {
             if (accessControl.signIn(username.getValue(), password.getValue())) {
+                registerAdminViewIfApplicable();
                 getUI().get().navigate("");
             } else {
                 showNotification(new Notification("Login failed. " +
                         "Please check your username and password and try again."));
                 username.focus();
+                password.setValue("");
             }
         } finally {
             login.setEnabled(true);
         }
     }
 
+    private void registerAdminViewIfApplicable() {
+        // register the admin view dynamically only for any admin user logged in
+        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
+            RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
+                    AdminView.class, MainLayout.class);
+            // as logout will purge the session route registry, no need to
+            // unregister the view on logout
+        }
+    }
+
     private void showNotification(Notification notification) {
         // keep the notification visible a little while after moving the
         // mouse, or until clicked
-        notification.setDuration(2000);
+        notification.setDuration(3000);
         notification.open();
     }
 }

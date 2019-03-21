@@ -3,7 +3,6 @@ package com.vaadin.samples.crud;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
@@ -13,12 +12,11 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -40,7 +38,7 @@ public class ProductForm extends Div {
     private TextField productName;
     private TextField price;
     private TextField stockCount;
-    private ComboBox<Availability> availability;
+    private Select<Availability> availability;
     private CheckboxGroup<Category> category;
     private Button save;
     private Button discard;
@@ -121,20 +119,17 @@ public class ProductForm extends Div {
         horizontalLayout.setFlexGrow(1, price, stockCount);
         content.add(horizontalLayout);
 
-        availability = new ComboBox<>("Availability");
+        availability = new Select<>();
+        availability.setLabel("Availability");
         availability.setWidth("100%");
-        availability.setRequired(true);
         availability.setItems(Availability.values());
-        availability.setAllowCustomValue(false);
         content.add(availability);
 
         category = new CheckboxGroup<>();
+        category.setLabel("Categories");
         category.setId("category");
         category.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
-        Label categoryLabel = new Label("Categories");
-        categoryLabel.setClassName("vaadin-label");
-        categoryLabel.setFor(category);
-        content.add(categoryLabel, category);
+        content.add(category);
 
         binder = new BeanValidationBinder<>(Product.class);
         binder.forField(price).withConverter(new PriceConverter())

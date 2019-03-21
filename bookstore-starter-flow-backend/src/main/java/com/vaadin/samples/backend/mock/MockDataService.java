@@ -1,5 +1,6 @@
 package com.vaadin.samples.backend.mock;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.vaadin.samples.backend.DataService;
@@ -17,11 +18,13 @@ public class MockDataService extends DataService {
     private List<Product> products;
     private List<Category> categories;
     private int nextProductId = 0;
+    private int nextCategoryId = 0;
 
     private MockDataService() {
         categories = MockDataGenerator.createCategories();
         products = MockDataGenerator.createProducts(categories);
         nextProductId = products.size() + 1;
+        nextCategoryId = categories.size() + 1;
     }
 
     public synchronized static DataService getInstance() {
@@ -33,12 +36,12 @@ public class MockDataService extends DataService {
 
     @Override
     public synchronized List<Product> getAllProducts() {
-        return products;
+        return Collections.unmodifiableList(products);
     }
 
     @Override
     public synchronized List<Category> getAllCategories() {
-        return categories;
+        return Collections.unmodifiableList(categories);
     }
 
     @Override
@@ -68,6 +71,23 @@ public class MockDataService extends DataService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+        if (category.getId() < 0) {
+            category.setId(nextCategoryId++);
+            categories.add(category);
+        }
+    }
+
+    @Override
+    public void deleteCategory(int categoryId) {
+        if (categories.removeIf(category -> category.getId() == categoryId)) {
+            getAllProducts().forEach(product -> {
+                product.getCategory().removeIf(category -> category.getId() == categoryId);
+            });
+        }
     }
 
     @Override

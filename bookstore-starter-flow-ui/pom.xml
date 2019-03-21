@@ -110,6 +110,7 @@
                                     <resourceBase>${project.build.directory}/${project.build.finalName}</resourceBase>
                                 </resourceBases>
                             </webAppConfig>
+                            <scanIntervalSeconds>2</scanIntervalSeconds>
                         </configuration>
                     </plugin>
                 </plugins>
