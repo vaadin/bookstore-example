@@ -7,6 +7,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
@@ -65,6 +66,12 @@ public class LoginScreen extends FlexLayout {
     private Component buildLoginForm() {
         FormLayout loginForm = new FormLayout();
 
+        // This is a workaround for current form-layout regression
+        // https://github.com/vaadin/vaadin-form-layout/issues/108
+        // which makes the login form is not shown in the middle of the screen.
+        // Remove the following line after the issue gets fixed
+        Div container = new Div();
+
         loginForm.setWidth("310px");
 
         loginForm.addFormItem(username = new TextField(), "Username");
@@ -89,7 +96,9 @@ public class LoginScreen extends FlexLayout {
         forgotPassword.addClickListener(event -> showNotification(new Notification("Hint: same as username")));
         forgotPassword.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
-        return loginForm;
+        container.add(loginForm);
+
+        return container;
     }
 
     private Component buildLoginInformation() {
