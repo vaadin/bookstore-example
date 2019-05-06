@@ -1,7 +1,6 @@
 package com.vaadin.samples;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Image;
@@ -49,7 +48,7 @@ public class Menu extends FlexLayout {
         // Note! Image resource url is resolved here as it is dependent on the
         // execution mode (development or production) and browser ES level support
         String resolvedImage = VaadinServletService.getCurrent()
-                .resolveResource("frontend://img/table-logo.png",
+                .resolveResource("img/table-logo.png",
                         VaadinSession.getCurrent().getBrowser());
 
         Image image = new Image(resolvedImage, "");

@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@vaadin/vaadin-ordered-layout": "=1.1.0",
+    "@vaadin/vaadin-login": "=1.0.0",
+    "@vaadin/vaadin-grid": "=5.3.3",
+    "@vaadin/vaadin-icons": "=4.3.1",
+    "@vaadin/vaadin-button": "=2.1.5",
+    "@vaadin/vaadin-text-field": "=2.4.0",
+    "@vaadin/vaadin-select": "=2.0.4",
+    "@polymer/iron-list": "=3.0.2",
+    "@vaadin/vaadin-list-box": "=1.1.0",
+    "@vaadin/vaadin-app-layout": "=2.0.0",
+    "@vaadin/vaadin-checkbox": "=2.2.7",
+    "@vaadin/vaadin-item": "=2.1.0",
+    "@vaadin/vaadin-context-menu": "=4.3.4",
+    "@vaadin/vaadin-tabs": "=2.1.2",
+    "@polymer/polymer": "=3.1.0",
+    "@vaadin/vaadin-lumo-styles": "=1.4.2",
+    "@webcomponents/webcomponentsjs": "2.2.10"
+  },
+  "devDependencies": {
+    "webpack-babel-multi-target-plugin": "2.1.0",
+    "copy-webpack-plugin": "5.0.3",
+    "webpack-cli": "3.3.0",
+    "webpack": "4.30.0",
+    "webpack-dev-server": "3.3.0"
+  }
+}

@@ -16,14 +16,19 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.router.Route;
 import com.vaadin.samples.backend.DataService;
 import com.vaadin.samples.backend.data.Category;
+
+import static com.vaadin.samples.AdminView.VIEW_NAME;
 
 /**
  * Admin view that is registered dynamically on admin user login.
  * <p>
  * Allows CRUD operations for the book categories.
  */
+// TODO remove this annotation, it's a stub added to override the https://github.com/vaadin/flow/issues/5509
+@Route(value=VIEW_NAME, registerAtStartup = false)
 public class AdminView extends VerticalLayout {
 
     public static final String VIEW_NAME = "admin";

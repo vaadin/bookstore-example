@@ -1,13 +1,6 @@
-<!-- The shared-styles.html is used instead of shared-styles.css so that
-  -- the styles are also used for browsers that do not support CSS Custom Properties
-  -- (mainly to support IE11)
-  -- for more information see: https://cdn.vaadin.com/vaadin-lumo-styles/1.3.1/demo/compatibility.html
-  -->
-<!-- Remember to import custom-style, which is included in the Polymer package -->
-<link rel="import"
-      href="../bower_components/polymer/lib/elements/custom-style.html">
+const $_documentContainer = document.createElement('template');
 
-<custom-style>
+$_documentContainer.innerHTML = `<custom-style>
     <style>
         .login-information {
             min-width: 300px;
@@ -147,4 +140,6 @@
         }
 
     </style>
-</custom-style>
+</custom-style>`;
+
+document.head.appendChild($_documentContainer.content);
