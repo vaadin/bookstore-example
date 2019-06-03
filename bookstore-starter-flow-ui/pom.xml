@@ -79,6 +79,7 @@
     </dependencies>
 
     <build>
+        <defaultGoal>jetty:run</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
