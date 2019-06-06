@@ -116,5 +116,6 @@
     <modules>
         <module>bookstore-starter-flow-backend</module>
         <module>bookstore-starter-flow-ui</module>
+        <module>bookstore-starter-flow-it</module>
     </modules>
 </project>
