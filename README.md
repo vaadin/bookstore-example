@@ -8,15 +8,15 @@ The easiest way of using it is via [https://vaadin.com/start](https://vaadin.com
 
 ## Prerequisites
 
-The project can be imported into the IDE of your choice, with Java 8 installed, as a Maven project.
+The project can be imported into the IDE of your choice, with Java 8 or 11 installed, as a Maven project.
 
 ## Project Structure
 
 The project consists of the following three modules:
 
 - parent project: common metadata and configuration
-- bookstore-starter-flow-ui: main application module, development time
-- bookstore-starter-flow-backend: POJO classes and mock services being used in ui
+- bookstore-starter-flow-ui: main application module that includes views
+- bookstore-starter-flow-backend: POJO classes and mock services being used in the ui
 
 ## Workflow
 
@@ -34,11 +34,11 @@ Other basic workflow steps:
 - creating a production mode war
   - run `mvn package -Pproduction` in the ui module or in the parent module
 - running in production mode
-  - run `mvn jetty:run-exploded` in ui module
+  - run `mvn jetty:run -Pproduction` in ui module
   - open http://localhost:8080/
 
 ### Branching information:
-* `master` the latest version of the starter, using latest platform snapshot
+* `master` the latest version of the starter, using the latest platform version
 * `v10` the version for Vaadin 10
 * `v11` the version for Vaadin 11
 * `v12` the version for Vaadin 12
