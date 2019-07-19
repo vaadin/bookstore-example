@@ -27,8 +27,6 @@ import static com.vaadin.samples.AdminView.VIEW_NAME;
  * <p>
  * Allows CRUD operations for the book categories.
  */
-// TODO remove this annotation, it's a stub added to override the https://github.com/vaadin/flow/issues/5509
-@Route(value=VIEW_NAME, registerAtStartup = false)
 public class AdminView extends VerticalLayout {
 
     public static final String VIEW_NAME = "admin";

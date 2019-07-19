@@ -1,7 +1,7 @@
 package com.vaadin.samples.authentication;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.login.LoginForm;
@@ -19,7 +19,7 @@ import com.vaadin.samples.MainLayout;
  */
 @Route("Login")
 @PageTitle("Login")
-@JsModule("frontend://styles/shared-styles.js")
+@CssImport("./styles/shared-styles.css")
 public class LoginScreen extends FlexLayout {
 
     private AccessControl accessControl;
