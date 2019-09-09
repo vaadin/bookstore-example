@@ -81,9 +81,9 @@ public class LoginScreen extends FlexLayout {
 
     private void registerAdminViewIfApplicable() {
         // register the admin view dynamically only for any admin user logged in
-        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
-            RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
-                    AdminView.class, MainLayout.class);
+        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME) && 
+                !RouteConfiguration.forSessionScope().isRouteRegistered(AdminView.class)) {
+            RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME, AdminView.class, MainLayout.class);
             // as logout will purge the session route registry, no need to
             // unregister the view on logout
         }
