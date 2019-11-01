@@ -12,29 +12,25 @@ The project can be imported into the IDE of your choice, with Java 8 or 11 insta
 
 ## Project Structure
 
-The project consists of the following three modules:
-
-- parent project: common metadata and configuration
-- bookstore-starter-flow-ui: main application module that includes views
-- bookstore-starter-flow-backend: POJO classes and mock services being used in the ui
+The project is following the standard [Maven project layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
 ## Workflow
 
-To compile the entire project, run "mvn install" in the parent project.
+To compile the entire project, run "mvn install" in the project root.
 
 Other basic workflow steps:
 
 - getting started
 - compiling the whole project
-  - run `mvn install` in parent project
+  - run `mvn install` in project root
 - developing the application
-  - edit code in the ui module
-  - run `mvn jetty:run` in ui module
+  - edit code in src/main
+  - run `mvn jetty:run` 
   - open http://localhost:8080/
 - creating a production mode war
-  - run `mvn package -Pproduction` in the ui module or in the parent module
+  - run `mvn package -Pproduction` 
 - running in production mode
-  - run `mvn jetty:run -Pproduction` in ui module
+  - run `mvn jetty:run -Pproduction`
   - open http://localhost:8080/
 
 ### Branching information:
