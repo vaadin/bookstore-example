@@ -29,7 +29,7 @@ import com.vaadin.samples.bookstore.backend.data.Category;
  */
 public class AdminView extends VerticalLayout {
 
-    public static final String VIEW_NAME = "admin";
+    public static final String VIEW_NAME = "Admin";
 
     private final IronList<Category> categoriesListing;
     private final ListDataProvider<Category> dataProvider;
