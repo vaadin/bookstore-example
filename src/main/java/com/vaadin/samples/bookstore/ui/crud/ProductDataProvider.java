@@ -1,11 +1,11 @@
-package com.vaadin.samples.crud;
+package com.vaadin.samples.bookstore.ui.crud;
 
 import java.util.Locale;
 import java.util.Objects;
 
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.samples.backend.DataService;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.DataService;
+import com.vaadin.samples.bookstore.backend.data.Product;
 
 public class ProductDataProvider extends ListDataProvider<Product> {
 

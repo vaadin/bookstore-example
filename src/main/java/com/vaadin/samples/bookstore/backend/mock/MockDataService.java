@@ -1,11 +1,11 @@
-package com.vaadin.samples.backend.mock;
+package com.vaadin.samples.bookstore.backend.mock;
 
 import java.util.Collections;
 import java.util.List;
 
-import com.vaadin.samples.backend.DataService;
-import com.vaadin.samples.backend.data.Category;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.DataService;
+import com.vaadin.samples.bookstore.backend.data.Category;
+import com.vaadin.samples.bookstore.backend.data.Product;
 
 /**
  * Mock data model. This implementation has very simplistic locking and does not

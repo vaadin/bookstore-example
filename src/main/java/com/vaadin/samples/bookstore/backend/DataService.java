@@ -1,11 +1,11 @@
-package com.vaadin.samples.backend;
+package com.vaadin.samples.bookstore.backend;
 
 import java.io.Serializable;
 import java.util.Collection;
 
-import com.vaadin.samples.backend.data.Category;
-import com.vaadin.samples.backend.data.Product;
-import com.vaadin.samples.backend.mock.MockDataService;
+import com.vaadin.samples.bookstore.backend.data.Category;
+import com.vaadin.samples.bookstore.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.mock.MockDataService;
 
 /**
  * Back-end service interface for retrieving and updating product data.

@@ -1,4 +1,4 @@
-package com.vaadin.samples;
+package com.vaadin.samples.bookstore.ui;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -15,7 +15,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinServletService;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.samples.authentication.AccessControlFactory;
+import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
 
 public class Menu extends FlexLayout {
 

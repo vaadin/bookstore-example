@@ -1,4 +1,4 @@
-package com.vaadin.samples.backend.data;
+package com.vaadin.samples.bookstore.backend.data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

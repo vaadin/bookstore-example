@@ -1,4 +1,4 @@
-package com.vaadin.samples.backend.mock;
+package com.vaadin.samples.bookstore.backend.mock;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import com.vaadin.samples.backend.data.Availability;
-import com.vaadin.samples.backend.data.Category;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.data.Availability;
+import com.vaadin.samples.bookstore.backend.data.Category;
+import com.vaadin.samples.bookstore.backend.data.Product;
 
 public class MockDataGenerator {
     private static int nextCategoryId = 1;

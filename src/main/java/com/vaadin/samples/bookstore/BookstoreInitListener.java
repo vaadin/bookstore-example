@@ -1,10 +1,10 @@
-package com.vaadin.samples;
+package com.vaadin.samples.bookstore;
 
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
-import com.vaadin.samples.authentication.AccessControl;
-import com.vaadin.samples.authentication.AccessControlFactory;
-import com.vaadin.samples.authentication.LoginScreen;
+import com.vaadin.samples.bookstore.authentication.AccessControl;
+import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
+import com.vaadin.samples.bookstore.ui.login.LoginScreen;
 
 /**
  * This class is used to listen to BeforeEnter event of all UIs in order to

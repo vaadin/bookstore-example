@@ -1,9 +1,9 @@
-package com.vaadin.samples.crud;
+package com.vaadin.samples.bookstore.ui.crud;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
-import com.vaadin.samples.backend.data.Category;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.data.Category;
+import com.vaadin.samples.bookstore.backend.data.Product;
 
 import java.text.DecimalFormat;
 import java.util.Comparator;

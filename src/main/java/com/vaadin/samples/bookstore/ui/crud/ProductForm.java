@@ -1,4 +1,4 @@
-package com.vaadin.samples.crud;
+package com.vaadin.samples.bookstore.ui.crud;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -24,9 +24,9 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.converter.StringToBigDecimalConverter;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.samples.backend.data.Availability;
-import com.vaadin.samples.backend.data.Category;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.data.Availability;
+import com.vaadin.samples.bookstore.backend.data.Category;
+import com.vaadin.samples.bookstore.backend.data.Product;
 
 /**
  * A form for editing a single product.

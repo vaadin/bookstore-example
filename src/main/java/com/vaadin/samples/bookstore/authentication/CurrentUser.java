@@ -1,4 +1,4 @@
-package com.vaadin.samples.authentication;
+package com.vaadin.samples.bookstore.authentication;
 
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.server.VaadinService;

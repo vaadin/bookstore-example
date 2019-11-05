@@ -1,4 +1,4 @@
-package com.vaadin.samples.authentication;
+package com.vaadin.samples.bookstore.authentication;
 
 import java.io.Serializable;
 

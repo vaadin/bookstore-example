@@ -1,4 +1,4 @@
-package com.vaadin.samples.crud;
+package com.vaadin.samples.bookstore.ui.crud;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
@@ -14,9 +14,9 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.vaadin.samples.MainLayout;
-import com.vaadin.samples.backend.DataService;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.DataService;
+import com.vaadin.samples.bookstore.backend.data.Product;
+import com.vaadin.samples.bookstore.ui.MainLayout;
 
 /**
  * A view for performing create-read-update-delete operations on products.

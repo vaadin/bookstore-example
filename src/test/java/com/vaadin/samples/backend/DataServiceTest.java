@@ -2,8 +2,10 @@ package com.vaadin.samples.backend;
 
 import org.junit.Before;
 import org.junit.Test;
-import com.vaadin.samples.backend.data.Product;
-import com.vaadin.samples.backend.mock.MockDataService;
+
+import com.vaadin.samples.bookstore.backend.DataService;
+import com.vaadin.samples.bookstore.backend.data.Product;
+import com.vaadin.samples.bookstore.backend.mock.MockDataService;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

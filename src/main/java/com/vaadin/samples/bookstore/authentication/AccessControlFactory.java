@@ -1,4 +1,4 @@
-package com.vaadin.samples.authentication;
+package com.vaadin.samples.bookstore.authentication;
 
 public class AccessControlFactory {
     private static final AccessControlFactory INSTANCE = new AccessControlFactory();

@@ -1,10 +1,10 @@
-package com.vaadin.samples.crud;
+package com.vaadin.samples.bookstore.ui.crud;
 
 import com.vaadin.flow.component.UI;
-import com.vaadin.samples.authentication.AccessControl;
-import com.vaadin.samples.authentication.AccessControlFactory;
-import com.vaadin.samples.backend.DataService;
-import com.vaadin.samples.backend.data.Product;
+import com.vaadin.samples.bookstore.authentication.AccessControl;
+import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
+import com.vaadin.samples.bookstore.backend.DataService;
+import com.vaadin.samples.bookstore.backend.data.Product;
 
 import java.io.Serializable;
 

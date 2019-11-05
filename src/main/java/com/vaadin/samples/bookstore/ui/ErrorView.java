@@ -1,4 +1,4 @@
-package com.vaadin.samples;
+package com.vaadin.samples.bookstore.ui;
 
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;

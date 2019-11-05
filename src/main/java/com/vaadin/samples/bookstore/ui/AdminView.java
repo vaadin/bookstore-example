@@ -1,4 +1,6 @@
-package com.vaadin.samples;
+package com.vaadin.samples.bookstore.ui;
+
+import static com.vaadin.samples.bookstore.ui.AdminView.VIEW_NAME;
 
 import java.util.ArrayList;
 
@@ -17,10 +19,8 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.Route;
-import com.vaadin.samples.backend.DataService;
-import com.vaadin.samples.backend.data.Category;
-
-import static com.vaadin.samples.AdminView.VIEW_NAME;
+import com.vaadin.samples.bookstore.backend.DataService;
+import com.vaadin.samples.bookstore.backend.data.Category;
 
 /**
  * Admin view that is registered dynamically on admin user login.

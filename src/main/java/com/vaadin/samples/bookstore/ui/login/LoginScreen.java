@@ -1,4 +1,4 @@
-package com.vaadin.samples.authentication;
+package com.vaadin.samples.bookstore.ui.login;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -11,8 +11,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteConfiguration;
-import com.vaadin.samples.AdminView;
-import com.vaadin.samples.MainLayout;
+import com.vaadin.samples.bookstore.authentication.AccessControl;
+import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
+import com.vaadin.samples.bookstore.ui.AdminView;
+import com.vaadin.samples.bookstore.ui.MainLayout;
 
 /**
  * UI content when the user is not logged in yet.

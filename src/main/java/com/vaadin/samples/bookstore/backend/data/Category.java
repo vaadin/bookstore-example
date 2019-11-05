@@ -1,4 +1,4 @@
-package com.vaadin.samples.backend.data;
+package com.vaadin.samples.bookstore.backend.data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

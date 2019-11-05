@@ -1,4 +1,4 @@
-package com.vaadin.samples;
+package com.vaadin.samples.bookstore.ui;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Key;
@@ -13,9 +13,9 @@ import com.vaadin.flow.server.Command;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import com.vaadin.samples.about.AboutView;
-import com.vaadin.samples.authentication.AccessControlFactory;
-import com.vaadin.samples.crud.SampleCrudView;
+import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
+import com.vaadin.samples.bookstore.ui.about.AboutView;
+import com.vaadin.samples.bookstore.ui.crud.SampleCrudView;
 
 /**
  * The main layout. Contains the navigation menu.

@@ -1,4 +1,4 @@
-package com.vaadin.samples.backend.data;
+package com.vaadin.samples.bookstore.backend.data;
 
 public enum Availability {
     COMING("Coming"), AVAILABLE("Available"), DISCONTINUED("Discontinued");
