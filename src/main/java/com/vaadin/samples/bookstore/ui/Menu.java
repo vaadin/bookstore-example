@@ -67,6 +67,7 @@ public class Menu extends FlexLayout {
                 VaadinIcon.SIGN_OUT.create());
         logoutButton.addClickListener(event -> AccessControlFactory
                 .getInstance().createAccessControl().signOut());
+        logoutButton.getElement().setAttribute("title", "Logout (Ctrl+L)");
 
         logoutButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
         add(logoutButton);

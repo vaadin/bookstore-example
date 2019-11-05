@@ -42,7 +42,8 @@ public class MainLayout extends FlexLayout implements RouterLayout {
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-
+ 
+        // User can quickly activate logout with Ctrl+L
         attachEvent.getUI()
                 .addShortcutListener(
                         () -> AccessControlFactory.getInstance()
