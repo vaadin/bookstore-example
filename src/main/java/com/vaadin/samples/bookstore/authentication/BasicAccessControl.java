@@ -5,18 +5,20 @@ import com.vaadin.flow.server.VaadinSession;
 
 /**
  * Default mock implementation of {@link AccessControl}. This implementation
- * accepts any string as a password, and considers the user "admin" as the only
- * administrator.
+ * accepts any string as a user if the password is the same string, and
+ * considers the user "admin" as the only administrator.
  */
 public class BasicAccessControl implements AccessControl {
 
     @Override
     public boolean signIn(String username, String password) {
-        if (username == null || username.isEmpty())
+        if (username == null || username.isEmpty()) {
             return false;
+        }
 
-        if (!username.equals(password))
+        if (!username.equals(password)) {
             return false;
+        }
 
         CurrentUser.set(username);
         return true;
