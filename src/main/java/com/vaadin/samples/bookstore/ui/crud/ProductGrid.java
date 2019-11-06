@@ -73,22 +73,7 @@ public class ProductGrid extends Grid<Product> {
         // screen
         // (e.g. switching from portrait to landscape mode)
         UI.getCurrent().getPage().addBrowserWindowResizeListener(
-                e -> reconfigureColumns(e.getWidth()));
-    }
-
-    /**
-     * Check screen width and show/hide columns appropriately
-     */
-    private void reconfigureColumns(Integer knownWidth) {
-        if (knownWidth != null) {
-            setColumnVisibility(knownWidth);
-        } else {
-            // fetch new width
-            UI.getCurrent().getInternals().setExtendedClientDetails(null);
-            UI.getCurrent().getPage().retrieveExtendedClientDetails(e -> {
-                setColumnVisibility(e.getBodyClientWidth());
-            });
-        }
+                e -> setColumnVisibility(e.getWidth()));
     }
 
     private void setColumnVisibility(int width) {
@@ -117,7 +102,11 @@ public class ProductGrid extends Grid<Product> {
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
 
-        reconfigureColumns(null);
+        // fetch browser width
+        UI.getCurrent().getInternals().setExtendedClientDetails(null);
+        UI.getCurrent().getPage().retrieveExtendedClientDetails(e -> {
+            setColumnVisibility(e.getBodyClientWidth());
+        });
     }
 
     public Product getSelectedRow() {
