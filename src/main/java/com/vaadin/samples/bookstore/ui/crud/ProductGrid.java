@@ -19,8 +19,6 @@ import com.vaadin.samples.bookstore.backend.data.Product;
  */
 public class ProductGrid extends Grid<Product> {
 
-    private boolean screenSizeChanged = true;
-
     public ProductGrid() {
 
         setSizeFull();
@@ -74,32 +72,22 @@ public class ProductGrid extends Grid<Product> {
         // If the browser window size changes, check if all columns fit on
         // screen
         // (e.g. switching from portrait to landscape mode)
-        UI.getCurrent().getPage().addBrowserWindowResizeListener(e -> {
-            screenSizeChanged = true;
-            reconfigureColumns();
-        });
+        UI.getCurrent().getPage().addBrowserWindowResizeListener(
+                e -> reconfigureColumns(e.getWidth()));
     }
 
     /**
      * Check screen width and show/hide columns appropriately
      */
-    private void reconfigureColumns() {
-
-        if (screenSizeChanged) {
-
+    private void reconfigureColumns(Integer knownWidth) {
+        if (knownWidth != null) {
+            setColumnVisibility(knownWidth);
+        } else {
             // fetch new width
             UI.getCurrent().getInternals().setExtendedClientDetails(null);
             UI.getCurrent().getPage().retrieveExtendedClientDetails(e -> {
                 setColumnVisibility(e.getBodyClientWidth());
             });
-
-            screenSizeChanged = false;
-        } else {
-
-            // use previously fetched width
-            final int width = UI.getCurrent().getInternals()
-                    .getExtendedClientDetails().getBodyClientWidth();
-            setColumnVisibility(width);
         }
     }
 
@@ -129,7 +117,7 @@ public class ProductGrid extends Grid<Product> {
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
 
-        reconfigureColumns();
+        reconfigureColumns(null);
     }
 
     public Product getSelectedRow() {
