@@ -16,44 +16,45 @@
     }
 }
 
-.main-layout {
-    flex-direction: row;
+body {
 
     /* Used by the menu and form overlays */
     --overlay-box-shadow: 0 0 3px 2px var(--lumo-contrast-10pct);
 }
 
-.menu-bar {
-    flex-direction: column;
-    flex-shrink: 0;
-    background: var(--lumo-base-color);
-    box-shadow: var(--overlay-box-shadow);
-}
-
 .menu-header {
     padding: 11px 16px;
+    padding-left: 32px;
+    font-size: var(--lumo-font-size-l);
 }
 
-.menu-bar vaadin-tabs {
-    align-items: flex-start;
-    transition: transform 300ms;
-}
-
-.menu-bar vaadin-tab {
-    padding: 0;
+.menu-toggle {
+    display: none;
 }
 
 .menu-link {
+    display: block;
     margin: 0 auto;
     padding: 10px 37px;
+    transition: transform 300ms;
+    
+    font-family: var(--lumo-font-family);
+    font-size: var(--lumo-font-size-m);
+    font-weight: 500;
+    color: var(--lumo-secondary-text-color);
 }
 
-.menu-link > span {
-    display: block;
+.menu-link:hover {
+    text-decoration: none;
+}
+
+.menu-link span {
+    padding-left: 5px;
 }
 
 .menu-button {
-    display: none;
+    padding: 10px 42px;
+    color: var(--lumo-secondary-text-color);
 }
 
 .product-form {
@@ -66,50 +67,27 @@
     box-shadow: var(--overlay-box-shadow);
 }
 
-/* On narrow screens, move the side bar to the top,
- * except for the link-tabs, which are hidden but
- * can be opened via a button.
+.product-form-content {
+    margin-top: var(--_vaadin-app-layout-navbar-offset-size);
+}
+
+/* 
+ * Special rules for narrow screens (responsive design rules)
  */
-@media (max-width: 800px) {
+@media (max-width: 800px), (max-height: 600px) {
 
-    .main-layout {
-        flex-direction: column;
-        --top-bar-height: 50px;
-        --top-bar-margin: 5vw;
-    }
-
-    .menu-bar {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        height: var(--top-bar-height);
-        margin: 0 var(--top-bar-margin);
-        background: none;
-        box-shadow: none;
-    }
-
-    .menu-bar vaadin-tabs {
-        transform: translateX(calc(-100% - var(--top-bar-margin)));
-        position: absolute;
-        top: var(--top-bar-height);
-        height: calc(100% - var(--top-bar-height));
-        z-index: 100;
-        box-shadow: var(--overlay-box-shadow);
-        background: var(--lumo-base-color);
-    }
-
-    .menu-bar .show-tabs {
-        transform: translateX(calc(0% - var(--top-bar-margin)));
-    }
-
-    .menu-button {
+	/*
+	 * Make menu toggle visible, and smaller
+	 */
+    .menu-toggle {
         display: block;
+        height: var(--lumo-button-size);
+        width: var(--lumo-button-size);
     }
-
-    .product-form {
-        height: calc(100% - var(--top-bar-height));
+    
+    .menu-header {
+        padding-left: 0;
     }
-
 }
 
 @media (max-width: 550px) {

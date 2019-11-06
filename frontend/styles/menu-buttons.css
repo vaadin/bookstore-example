@@ -1,0 +1,17 @@
+
+/*
+
+Helper styles to make menu buttons look like router links
+
+*/
+:host(.menu-button) .vaadin-button-container {
+	justify-content: left;
+}
+
+:host(.menu-button) {
+	cursor: pointer;
+}
+
+[part] ::slotted(iron-icon[icon^="vaadin:"]) {
+    padding: 0;
+}
