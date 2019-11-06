@@ -7,6 +7,13 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.samples.bookstore.backend.DataService;
 import com.vaadin.samples.bookstore.backend.data.Product;
 
+/**
+ * Utility class that encapsulates filtering and CRUD operations for
+ * {@link Product} entities.
+ * <p>
+ * Used to simplify the code in {@link SampleCrudView} and
+ * {@link SampleCrudLogic}.
+ */
 public class ProductDataProvider extends ListDataProvider<Product> {
 
     /** Text filter that can be changed separately. */
@@ -18,12 +25,12 @@ public class ProductDataProvider extends ListDataProvider<Product> {
 
     /**
      * Store given product to the backing data service.
-     * 
+     *
      * @param product
      *            the updated or new product
      */
     public void save(Product product) {
-        boolean newProduct = product.isNewProduct();
+        final boolean newProduct = product.isNewProduct();
 
         DataService.get().updateProduct(product);
         if (newProduct) {
@@ -35,7 +42,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
 
     /**
      * Delete given product from the backing data service.
-     * 
+     *
      * @param product
      *            the product to be deleted
      */
@@ -48,7 +55,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
      * Sets the filter to use for this data provider and refreshes data.
      * <p>
      * Filter is compared for product name, availability and category.
-     * 
+     *
      * @param filterText
      *            the text to filter by, never null
      */
