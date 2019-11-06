@@ -94,6 +94,7 @@ public class ProductForm extends Div {
 
         content = new VerticalLayout();
         content.setSizeUndefined();
+        content.addClassName("product-form-content");
         add(content);
 
         viewLogic = sampleCrudLogic;
