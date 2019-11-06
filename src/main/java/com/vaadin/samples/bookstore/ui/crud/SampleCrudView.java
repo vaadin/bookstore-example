@@ -30,18 +30,18 @@ public class SampleCrudView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
     public static final String VIEW_NAME = "Inventory";
-    private ProductGrid grid;
-    private ProductForm form;
+    private final ProductGrid grid;
+    private final ProductForm form;
     private TextField filter;
 
-    private SampleCrudLogic viewLogic = new SampleCrudLogic(this);
+    private final SampleCrudLogic viewLogic = new SampleCrudLogic(this);
     private Button newProduct;
 
-    private ProductDataProvider dataProvider = new ProductDataProvider();
+    private final ProductDataProvider dataProvider = new ProductDataProvider();
 
     public SampleCrudView() {
         setSizeFull();
-        HorizontalLayout topLayout = createTopBar();
+        final HorizontalLayout topLayout = createTopBar();
 
         grid = new ProductGrid();
         grid.setDataProvider(dataProvider);
@@ -51,7 +51,7 @@ public class SampleCrudView extends HorizontalLayout
         form = new ProductForm(viewLogic);
         form.setCategories(DataService.get().getAllCategories());
 
-        VerticalLayout barAndGridLayout = new VerticalLayout();
+        final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);
         barAndGridLayout.setFlexGrow(1, grid);
@@ -68,8 +68,10 @@ public class SampleCrudView extends HorizontalLayout
     public HorizontalLayout createTopBar() {
         filter = new TextField();
         filter.setPlaceholder("Filter name, availability or category");
-        // Apply the filter to grid's data provider. TextField value is never null
-        filter.addValueChangeListener(event -> dataProvider.setFilter(event.getValue()));
+        // Apply the filter to grid's data provider. TextField value is never
+        // null
+        filter.addValueChangeListener(
+                event -> dataProvider.setFilter(event.getValue()));
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
         newProduct = new Button("New product");
@@ -79,7 +81,7 @@ public class SampleCrudView extends HorizontalLayout
         // CTRL+N will create a new window which is unavoidable
         newProduct.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
 
-        HorizontalLayout topLayout = new HorizontalLayout();
+        final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
         topLayout.add(newProduct);
@@ -127,17 +129,12 @@ public class SampleCrudView extends HorizontalLayout
 
     public void showForm(boolean show) {
         form.setVisible(show);
-
-        /* FIXME The following line should be uncommented when the CheckboxGroup
-         * issue is resolved. The category CheckboxGroup throws an
-         * IllegalArgumentException when the form is disabled.
-         */
-        //form.setEnabled(show);
+        form.setEnabled(show);
     }
 
     @Override
     public void setParameter(BeforeEvent event,
-                             @OptionalParameter String parameter) {
+            @OptionalParameter String parameter) {
         viewLogic.enter(parameter);
     }
 }
