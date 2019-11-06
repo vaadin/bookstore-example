@@ -1,8 +1,10 @@
 package com.vaadin.samples.bookstore.backend.data;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 public class Category implements Serializable {
 
@@ -30,5 +32,29 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return getName();
+    }
+
+    /*
+     * Vaadin DataProviders rely on properly implemented equals and hashcode
+     * methods.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || id == -1) {
+            return false;
+        }
+        if (obj instanceof Category) {
+            return id == ((Category) obj).id;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        if (id == -1) {
+            return super.hashCode();
+        }
+
+        return Objects.hash(id);
     }
 }

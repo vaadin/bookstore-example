@@ -2,6 +2,7 @@ package com.vaadin.samples.bookstore.backend.data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.validation.constraints.Min;
@@ -75,4 +76,27 @@ public class Product implements Serializable {
         return getId() == -1;
     }
 
+    /*
+     * Vaadin DataProviders rely on properly implemented equals and hashcode
+     * methods.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || id == -1) {
+            return false;
+        }
+        if (obj instanceof Product) {
+            return id == ((Product) obj).id;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        if (id == -1) {
+            return super.hashCode();
+        }
+
+        return Objects.hash(id);
+    }
 }

@@ -38,12 +38,7 @@ public class AdminView extends VerticalLayout {
     public AdminView() {
         categoriesListing = new IronList<>();
 
-        dataProvider = new ListDataProvider<Category>(new ArrayList<>(DataService.get().getAllCategories())) {
-            @Override
-            public Object getId(Category item) {
-                return item.getId();
-            }
-        };
+        dataProvider = new ListDataProvider<Category>(new ArrayList<>(DataService.get().getAllCategories()));
         categoriesListing.setDataProvider(dataProvider);
         categoriesListing.setRenderer(new ComponentRenderer<>(this::createCategoryEditor));
 
