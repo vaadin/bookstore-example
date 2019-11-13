@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.vaadin.flow.component.html.testbench.SpanElement;
+import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.samples.AbstractViewTest;
 import com.vaadin.samples.MainLayoutElement;
 import com.vaadin.samples.authentication.LoginFormElement;
@@ -12,6 +13,7 @@ public class AboutViewIT extends AbstractViewTest {
 
     @Test
     public void openAboutView_showsFlowVersion() {
+
         // given authenticated as a regular user
         $(LoginFormElement.class).first().login("user", "user");
 
@@ -20,9 +22,10 @@ public class AboutViewIT extends AbstractViewTest {
         mainElem.clickMenuLink("About");
 
         // then the view contents a span with Flow version information
-        final SpanElement aboutSpan = mainElem.$(SpanElement.class).last();
+        final SpanElement aboutSpan = mainElem.$(HorizontalLayoutElement.class)
+                .last().$(SpanElement.class).last();
 
-        Assert.assertTrue("Expected link to admin view",
-                aboutSpan.getText().contains("Flow"));
+        Assert.assertTrue("Expected version text",
+                aboutSpan.getText().contains("Vaadin"));
     }
 }
