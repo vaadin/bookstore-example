@@ -269,6 +269,7 @@
                             <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
                             <customRepositoryMap>webdrivers.xml</customRepositoryMap>
                             <downloadedZipFileDirectory>.driver/zips</downloadedZipFileDirectory>
+                            <overwriteFilesThatExist>true</overwriteFilesThatExist>
                         </configuration>
                         <executions>
                             <execution>

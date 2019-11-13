@@ -33,6 +33,22 @@ Other basic workflow steps:
   - run `mvn jetty:run -Pproduction`
   - open http://localhost:8080/
 
+### Running Integration Tests
+
+Integration tests are implemented using TestBench. The tests take a few minutes to run and are therefore included in a separate Maven profile. To run the tests using Google Chrome, execute
+
+`mvn verify -Pit`
+
+and make sure you have a valid TestBench license installed. If the tests fail because of an old Chrome Driver or you want to use a different browser, you'll need to update the webdrivers.xml file in the project root.
+
+Profile `it` adds the following parameters to run integration tests:
+```sh
+-Dwebdriver.chrome.driver=path_to_driver
+-Dcom.vaadin.testbench.Parameters.runLocally=chrome
+```
+
+If you would like to run a separate test make sure you have added these parameters to VM Options of JUnit run configuration
+
 ### Branching information:
 * `master` the latest version of the starter, using the latest platform version
 * `v10` the version for Vaadin 10
