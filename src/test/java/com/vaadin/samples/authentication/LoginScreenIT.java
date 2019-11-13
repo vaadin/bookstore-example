@@ -11,12 +11,13 @@ public class LoginScreenIT extends AbstractViewTest {
 
     @Test
     public void loginForm_isLumoThemed() {
-        LoginFormElement loginForm = $(LoginFormElement.class).first();
+        final LoginFormElement loginForm = $(LoginFormElement.class).first();
         assertThemePresentOnElement(loginForm, Lumo.class);
     }
 
     @Test
     public void loginAsAdmin_hasAdminViewLink() {
+
         // when authenticating as admin
         $(LoginFormElement.class).first().login("admin", "admin");
 

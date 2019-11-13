@@ -16,6 +16,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
 
     @Test
     public void userSelectsProduct_cannotEditProductInformation() {
+
         // given authenticated as a regular user
         $(LoginFormElement.class).first().login("user", "user");
 
@@ -24,7 +25,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
         mainLayout.clickMenuLink("Inventory");
 
         // when selecting an item from the product grid
-        GridElement grid = $(GridElement.class).first();
+        final GridElement grid = $(GridElement.class).first();
         grid.getCell(0, 0).click();
 
         // then the product data is not editable
@@ -34,6 +35,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
 
     @Test
     public void adminSelectsProduct_canUpdateProductInformation() {
+
         // given authenticated as an admin
         $(LoginFormElement.class).first().login("admin", "admin");
 
@@ -42,7 +44,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
         mainElem.clickMenuLink("Inventory");
 
         // when selecting an item from the product grid
-        GridElement grid = $(GridElement.class).first();
+        final GridElement grid = $(GridElement.class).first();
         grid.getCell(0, 0).click();
 
         // when altering the product name and clicking the save button
@@ -66,8 +68,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
         mainElem.clickMenuLink("Inventory");
 
         // when clicking the "New product" button
-        $(ButtonElement.class).attribute("theme","primary").first()
-                .click();
+        $(ButtonElement.class).attribute("theme", "primary").first().click();
 
         // when entering new product data and saving the product
         final ProductFormElement prodForm = $(ProductFormElement.class).first();
@@ -76,7 +77,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
         prodForm.getSaveButtonElement().click();
 
         // then the new title is in the grid
-        GridElement grid = $(GridElement.class).first();
+        final GridElement grid = $(GridElement.class).first();
         final boolean foundInGrid = IntStream.range(0, grid.getRowCount())
                 .mapToObj(row -> grid.getCell(row, 0).getText())
                 .anyMatch(title -> newTitle.equals(title));
