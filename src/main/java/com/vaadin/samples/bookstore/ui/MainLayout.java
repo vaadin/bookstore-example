@@ -27,7 +27,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import com.vaadin.samples.bookstore.authentication.AccessControl;
 import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
 import com.vaadin.samples.bookstore.ui.about.AboutView;
-import com.vaadin.samples.bookstore.ui.crud.SampleCrudView;
+import com.vaadin.samples.bookstore.ui.inventory.InventoryView;
 
 /**
  * The main layout. Contains the navigation menu.
@@ -67,8 +67,8 @@ public class MainLayout extends AppLayout implements RouterLayout {
         addToNavbar(top);
 
         // Navigation items
-        addToDrawer(createMenuLink(SampleCrudView.class,
-                SampleCrudView.VIEW_NAME, VaadinIcon.EDIT.create()));
+        addToDrawer(createMenuLink(InventoryView.class, InventoryView.VIEW_NAME,
+                VaadinIcon.EDIT.create()));
 
         addToDrawer(createMenuLink(AboutView.class, AboutView.VIEW_NAME,
                 VaadinIcon.INFO_CIRCLE.create()));

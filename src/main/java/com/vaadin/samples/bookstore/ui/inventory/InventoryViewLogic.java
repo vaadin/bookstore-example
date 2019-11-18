@@ -1,12 +1,12 @@
-package com.vaadin.samples.bookstore.ui.crud;
+package com.vaadin.samples.bookstore.ui.inventory;
+
+import java.io.Serializable;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.samples.bookstore.authentication.AccessControl;
 import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
 import com.vaadin.samples.bookstore.backend.DataService;
 import com.vaadin.samples.bookstore.backend.data.Product;
-
-import java.io.Serializable;
 
 /**
  * This class provides an interface for the logical operations between the CRUD
@@ -17,11 +17,11 @@ import java.io.Serializable;
  * the system separately, and to e.g. provide alternative views for the same
  * data.
  */
-public class SampleCrudLogic implements Serializable {
+public class InventoryViewLogic implements Serializable {
 
-    private SampleCrudView view;
+    private final InventoryView view;
 
-    public SampleCrudLogic(SampleCrudView simpleCrudView) {
+    public InventoryViewLogic(InventoryView simpleCrudView) {
         view = simpleCrudView;
     }
 
@@ -50,7 +50,7 @@ public class SampleCrudLogic implements Serializable {
             fragmentParameter = productId;
         }
 
-        UI.getCurrent().navigate(SampleCrudView.class, fragmentParameter);
+        UI.getCurrent().navigate(InventoryView.class, fragmentParameter);
     }
 
     public void enter(String productId) {
@@ -61,10 +61,10 @@ public class SampleCrudLogic implements Serializable {
                 // Ensure this is selected even if coming directly here from
                 // login
                 try {
-                    int pid = Integer.parseInt(productId);
-                    Product product = findProduct(pid);
+                    final int pid = Integer.parseInt(productId);
+                    final Product product = findProduct(pid);
                     view.selectRow(product);
-                } catch (NumberFormatException e) {
+                } catch (final NumberFormatException e) {
                 }
             }
         } else {
@@ -77,7 +77,7 @@ public class SampleCrudLogic implements Serializable {
     }
 
     public void saveProduct(Product product) {
-        boolean newProduct = product.isNewProduct();
+        final boolean newProduct = product.isNewProduct();
         view.clearSelection();
         view.updateProduct(product);
         setFragmentParameter("");

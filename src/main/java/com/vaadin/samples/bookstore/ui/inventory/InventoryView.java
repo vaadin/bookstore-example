@@ -1,4 +1,4 @@
-package com.vaadin.samples.bookstore.ui.crud;
+package com.vaadin.samples.bookstore.ui.inventory;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
@@ -26,7 +26,7 @@ import com.vaadin.samples.bookstore.ui.MainLayout;
  */
 @Route(value = "Inventory", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-public class SampleCrudView extends HorizontalLayout
+public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
     public static final String VIEW_NAME = "Inventory";
@@ -34,12 +34,12 @@ public class SampleCrudView extends HorizontalLayout
     private final ProductForm form;
     private TextField filter;
 
-    private final SampleCrudLogic viewLogic = new SampleCrudLogic(this);
+    private final InventoryViewLogic viewLogic = new InventoryViewLogic(this);
     private Button newProduct;
 
     private final ProductDataProvider dataProvider = new ProductDataProvider();
 
-    public SampleCrudView() {
+    public InventoryView() {
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
 

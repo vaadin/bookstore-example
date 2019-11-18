@@ -1,4 +1,4 @@
-package com.vaadin.samples.bookstore.ui.crud;
+package com.vaadin.samples.bookstore.ui.inventory;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -33,20 +33,20 @@ import com.vaadin.samples.bookstore.backend.data.Product;
  */
 public class ProductForm extends Div {
 
-    private VerticalLayout content;
+    private final VerticalLayout content;
 
-    private TextField productName;
-    private TextField price;
-    private TextField stockCount;
-    private Select<Availability> availability;
-    private CheckboxGroup<Category> category;
+    private final TextField productName;
+    private final TextField price;
+    private final TextField stockCount;
+    private final Select<Availability> availability;
+    private final CheckboxGroup<Category> category;
     private Button save;
     private Button discard;
     private Button cancel;
-    private Button delete;
+    private final Button delete;
 
-    private SampleCrudLogic viewLogic;
-    private Binder<Product> binder;
+    private final InventoryViewLogic viewLogic;
+    private final Binder<Product> binder;
     private Product currentProduct;
 
     private static class PriceConverter extends StringToBigDecimalConverter {
@@ -58,7 +58,7 @@ public class ProductForm extends Div {
         @Override
         protected NumberFormat getFormat(Locale locale) {
             // Always display currency with two decimals
-            NumberFormat format = super.getFormat(locale);
+            final NumberFormat format = super.getFormat(locale);
             if (format instanceof DecimalFormat) {
                 format.setMaximumFractionDigits(2);
                 format.setMinimumFractionDigits(2);
@@ -80,7 +80,7 @@ public class ProductForm extends Div {
             // number expects a fixed wire/DOM number format regardless
             // of how the browser presents it to the user (which could
             // depend on the browser locale).
-            DecimalFormat format = new DecimalFormat();
+            final DecimalFormat format = new DecimalFormat();
             format.setMaximumFractionDigits(0);
             format.setDecimalSeparatorAlwaysShown(false);
             format.setParseIntegerOnly(true);
@@ -89,7 +89,7 @@ public class ProductForm extends Div {
         }
     }
 
-    public ProductForm(SampleCrudLogic sampleCrudLogic) {
+    public ProductForm(InventoryViewLogic sampleCrudLogic) {
         setClassName("product-form");
 
         content = new VerticalLayout();
@@ -114,7 +114,7 @@ public class ProductForm extends Div {
         stockCount.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         stockCount.setValueChangeMode(ValueChangeMode.EAGER);
 
-        HorizontalLayout horizontalLayout = new HorizontalLayout(price,
+        final HorizontalLayout horizontalLayout = new HorizontalLayout(price,
                 stockCount);
         horizontalLayout.setWidth("100%");
         horizontalLayout.setFlexGrow(1, price, stockCount);
@@ -141,8 +141,8 @@ public class ProductForm extends Div {
 
         // enable/disable save button while editing
         binder.addStatusChangeListener(event -> {
-            boolean isValid = !event.hasValidationErrors();
-            boolean hasChanges = binder.hasChanges();
+            final boolean isValid = !event.hasValidationErrors();
+            final boolean hasChanges = binder.hasChanges();
             save.setEnabled(hasChanges && isValid);
             discard.setEnabled(hasChanges);
         });
@@ -173,7 +173,8 @@ public class ProductForm extends Div {
 
         delete = new Button("Delete");
         delete.setWidth("100%");
-        delete.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
+        delete.addThemeVariants(ButtonVariant.LUMO_ERROR,
+                ButtonVariant.LUMO_PRIMARY);
         delete.addClickListener(event -> {
             if (currentProduct != null) {
                 viewLogic.deleteProduct(currentProduct);

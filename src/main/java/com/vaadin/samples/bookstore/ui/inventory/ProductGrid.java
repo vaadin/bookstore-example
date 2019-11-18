@@ -1,4 +1,4 @@
-package com.vaadin.samples.bookstore.ui.crud;
+package com.vaadin.samples.bookstore.ui.inventory;
 
 import java.text.DecimalFormat;
 import java.util.Comparator;
