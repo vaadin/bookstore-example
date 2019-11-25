@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -66,7 +65,7 @@ public class AdminView extends VerticalLayout {
                     final ConfirmDialog dialog = new ConfirmDialog(
                             "Please confirm",
                             "Are you sure you want to delete the category? Books in this category will not be deleted.",
-                            "Yes", e -> {
+                            "Delete", () -> {
                                 DataService.get()
                                         .deleteCategory(category.getId());
                                 dataProvider.getItems().remove(category);
@@ -74,9 +73,6 @@ public class AdminView extends VerticalLayout {
                                 Notification.show("Category Deleted.");
                             });
 
-                    dialog.setCancelable(true);
-
-                    add(dialog);
                     dialog.open();
 
                 });
