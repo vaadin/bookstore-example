@@ -51,7 +51,3 @@ If you would like to run a separate test make sure you have added these paramete
 
 ### Branching information:
 * `master` the latest version of the starter, using the latest platform version
-* `v10` the version for Vaadin 10
-* `v11` the version for Vaadin 11
-* `v12` the version for Vaadin 12
-* `v13` the version for Vaadin 13
