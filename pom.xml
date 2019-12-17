@@ -41,71 +41,70 @@
 
 
     <dependencies>
-      <dependency>
-          <groupId>com.vaadin</groupId>
-          <!-- Replace artifactId with vaadin-core to use only free components -->
-          <artifactId>vaadin-core</artifactId>
-          <exclusions>
-              <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
-              <exclusion>
-                  <groupId>com.vaadin.webjar</groupId>
-                  <artifactId>*</artifactId>
-              </exclusion>
-              <exclusion>
-                  <groupId>org.webjars.bowergithub.insites</groupId>
-                  <artifactId>*</artifactId>
-              </exclusion>
-              <exclusion>
-                  <groupId>org.webjars.bowergithub.polymer</groupId>
-                  <artifactId>*</artifactId>
-              </exclusion>
-              <exclusion>
-                  <groupId>org.webjars.bowergithub.polymerelements</groupId>
-                  <artifactId>*</artifactId>
-              </exclusion>
-              <exclusion>
-                  <groupId>org.webjars.bowergithub.vaadin</groupId>
-                  <artifactId>*</artifactId>
-              </exclusion>
-              <exclusion>
-                  <groupId>org.webjars.bowergithub.webcomponents</groupId>
-                  <artifactId>*</artifactId>
-              </exclusion>
-          </exclusions>
-      </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>4.0.1</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>javax.validation</groupId>
-          <artifactId>validation-api</artifactId>
-          <version>2.0.1.Final</version>
-      </dependency>
-      <!-- Bean validation implementation -->
-      <dependency>
-          <groupId>org.hibernate.validator</groupId>
-          <artifactId>hibernate-validator</artifactId>
-          <version>6.0.16.Final</version>
-      </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <!-- Replace artifactId with vaadin-core to use only free components -->
+            <artifactId>vaadin-core</artifactId>
+            <exclusions>
+                <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+                <exclusion>
+                    <groupId>com.vaadin.webjar</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.insites</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.polymer</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.polymerelements</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.vaadin</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars.bowergithub.webcomponents</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+        <!-- Bean validation implementation -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.16.Final</version>
+        </dependency>
 
-      <!-- Testing -->
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.12</version>
-          <scope>test</scope>
-      </dependency>
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
-      <!-- Vaadin Testbench -->
-      <dependency>
-          <groupId>com.vaadin</groupId>
-          <artifactId>vaadin-testbench</artifactId>
-          <scope>test</scope>
-      </dependency>
-
+        <!-- Vaadin Testbench -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -205,7 +204,7 @@
             </build>
         </profile>
         
-         <profile>
+        <profile>
             <id>it</id>
             <build>
                 <plugins>
@@ -279,7 +278,5 @@
                 </plugins>
             </build>
         </profile>
-        
     </profiles>
-
 </project>
