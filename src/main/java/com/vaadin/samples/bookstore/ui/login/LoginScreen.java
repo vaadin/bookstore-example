@@ -8,19 +8,14 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.samples.bookstore.authentication.AccessControl;
 import com.vaadin.samples.bookstore.authentication.AccessControlFactory;
-import com.vaadin.samples.bookstore.ui.AdminView;
-import com.vaadin.samples.bookstore.ui.MainLayout;
 
 /**
  * UI content when the user is not logged in yet.
  */
 @Route("Login")
-@PageTitle("Login")
 @CssImport("./styles/shared-styles.css")
 public class LoginScreen extends FlexLayout {
 
