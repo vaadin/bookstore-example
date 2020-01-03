@@ -1,5 +1,5 @@
 tasks:
-  - init: mvn install
+  - init: mvn install -Pproduction
     command: mvn jetty:run
 ports:
   - port: 8080
