@@ -107,6 +107,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-custom-field-flow</artifactId>
+            <version>3.0.3</version>
+        </dependency>
         <!-- Vaadin Testbench -->
         <dependency>
             <groupId>com.vaadin</groupId>
