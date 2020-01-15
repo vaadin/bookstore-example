@@ -262,7 +262,7 @@
                                 in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
                             <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
-                            <customRepositoryMap>webdrivers.xml</customRepositoryMap>
+                            <customRepositoryMap>drivers.xml</customRepositoryMap>
                             <downloadedZipFileDirectory>.driver/zips</downloadedZipFileDirectory>
                             <overwriteFilesThatExist>true</overwriteFilesThatExist>
                         </configuration>
