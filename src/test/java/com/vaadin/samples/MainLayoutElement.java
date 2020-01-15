@@ -6,13 +6,12 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.vaadin.testbench.TestBenchElement;
-import com.vaadin.testbench.elementsbase.Element;
+import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
 
-@Element("vaadin-app-layout")
-public class MainLayoutElement extends TestBenchElement {
+public class MainLayoutElement extends AppLayoutElement {
 
     public List<WebElement> findMenuLinks() {
+        this.getDrawerToggle().click();
         final List<WebElement> elements = new ArrayList<WebElement>();
         elements.addAll(findElements(By.className("menu-link")));
         elements.addAll(findElements(By.className("menu-button")));
