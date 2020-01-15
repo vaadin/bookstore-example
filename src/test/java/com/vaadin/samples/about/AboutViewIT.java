@@ -2,7 +2,10 @@ package com.vaadin.samples.about;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
+import com.vaadin.flow.component.applayout.testbench.AppLayoutElement;
+import com.vaadin.flow.component.applayout.testbench.DrawerToggleElement;
 import com.vaadin.flow.component.html.testbench.SpanElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
 import com.vaadin.samples.AbstractViewTest;
