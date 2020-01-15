@@ -212,11 +212,9 @@
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
-                            <stopPort>8081</stopPort>
-                            <scanIntervalSeconds>0</scanIntervalSeconds>
-                            <stopWait>5</stopWait>
-                            <stopKey>${project.artifactId}</stopKey>
-                            <daemon>false</daemon>
+                            <stopPort>9966</stopPort>
+                            <stopKey>stopit</stopKey>
+                            <scanIntervalSeconds>-1</scanIntervalSeconds>
                         </configuration>
                         <executions>
                             <execution>
@@ -247,9 +245,8 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <trimStackTrace>false</trimStackTrace>
                             <systemPropertyVariables>
-                                <enableAssertions>true</enableAssertions>
-                                <trimStackTrace>false</trimStackTrace>
                                 <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                                 <com.vaadin.testbench.Parameters.runLocally>chrome</com.vaadin.testbench.Parameters.runLocally>
                             </systemPropertyVariables>
