@@ -12,7 +12,7 @@ public class MainLayoutElement extends AppLayoutElement {
 
     public List<WebElement> findMenuLinks() {
         this.getDrawerToggle().click();
-        waitUntil(driver ->"Inventory".equals(findElements(By.className("menu-link")).get(0).getText()));
+        waitUntil(driver ->"Inventory".equals(findElements(By.className("menu-link")).get(0).getText()), 20);
         final List<WebElement> elements = new ArrayList<>();
         elements.addAll(findElements(By.className("menu-link")));
         elements.addAll(findElements(By.className("menu-button")));
