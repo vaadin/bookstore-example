@@ -1,6 +1,5 @@
 package com.vaadin.samples;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,23 +24,25 @@ import com.vaadin.testbench.parallel.ParallelTest;
  * as a base class for you own TestBench tests.
  * <p>
  * To learn more about TestBench, visit
- * <a href="https://vaadin.com/docs/v10/testbench/testbench-overview.html">Vaadin TestBench</a>.
+ * <a href="https://vaadin.com/docs/testbench/testbench-overview.html">Vaadin TestBench</a>.
  */
 public abstract class AbstractViewTest extends ParallelTest {
     private static final int SERVER_PORT = 8080;
 
     private final String route;
+    private final By rootSelector;
 
     @Rule
     public ScreenshotOnFailureRule rule = new ScreenshotOnFailureRule(this,
             false);
 
     public AbstractViewTest() {
-        this("");
+        this("", By.tagName("body"));
     }
 
-    protected AbstractViewTest(String route) {
+    protected AbstractViewTest(String route, By rootSelector) {
         this.route = route;
+        this.rootSelector = rootSelector;
     }
 
     @Before
@@ -52,6 +53,16 @@ public abstract class AbstractViewTest extends ParallelTest {
             setDriver(TestBench.createDriver(new ChromeDriver()));
         }
         getDriver().get(getURL(route));
+    }
+
+    /**
+     * Convenience method for getting the root element of the view based on
+     * the selector passed to the constructor.
+     *
+     * @return the root element
+     */
+    protected WebElement getRootElement() {
+        return findElement(rootSelector);
     }
 
     /**
