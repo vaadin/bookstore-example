@@ -23,10 +23,6 @@
 
     </properties>
 
-    <prerequisites>
-        <maven>3</maven>
-    </prerequisites>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -38,7 +34,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
     <dependencies>
         <dependency>
@@ -73,6 +68,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Added to provide logging output as Vaadin uses -->
+        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -89,14 +92,6 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.16.Final</version>
-        </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Vaadin Testbench -->
@@ -144,11 +139,21 @@
         <defaultGoal>jetty:run</defaultGoal>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
+
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.22.v20191022</version>
                 <configuration>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <!-- Use war output directory to get the webpack files -->
+                    <webAppConfig>
+                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+                    </webAppConfig>
                 </configuration>
             </plugin>
 
@@ -212,7 +217,9 @@
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
-                            <stopPort>9966</stopPort>
+                            <stopPort>8081</stopPort>
+                            <stopWait>5</stopWait>
+                            <daemon>false</daemon>
                             <stopKey>stopit</stopKey>
                             <scanIntervalSeconds>-1</scanIntervalSeconds>
                         </configuration>
@@ -246,9 +253,9 @@
                         </executions>
                         <configuration>
                             <trimStackTrace>false</trimStackTrace>
+                            <enableAssertions>true</enableAssertions>
                             <systemPropertyVariables>
                                 <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
-                                <com.vaadin.testbench.Parameters.runLocally>chrome</com.vaadin.testbench.Parameters.runLocally>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
@@ -262,7 +269,7 @@
                                 in -->
                             <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
                             <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
-                            <customRepositoryMap>webdrivers.xml</customRepositoryMap>
+                            <customRepositoryMap>drivers.xml</customRepositoryMap>
                             <downloadedZipFileDirectory>.driver/zips</downloadedZipFileDirectory>
                             <overwriteFilesThatExist>true</overwriteFilesThatExist>
                         </configuration>
