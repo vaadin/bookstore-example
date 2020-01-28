@@ -81,7 +81,7 @@ public class InventoryViewLogic implements Serializable {
         view.clearSelection();
         view.updateProduct(product);
         setFragmentParameter("");
-        view.showSaveNotification(product.getProductName()
+        view.showNotification(product.getProductName()
                 + (newProduct ? " created" : " updated"));
     }
 
@@ -89,7 +89,7 @@ public class InventoryViewLogic implements Serializable {
         view.clearSelection();
         view.removeProduct(product);
         setFragmentParameter("");
-        view.showSaveNotification(product.getProductName() + " removed");
+        view.showNotification(product.getProductName() + " removed");
     }
 
     public void editProduct(Product product) {
