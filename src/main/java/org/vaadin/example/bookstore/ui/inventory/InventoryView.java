@@ -40,17 +40,16 @@ public class InventoryView extends HorizontalLayout
     private final ProductDataProvider dataProvider = new ProductDataProvider();
 
     public InventoryView() {
+        // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
-
         grid = new ProductGrid();
         grid.setDataProvider(dataProvider);
+        // Allows user to select a single row in the grid.
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
-
         form = new ProductForm(viewLogic);
         form.setCategories(DataService.get().getAllCategories());
-
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);
@@ -72,15 +71,17 @@ public class InventoryView extends HorizontalLayout
         // null
         filter.addValueChangeListener(
                 event -> dataProvider.setFilter(event.getValue()));
+        // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
         newProduct = new Button("New product");
+        // Setting theme variant of new production button to LUMO_PRIMARY that
+        // changes its background color to blue and its text color to white
         newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         newProduct.setIcon(VaadinIcon.PLUS_CIRCLE.create());
         newProduct.addClickListener(click -> viewLogic.newProduct());
-        // CTRL+N will create a new window which is unavoidable
+        // A shortcut to click the new product button by pressing ctrl + N
         newProduct.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
-
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
@@ -94,39 +95,73 @@ public class InventoryView extends HorizontalLayout
         Notification.show(msg);
     }
 
-    public void showSaveNotification(String msg) {
+    /**
+     * shows a message in a notification.
+     *
+     * @param msg
+     */
+    public void showNotification(String msg) {
         Notification.show(msg);
     }
 
+    /**
+     * Enables/Disables the new product button.
+     *
+     * @param enabled
+     */
     public void setNewProductEnabled(boolean enabled) {
         newProduct.setEnabled(enabled);
     }
 
+    /**
+     * Clears the fields in the product form.
+     */
     public void clearSelection() {
         grid.getSelectionModel().deselectAll();
     }
 
+    /**
+     * Selects a row
+     * 
+     * @param row
+     */
     public void selectRow(Product row) {
         grid.getSelectionModel().select(row);
     }
 
-    public Product getSelectedRow() {
-        return grid.getSelectedRow();
-    }
-
+    /**
+     * Updates a product
+     * 
+     * @param product
+     */
     public void updateProduct(Product product) {
         dataProvider.save(product);
     }
 
+    /**
+     * Removes a product
+     * 
+     * @param product
+     */
     public void removeProduct(Product product) {
         dataProvider.delete(product);
     }
 
+    /**
+     * Edits a product
+     * 
+     * @param product
+     */
     public void editProduct(Product product) {
         showForm(product != null);
         form.editProduct(product);
     }
 
+    /**
+     * Shows the new product form
+     * 
+     * @param show
+     */
     public void showForm(boolean show) {
         form.setVisible(show);
         form.setEnabled(show);
