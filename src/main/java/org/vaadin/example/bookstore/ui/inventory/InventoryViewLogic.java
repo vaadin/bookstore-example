@@ -25,9 +25,11 @@ public class InventoryViewLogic implements Serializable {
         view = simpleCrudView;
     }
 
+    /**
+     * Does the initialization of the inventory view including disabling the
+     * buttons if the user doesn't have access.
+     */
     public void init() {
-        editProduct(null);
-        // Hide and disable if not admin
         if (!AccessControlFactory.getInstance().createAccessControl()
                 .isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
             view.setNewProductEnabled(false);
@@ -40,7 +42,11 @@ public class InventoryViewLogic implements Serializable {
     }
 
     /**
-     * Update the fragment without causing navigator to change view
+     * Updates the fragment without causing InventoryViewLogic navigator to
+     * change view. It actually appends the productId as a parameter to the URL.
+     * The parameter is set to keep the view state the same during e.g. a
+     * refresh and to enable bookmarking of individual product selections.
+     *
      */
     private void setFragmentParameter(String productId) {
         String fragmentParameter;
@@ -53,6 +59,15 @@ public class InventoryViewLogic implements Serializable {
         UI.getCurrent().navigate(InventoryView.class, fragmentParameter);
     }
 
+    /**
+     * Opens the product form and clears its fields to make it ready for
+     * entering a new product if productId is null, otherwise loads the product
+     * with the given productId and shows its data in the form fields so the
+     * user can edit them.
+     *
+     * 
+     * @param productId
+     */
     public void enter(String productId) {
         if (productId != null && !productId.isEmpty()) {
             if (productId.equals("new")) {

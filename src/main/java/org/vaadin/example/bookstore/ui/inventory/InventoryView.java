@@ -21,7 +21,7 @@ import org.vaadin.example.bookstore.ui.MainLayout;
 /**
  * A view for performing create-read-update-delete operations on products.
  *
- * See also {@link SampleCrudLogic} for fetching the data, the actual CRUD
+ * See also {@link InventoryViewLogic} for fetching the data, the actual CRUD
  * operations and controlling the view based on events from outside.
  */
 @Route(value = "Inventory", layout = MainLayout.class)
@@ -68,7 +68,6 @@ public class InventoryView extends HorizontalLayout
         filter = new TextField();
         filter.setPlaceholder("Filter name, availability or category");
         // Apply the filter to grid's data provider. TextField value is never
-        // null
         filter.addValueChangeListener(
                 event -> dataProvider.setFilter(event.getValue()));
         // A shortcut to focus on the textField by pressing ctrl + F
@@ -80,7 +79,7 @@ public class InventoryView extends HorizontalLayout
         newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         newProduct.setIcon(VaadinIcon.PLUS_CIRCLE.create());
         newProduct.addClickListener(click -> viewLogic.newProduct());
-        // A shortcut to click the new product button by pressing ctrl + N
+        // A shortcut to click the new product button by pressing ALT + N
         newProduct.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
@@ -96,8 +95,9 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * shows a message in a notification.
-     *
+     * Shows a temporary popup notification to the user.
+     * 
+     * @see Notification#show(String)
      * @param msg
      */
     public void showNotification(String msg) {
@@ -106,7 +106,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Enables/Disables the new product button.
-     *
+     * 
      * @param enabled
      */
     public void setNewProductEnabled(boolean enabled) {
@@ -114,7 +114,7 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * Clears the fields in the product form.
+     * Deselects the selected row in the grid.
      */
     public void clearSelection() {
         grid.getSelectionModel().deselectAll();
@@ -130,7 +130,7 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * Updates a product
+     * Updates a product in the list of products.
      * 
      * @param product
      */
@@ -139,7 +139,7 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * Removes a product
+     * Removes a product from the list of products.
      * 
      * @param product
      */
@@ -148,7 +148,7 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * Edits a product
+     * Edits a product in the list of products.
      * 
      * @param product
      */
@@ -158,7 +158,7 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * Shows the new product form
+     * Shows and hides the new product form
      * 
      * @param show
      */
