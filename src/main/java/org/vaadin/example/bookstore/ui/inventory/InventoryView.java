@@ -148,7 +148,7 @@ public class InventoryView extends HorizontalLayout
     }
 
     /**
-     * Edits a product in the list of products.
+     * Displays user a form to edit a Product.
      * 
      * @param product
      */
