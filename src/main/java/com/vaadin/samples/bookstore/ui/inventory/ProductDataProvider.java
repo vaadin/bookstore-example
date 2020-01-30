@@ -64,11 +64,11 @@ public class ProductDataProvider extends ListDataProvider<Product> {
         if (Objects.equals(this.filterText, filterText.trim())) {
             return;
         }
-        this.filterText = filterText.trim();
+        this.filterText = filterText.trim().toLowerCase(Locale.ENGLISH);
 
-        setFilter(product -> passesFilter(product.getProductName(), filterText)
-                || passesFilter(product.getAvailability(), filterText)
-                || passesFilter(product.getCategory(), filterText));
+        setFilter(product -> passesFilter(product.getProductName(), this.filterText)
+                || passesFilter(product.getAvailability(), this.filterText)
+                || passesFilter(product.getCategory(), this.filterText));
     }
 
     @Override
