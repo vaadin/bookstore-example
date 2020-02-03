@@ -1,1 +1,1 @@
-com.vaadin.samples.bookstore.BookstoreInitListener
+org.vaadin.example.bookstore.BookstoreInitListener

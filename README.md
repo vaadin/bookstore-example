@@ -23,7 +23,7 @@ Other basic workflow steps:
   - run `mvn install` in project root
 - developing the application
   - edit code in src/main
-  - run `mvn jetty:run` 
+  - run `mvn`
   - open http://localhost:8080/
 - creating a production mode war
   - run `mvn package -Pproduction` 
