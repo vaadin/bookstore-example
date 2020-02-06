@@ -58,7 +58,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
         // execution mode (development or production) and browser ES level
         // support
         final String resolvedImage = VaadinService.getCurrent().resolveResource(
-                "img/table-logo.png", VaadinSession.getCurrent().getBrowser());
+                "img/table-logo.png");
 
         final Image image = new Image(resolvedImage, "");
         final Label title = new Label("Bookstore");
