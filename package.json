@@ -10,7 +10,7 @@
     "@vaadin/vaadin-grid": "5.5.0",
     "@vaadin/vaadin-split-layout": "4.1.1",
     "@vaadin/vaadin-combo-box": "5.0.10",
-    "@vaadin/vaadin-core-shrinkwrap": "15.0.0-beta1",
+    "@vaadin/vaadin-core-shrinkwrap": "15.0.0-beta2",
     "@vaadin/vaadin-upload": "4.2.2",
     "@vaadin/vaadin-dialog": "2.2.1",
     "@vaadin/vaadin-select": "2.1.7",
@@ -51,7 +51,7 @@
     "html-webpack-plugin": "3.2.0",
     "script-ext-html-webpack-plugin": "2.1.4",
     "awesome-typescript-loader": "5.2.1",
-    "typescript": "3.5.3"
+    "typescript": "3.7.3"
   },
   "vaadinAppPackageHash": "92bc89a9c4a03b3e150ad0ae79069103bbbc47a102ed2f7185aca62792511dd1",
   "vaadin": {
@@ -62,7 +62,7 @@
       "@vaadin/vaadin-grid": "5.5.0",
       "@vaadin/vaadin-split-layout": "4.1.1",
       "@vaadin/vaadin-combo-box": "5.0.10",
-      "@vaadin/vaadin-core-shrinkwrap": "15.0.0-beta1",
+      "@vaadin/vaadin-core-shrinkwrap": "15.0.0-beta2",
       "@vaadin/vaadin-upload": "4.2.2",
       "@vaadin/vaadin-dialog": "2.2.1",
       "@vaadin/vaadin-select": "2.1.7",
@@ -101,10 +101,10 @@
       "html-webpack-plugin": "3.2.0",
       "script-ext-html-webpack-plugin": "2.1.4",
       "awesome-typescript-loader": "5.2.1",
-      "typescript": "3.5.3",
+      "typescript": "3.7.3",
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.9.0"
     },
-    "hash": "e96d798b4da846b9c270ba27a2c380949be1acb7dfe2cec86c80c3744718d8dd"
+    "hash": "1065c1f1953d507b22d8df3dd8130fe6eff04b51442de15c0f6d53121aa5778a"
   }
 }
