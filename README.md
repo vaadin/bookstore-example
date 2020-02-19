@@ -1,5 +1,3 @@
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin-flow/Lobby#?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 # Bookstore App Starter for Vaadin
 
 A project example for a Vaadin application that only requires a Servlet 3.1 container to run (no other JEE dependencies). The UI is built with Java only.
@@ -25,7 +23,7 @@ Other basic workflow steps:
   - run `mvn install` in project root
 - developing the application
   - edit code in src/main
-  - run `mvn jetty:run` 
+  - run `mvn`
   - open http://localhost:8080/
 - creating a production mode war
   - run `mvn package -Pproduction` 

@@ -17,15 +17,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>14.1.4</vaadin.version>
-        <drivers.dir>${project.basedir}/drivers</drivers.dir>
-        <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
-
+        <vaadin.version>15.0.0.beta1</vaadin.version>
     </properties>
-
-    <prerequisites>
-        <maven>3</maven>
-    </prerequisites>
 
     <dependencyManagement>
         <dependencies>
@@ -38,7 +31,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
     <dependencies>
         <dependency>
@@ -73,6 +65,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Added to provide logging output as Vaadin uses -->
+        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -91,18 +91,18 @@
             <version>6.1.0.Final</version>
         </dependency>
 
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Vaadin Testbench -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -127,6 +127,15 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+             
+        <repository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+             
     </repositories>
 
     <pluginRepositories>
@@ -138,17 +147,34 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
     </pluginRepositories>
 
     <build>
         <defaultGoal>jetty:run</defaultGoal>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
+
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.22.v20191022</version>
                 <configuration>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <!-- Use war output directory to get the webpack files -->
+                    <webAppConfig>
+                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+                    </webAppConfig>
                 </configuration>
             </plugin>
 
@@ -212,7 +238,9 @@
                         <groupId>org.eclipse.jetty</groupId>
                         <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
-                            <stopPort>9966</stopPort>
+                            <stopPort>8081</stopPort>
+                            <stopWait>5</stopWait>
+                            <daemon>false</daemon>
                             <stopKey>stopit</stopKey>
                             <scanIntervalSeconds>-1</scanIntervalSeconds>
                         </configuration>
@@ -246,35 +274,9 @@
                         </executions>
                         <configuration>
                             <trimStackTrace>false</trimStackTrace>
-                            <systemPropertyVariables>
-                                <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
-                                <com.vaadin.testbench.Parameters.runLocally>chrome</com.vaadin.testbench.Parameters.runLocally>
-                            </systemPropertyVariables>
+                            <enableAssertions>true</enableAssertions>
                         </configuration>
                     </plugin>
-                    <!-- Plugin for automatically download Chrome Driver for tests -->
-                    <plugin>
-                        <groupId>com.lazerycode.selenium</groupId>
-                        <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-                        <version>1.0.17</version>
-                        <configuration>
-                            <!-- root directory that downloaded driver binaries will be stored
-                                in -->
-                            <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
-                            <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
-                            <customRepositoryMap>webdrivers.xml</customRepositoryMap>
-                            <downloadedZipFileDirectory>.driver/zips</downloadedZipFileDirectory>
-                            <overwriteFilesThatExist>true</overwriteFilesThatExist>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>selenium</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
                 </plugins>
             </build>
         </profile>
