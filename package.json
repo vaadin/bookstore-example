@@ -10,7 +10,7 @@
     "@vaadin/vaadin-grid": "5.5.1",
     "@vaadin/vaadin-split-layout": "4.1.1",
     "@vaadin/vaadin-combo-box": "5.0.10",
-    "@vaadin/vaadin-core-shrinkwrap": "15.0.0",
+    "@vaadin/vaadin-core-shrinkwrap": "15.0.1",
     "@vaadin/vaadin-upload": "4.2.2",
     "@vaadin/vaadin-dialog": "2.2.1",
     "@vaadin/vaadin-select": "2.1.7",
@@ -34,24 +34,24 @@
     "@polymer/iron-icon": "3.0.1",
     "@vaadin/vaadin-time-picker": "2.0.6",
     "@vaadin/vaadin-context-menu": "4.3.15",
-    "@vaadin/vaadin-radio-button": "1.2.4",
+    "@vaadin/vaadin-radio-button": "1.2.6",
     "@vaadin/vaadin-tabs": "3.0.5",
     "@vaadin/vaadin-lumo-styles": "1.5.0",
     "@vaadin/vaadin-material-styles": "1.2.3"
   },
   "devDependencies": {
-    "webpack": "4.30.0",
-    "webpack-cli": "3.3.10",
-    "webpack-dev-server": "3.9.0",
+    "webpack": "4.42.0",
+    "webpack-cli": "3.3.11",
+    "webpack-dev-server": "3.10.3",
     "webpack-babel-multi-target-plugin": "2.3.3",
-    "copy-webpack-plugin": "5.1.0",
-    "compression-webpack-plugin": "3.0.1",
+    "copy-webpack-plugin": "5.1.1",
+    "compression-webpack-plugin": "3.1.0",
     "webpack-merge": "4.2.2",
-    "raw-loader": "3.0.0",
+    "raw-loader": "4.0.0",
     "html-webpack-plugin": "3.2.0",
     "script-ext-html-webpack-plugin": "2.1.4",
     "awesome-typescript-loader": "5.2.1",
-    "typescript": "3.7.3"
+    "typescript": "3.8.3"
   },
   "vaadinAppPackageHash": "92bc89a9c4a03b3e150ad0ae79069103bbbc47a102ed2f7185aca62792511dd1",
   "vaadin": {
@@ -62,7 +62,7 @@
       "@vaadin/vaadin-grid": "5.5.1",
       "@vaadin/vaadin-split-layout": "4.1.1",
       "@vaadin/vaadin-combo-box": "5.0.10",
-      "@vaadin/vaadin-core-shrinkwrap": "15.0.0",
+      "@vaadin/vaadin-core-shrinkwrap": "15.0.1",
       "@vaadin/vaadin-upload": "4.2.2",
       "@vaadin/vaadin-dialog": "2.2.1",
       "@vaadin/vaadin-select": "2.1.7",
@@ -86,25 +86,25 @@
       "@polymer/iron-icon": "3.0.1",
       "@vaadin/vaadin-time-picker": "2.0.6",
       "@vaadin/vaadin-context-menu": "4.3.15",
-      "@vaadin/vaadin-radio-button": "1.2.4",
+      "@vaadin/vaadin-radio-button": "1.2.6",
       "@vaadin/vaadin-tabs": "3.0.5",
       "@vaadin/vaadin-lumo-styles": "1.5.0",
       "@vaadin/vaadin-material-styles": "1.2.3"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
-      "copy-webpack-plugin": "5.1.0",
-      "compression-webpack-plugin": "3.0.1",
-      "raw-loader": "3.0.0",
-      "webpack-cli": "3.3.10",
-      "webpack": "4.30.0",
+      "copy-webpack-plugin": "5.1.1",
+      "compression-webpack-plugin": "3.1.0",
+      "raw-loader": "4.0.0",
+      "webpack-cli": "3.3.11",
+      "webpack": "4.42.0",
       "html-webpack-plugin": "3.2.0",
       "script-ext-html-webpack-plugin": "2.1.4",
       "awesome-typescript-loader": "5.2.1",
-      "typescript": "3.7.3",
+      "typescript": "3.8.3",
       "webpack-merge": "4.2.2",
-      "webpack-dev-server": "3.9.0"
+      "webpack-dev-server": "3.10.3"
     },
-    "hash": "1ca177a21a9764a1182c45d50973c2d8ec30a4d8f5256c005939195aa8d341c6"
+    "hash": "cd19301f238f3c813f99bdf0f32235ef1a6b82f03205e60674d0ca899b3f8bbe"
   }
 }
