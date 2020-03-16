@@ -10,7 +10,7 @@
     "@vaadin/vaadin-grid": "5.5.1",
     "@vaadin/vaadin-split-layout": "4.1.1",
     "@vaadin/vaadin-combo-box": "5.0.10",
-    "@vaadin/vaadin-core-shrinkwrap": "15.0.1",
+    "@vaadin/vaadin-core-shrinkwrap": "15.0.2",
     "@vaadin/vaadin-upload": "4.2.2",
     "@vaadin/vaadin-dialog": "2.2.1",
     "@vaadin/vaadin-select": "2.1.7",
@@ -21,7 +21,7 @@
     "@vaadin/vaadin-ordered-layout": "1.1.0",
     "@vaadin/vaadin-login": "1.0.1",
     "@vaadin/vaadin-button": "2.2.2",
-    "@vaadin/vaadin-date-picker": "4.0.7",
+    "@vaadin/vaadin-date-picker": "4.0.8",
     "@vaadin/vaadin-text-field": "2.5.4",
     "@vaadin/vaadin-menu-bar": "1.0.5",
     "@vaadin/vaadin-custom-field": "1.0.11",
@@ -62,7 +62,7 @@
       "@vaadin/vaadin-grid": "5.5.1",
       "@vaadin/vaadin-split-layout": "4.1.1",
       "@vaadin/vaadin-combo-box": "5.0.10",
-      "@vaadin/vaadin-core-shrinkwrap": "15.0.1",
+      "@vaadin/vaadin-core-shrinkwrap": "15.0.2",
       "@vaadin/vaadin-upload": "4.2.2",
       "@vaadin/vaadin-dialog": "2.2.1",
       "@vaadin/vaadin-select": "2.1.7",
@@ -73,7 +73,7 @@
       "@vaadin/vaadin-ordered-layout": "1.1.0",
       "@vaadin/vaadin-login": "1.0.1",
       "@vaadin/vaadin-button": "2.2.2",
-      "@vaadin/vaadin-date-picker": "4.0.7",
+      "@vaadin/vaadin-date-picker": "4.0.8",
       "@vaadin/vaadin-text-field": "2.5.4",
       "@vaadin/vaadin-menu-bar": "1.0.5",
       "@vaadin/vaadin-custom-field": "1.0.11",
@@ -105,6 +105,6 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.10.3"
     },
-    "hash": "cd19301f238f3c813f99bdf0f32235ef1a6b82f03205e60674d0ca899b3f8bbe"
+    "hash": "87cfd1218954f57c1d44e77effefdda4cdb877e74a696b31e971ba7aa1129ef6"
   }
 }
