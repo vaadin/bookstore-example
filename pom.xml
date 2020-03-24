@@ -164,16 +164,56 @@
             </plugin>
 
             <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jetty-maven-plugin-run</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <!--
+                                Jetty-maven-plugin scanner requires all excluded
+                                paths to be existed before exclusion registration
+                            -->
+                            <tasks>
+                                <mkdir dir="node_modules"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.22.v20191022</version>
-                <configuration>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
-                    <!-- Use war output directory to get the webpack files -->
-                    <webAppConfig>
-                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
-                    </webAppConfig>
-                </configuration>
+                <version>9.4.27.v20200227</version>
+                <executions>
+                    <execution>
+                        <id>jetty-maven-plugin-run</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <scanIntervalSeconds>2</scanIntervalSeconds>
+                            <!-- Use war output directory to get the webpack files -->
+                            <webAppConfig>
+                                <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+                            </webAppConfig>
+                            <!--
+                                Exclude 'node_modules' path to avoid a Jetty restart after
+                                'node_modules' being updated by webpack
+                            -->
+                            <scanTargetPatterns>
+                                <scanTargetPattern>
+                                    <directory>${project.basedir}/node_modules</directory>
+                                    <excludes>
+                                        <exclude>**/*.*</exclude>
+                                    </excludes>
+                                </scanTargetPattern>
+                            </scanTargetPatterns>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!--
