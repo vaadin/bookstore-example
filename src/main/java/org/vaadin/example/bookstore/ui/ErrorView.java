@@ -8,6 +8,9 @@ import com.vaadin.flow.router.ErrorParameter;
 import com.vaadin.flow.router.HasErrorParameter;
 import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.ParentLayout;
+import org.vaadin.example.bookstore.authentication.AccessControl;
+import org.vaadin.example.bookstore.authentication.AccessControlFactory;
+import org.vaadin.example.bookstore.ui.login.LoginScreen;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +32,12 @@ public class ErrorView extends VerticalLayout implements HasErrorParameter<NotFo
 
     @Override
     public int setErrorParameter(BeforeEnterEvent event, ErrorParameter<NotFoundException> parameter) {
+        final AccessControl accessControl = AccessControlFactory
+                .getInstance().createAccessControl();
+        if (!accessControl.isUserSignedIn()) {
+            event.rerouteTo(LoginScreen.class);
+            return HttpServletResponse.SC_FORBIDDEN;
+        }
         explanation.setText("Could not navigate to '"
                 + event.getLocation().getPath() + "'.");
         return HttpServletResponse.SC_NOT_FOUND;
