@@ -1,4 +1,4 @@
-package com.vaadin.starter.business.ui;
+package org.vaadin.example.bookstore.ui;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
