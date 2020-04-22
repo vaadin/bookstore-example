@@ -19,9 +19,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.vaadin.example.bookstore.authentication.AccessControl;
@@ -33,7 +31,6 @@ import org.vaadin.example.bookstore.ui.inventory.InventoryView;
  * The main layout. Contains the navigation menu.
  */
 @Theme(value = Lumo.class)
-@PWA(name = "Bookstore", shortName = "Bookstore")
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
 public class MainLayout extends AppLayout implements RouterLayout {
