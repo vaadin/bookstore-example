@@ -2,8 +2,10 @@ package org.vaadin.example.bookstore.ui;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Direction;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -16,6 +18,9 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -29,6 +34,9 @@ import org.vaadin.example.bookstore.authentication.AccessControlFactory;
 import org.vaadin.example.bookstore.ui.about.AboutView;
 import org.vaadin.example.bookstore.ui.inventory.InventoryView;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * The main layout. Contains the navigation menu.
  */
@@ -36,9 +44,13 @@ import org.vaadin.example.bookstore.ui.inventory.InventoryView;
 @PWA(name = "Bookstore", shortName = "Bookstore")
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
-public class MainLayout extends AppLayout implements RouterLayout {
+public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeObserver {
+
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final Button logoutButton;
+
+    private Select<String> languageSelect;
 
     public MainLayout() {
 
@@ -61,23 +73,23 @@ public class MainLayout extends AppLayout implements RouterLayout {
                 "img/table-logo.png");
 
         final Image image = new Image(resolvedImage, "");
-        final Label title = new Label("Bookstore");
+        final Label title = new Label(resourceBundle.getString("bookstore"));
         top.add(image, title);
         top.add(title);
         addToNavbar(top);
 
         // Navigation items
-        addToDrawer(createMenuLink(InventoryView.class, InventoryView.VIEW_NAME,
+        addToDrawer(createMenuLink(InventoryView.class, resourceBundle.getString("inventory"),
                 VaadinIcon.EDIT.create()));
 
-        addToDrawer(createMenuLink(AboutView.class, AboutView.VIEW_NAME,
+        addToDrawer(createMenuLink(AboutView.class, resourceBundle.getString("about"),
                 VaadinIcon.INFO_CIRCLE.create()));
 
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())
-        logoutButton = createMenuButton("Logout", VaadinIcon.SIGN_OUT.create());
+        logoutButton = createMenuButton(resourceBundle.getString("logout"), VaadinIcon.SIGN_OUT.create());
         logoutButton.addClickListener(e -> logout());
-        logoutButton.getElement().setAttribute("title", "Logout (Ctrl+L)");
+        logoutButton.getElement().setAttribute("title", resourceBundle.getString("logout") + " (Ctrl+L)");
 
     }
 
@@ -109,7 +121,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
         if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)
                 && !RouteConfiguration.forSessionScope()
                         .isRouteRegistered(AdminView.class)) {
-            RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
+            RouteConfiguration.forSessionScope().setRoute(resourceBundle.getString("admin"),
                     AdminView.class, MainLayout.class);
             // as logout will purge the session route registry, no need to
             // unregister the view on logout
@@ -134,12 +146,48 @@ public class MainLayout extends AppLayout implements RouterLayout {
 
             // The link can only be created now, because the RouterLink checks
             // that the target is valid.
-            addToDrawer(createMenuLink(AdminView.class, AdminView.VIEW_NAME,
+            addToDrawer(createMenuLink(AdminView.class, resourceBundle.getString("admin"),
                     VaadinIcon.DOCTOR.create()));
         }
+
+        // Add language selector
+        languageSelect = new Select<>();
+        languageSelect.setClassName("language-selector");
+        languageSelect.setLabel(resourceBundle.getString("language"));
+        languageSelect.setItems("English", "Persian");
+
+        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "Persian");
+
+        languageSelect.addValueChangeListener(
+                event -> {
+                    if (event.getValue().equals("English")) {
+                        VaadinSession.getCurrent().setLocale(Locale.ENGLISH);
+                        UI.getCurrent().getPage().reload();
+                    } else {
+                        VaadinSession.getCurrent().setLocale(new Locale("fa", "IR"));
+                        UI.getCurrent().getPage().reload();
+                    }
+                });
+
+        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "Persian");
+        addToDrawer(languageSelect);
 
         // Finally, add logout button for all users
         addToDrawer(logoutButton);
     }
 
+    @Override
+    public void localeChange(LocaleChangeEvent event) {
+        if (event.getLocale().getLanguage().equals("fa")) {
+            if (languageSelect != null) {
+                languageSelect.setValue("Persian");
+            }
+            UI.getCurrent().setDirection(Direction.RIGHT_TO_LEFT);
+        } else {
+            if (languageSelect != null) {
+                languageSelect.setValue("English");
+            }
+            UI.getCurrent().setDirection(Direction.LEFT_TO_RIGHT);
+        }
+    }
 }

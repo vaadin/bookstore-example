@@ -1,6 +1,7 @@
 package org.vaadin.example.bookstore.ui.inventory;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
 import com.vaadin.flow.component.UI;
 import org.vaadin.example.bookstore.authentication.AccessControl;
@@ -19,6 +20,7 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class InventoryViewLogic implements Serializable {
 
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
     private final InventoryView view;
 
     public InventoryViewLogic(InventoryView simpleCrudView) {
@@ -97,14 +99,14 @@ public class InventoryViewLogic implements Serializable {
         view.updateProduct(product);
         setFragmentParameter("");
         view.showNotification(product.getProductName()
-                + (newProduct ? " created" : " updated"));
+                + (newProduct ? " " + resourceBundle.getString("created") : " " + resourceBundle.getString("updated")));
     }
 
     public void deleteProduct(Product product) {
         view.clearSelection();
         view.removeProduct(product);
         setFragmentParameter("");
-        view.showNotification(product.getProductName() + " removed");
+        view.showNotification(product.getProductName() + " " + resourceBundle.getString("removed"));
     }
 
     public void editProduct(Product product) {

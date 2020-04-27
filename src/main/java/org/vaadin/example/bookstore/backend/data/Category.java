@@ -10,7 +10,7 @@ public class Category implements Serializable {
 
     @NotNull
     private int id = -1;
-    @Size(min = 2, message = "Category name must be at least two characters")
+    @Size(min = 2, message = "{bookstore.size.category_characters_msg}")
     private String name;
 
     public int getId() {

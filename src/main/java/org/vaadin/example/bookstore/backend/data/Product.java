@@ -14,12 +14,12 @@ public class Product implements Serializable {
     @NotNull
     private int id = -1;
     @NotNull
-    @Size(min = 2, message = "Product name must have at least two characters")
+    @Size(min = 2, message = "{bookstore.size.product_characters_msg}")
     private String productName = "";
     @Min(0)
     private BigDecimal price = BigDecimal.ZERO;
     private Set<Category> category;
-    @Min(value = 0, message = "Can't have negative amount in stock")
+    @Min(value = 0, message = "{bookstore.size.negative_amount_msg}")
     private int stockCount = 0;
     @NotNull
     private Availability availability = Availability.COMING;

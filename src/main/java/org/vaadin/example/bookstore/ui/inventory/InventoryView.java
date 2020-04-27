@@ -2,6 +2,7 @@ package org.vaadin.example.bookstore.ui.inventory;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -18,6 +19,8 @@ import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Product;
 import org.vaadin.example.bookstore.ui.MainLayout;
 
+import java.util.ResourceBundle;
+
 /**
  * A view for performing create-read-update-delete operations on products.
  *
@@ -29,7 +32,8 @@ import org.vaadin.example.bookstore.ui.MainLayout;
 public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
-    public static final String VIEW_NAME = "Inventory";
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    public final String VIEW_NAME = resourceBundle.getString("inventory");
     private final ProductGrid grid;
     private final ProductForm form;
     private TextField filter;
@@ -66,14 +70,14 @@ public class InventoryView extends HorizontalLayout
 
     public HorizontalLayout createTopBar() {
         filter = new TextField();
-        filter.setPlaceholder("Filter name, availability or category");
+        filter.setPlaceholder(resourceBundle.getString("filter_placeholder"));
         // Apply the filter to grid's data provider. TextField value is never
         filter.addValueChangeListener(
                 event -> dataProvider.setFilter(event.getValue()));
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
-        newProduct = new Button("New product");
+        newProduct = new Button(resourceBundle.getString("new_product"));
         // Setting theme variant of new production button to LUMO_PRIMARY that
         // changes its background color to blue and its text color to white
         newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);

@@ -5,9 +5,11 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
@@ -32,6 +34,8 @@ import org.vaadin.example.bookstore.backend.data.Product;
  * A form for editing a single product.
  */
 public class ProductForm extends Div {
+
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final VerticalLayout content;
 
@@ -99,18 +103,18 @@ public class ProductForm extends Div {
 
         viewLogic = sampleCrudLogic;
 
-        productName = new TextField("Product name");
+        productName = new TextField(resourceBundle.getString("product_name"));
         productName.setWidth("100%");
         productName.setRequired(true);
         productName.setValueChangeMode(ValueChangeMode.EAGER);
         content.add(productName);
 
-        price = new TextField("Price");
+        price = new TextField(resourceBundle.getString("price"));
         price.setSuffixComponent(new Span("€"));
         price.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         price.setValueChangeMode(ValueChangeMode.EAGER);
 
-        stockCount = new TextField("In stock");
+        stockCount = new TextField(resourceBundle.getString("in_stock"));
         stockCount.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         stockCount.setValueChangeMode(ValueChangeMode.EAGER);
 
@@ -121,13 +125,13 @@ public class ProductForm extends Div {
         content.add(horizontalLayout);
 
         availability = new Select<>();
-        availability.setLabel("Availability");
+        availability.setLabel(resourceBundle.getString("availability"));
         availability.setWidth("100%");
         availability.setItems(Availability.values());
         content.add(availability);
 
         category = new CheckboxGroup<>();
-        category.setLabel("Categories");
+        category.setLabel(resourceBundle.getString("categories"));
         category.setId("category");
         category.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
         content.add(category);
@@ -147,7 +151,7 @@ public class ProductForm extends Div {
             discard.setEnabled(hasChanges);
         });
 
-        save = new Button("Save");
+        save = new Button(resourceBundle.getString("save"));
         save.setWidth("100%");
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         save.addClickListener(event -> {
@@ -158,12 +162,12 @@ public class ProductForm extends Div {
         });
         save.addClickShortcut(Key.KEY_S, KeyModifier.CONTROL);
 
-        discard = new Button("Discard changes");
+        discard = new Button(resourceBundle.getString("discard"));
         discard.setWidth("100%");
         discard.addClickListener(
                 event -> viewLogic.editProduct(currentProduct));
 
-        cancel = new Button("Cancel");
+        cancel = new Button(resourceBundle.getString("cancel"));
         cancel.setWidth("100%");
         cancel.addClickListener(event -> viewLogic.cancelProduct());
         cancel.addClickShortcut(Key.ESCAPE);
@@ -171,7 +175,7 @@ public class ProductForm extends Div {
                 .addEventListener("keydown", event -> viewLogic.cancelProduct())
                 .setFilter("event.key == 'Escape'");
 
-        delete = new Button("Delete");
+        delete = new Button(resourceBundle.getString("delete"));
         delete.setWidth("100%");
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR,
                 ButtonVariant.LUMO_PRIMARY);
