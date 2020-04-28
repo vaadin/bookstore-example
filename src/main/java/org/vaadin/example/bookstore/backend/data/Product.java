@@ -23,6 +23,8 @@ public class Product implements Serializable {
     private int stockCount = 0;
     @NotNull
     private Availability availability = Availability.COMING;
+    @NotNull
+    private String availabilityClass = "coming";
 
     public int getId() {
         return id;
@@ -98,5 +100,13 @@ public class Product implements Serializable {
         }
 
         return Objects.hash(id);
+    }
+
+    public String getAvailabilityClass() {
+        return availabilityClass;
+    }
+
+    public void setAvailabilityClass(String availabilityClass) {
+        this.availabilityClass = availabilityClass;
     }
 }

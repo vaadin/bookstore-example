@@ -76,6 +76,28 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
         final Label title = new Label(resourceBundle.getString("bookstore"));
         top.add(image, title);
         top.add(title);
+
+        // Add language selector
+        languageSelect = new Select<>();
+        languageSelect.setItems("English", "فارسی");
+        languageSelect.getElement().setAttribute("theme", "small");
+
+        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "فارسی");
+
+        languageSelect.addValueChangeListener(
+                event -> {
+                    if (event.getValue().equals("English")) {
+                        VaadinSession.getCurrent().setLocale(Locale.ENGLISH);
+                        UI.getCurrent().getPage().reload();
+                    } else {
+                        VaadinSession.getCurrent().setLocale(new Locale("fa", "IR"));
+                        UI.getCurrent().getPage().reload();
+                    }
+                });
+
+        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "فارسی");
+        top.add(languageSelect);
+
         addToNavbar(top);
 
         // Navigation items
@@ -150,28 +172,6 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
                     VaadinIcon.DOCTOR.create()));
         }
 
-        // Add language selector
-        languageSelect = new Select<>();
-        languageSelect.setClassName("language-selector");
-        languageSelect.setLabel(resourceBundle.getString("language"));
-        languageSelect.setItems("English", "Persian");
-
-        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "Persian");
-
-        languageSelect.addValueChangeListener(
-                event -> {
-                    if (event.getValue().equals("English")) {
-                        VaadinSession.getCurrent().setLocale(Locale.ENGLISH);
-                        UI.getCurrent().getPage().reload();
-                    } else {
-                        VaadinSession.getCurrent().setLocale(new Locale("fa", "IR"));
-                        UI.getCurrent().getPage().reload();
-                    }
-                });
-
-        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "Persian");
-        addToDrawer(languageSelect);
-
         // Finally, add logout button for all users
         addToDrawer(logoutButton);
     }
@@ -180,7 +180,7 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
     public void localeChange(LocaleChangeEvent event) {
         if (event.getLocale().getLanguage().equals("fa")) {
             if (languageSelect != null) {
-                languageSelect.setValue("Persian");
+                languageSelect.setValue("فارسی");
             }
             UI.getCurrent().setDirection(Direction.RIGHT_TO_LEFT);
         } else {

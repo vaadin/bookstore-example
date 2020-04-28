@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 public class AboutView extends HorizontalLayout {
 
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
-    public final String VIEW_NAME = resourceBundle.getString("about");
 
     public AboutView() {
         add(VaadinIcon.INFO_CIRCLE.create());

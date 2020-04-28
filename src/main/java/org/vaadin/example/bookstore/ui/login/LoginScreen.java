@@ -73,9 +73,9 @@ public class LoginScreen extends FlexLayout implements LocaleChangeObserver {
 
         languageSelect = new Select<>();
         languageSelect.setLabel(resourceBundle.getString("language"));
-        languageSelect.setItems("English", "Persian");
+        languageSelect.setItems("English", "فارسی");
 
-        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "Persian");
+        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "فارسی");
 
         languageSelect.addValueChangeListener(
                 event -> {
@@ -124,7 +124,7 @@ public class LoginScreen extends FlexLayout implements LocaleChangeObserver {
     @Override
     public void localeChange(LocaleChangeEvent event) {
         if (event.getLocale().getLanguage().equals("fa")) {
-            languageSelect.setValue("Persian");
+            languageSelect.setValue("فارسی");
             UI.getCurrent().setDirection(Direction.RIGHT_TO_LEFT);
         } else {
             languageSelect.setValue("English");

@@ -11,6 +11,8 @@ import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
+import elemental.json.Json;
+import elemental.json.JsonObject;
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
 
@@ -45,10 +47,15 @@ public class ProductGrid extends Grid<Product> {
         // Available, Coming and Discontinued, are defined in shared-styles.css
         // and are
         // used here in availabilityTemplate.
-        final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability]]\"></iron-icon> [[item.availability]]";
+        final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability.name]]\"></iron-icon> [[item.availability.value]]";
         addColumn(TemplateRenderer.<Product>of(availabilityTemplate)
                 .withProperty("availability",
-                        product -> product.getAvailability().toString()))
+                        product -> {
+                            JsonObject availabilityMap = Json.createObject();
+                            availabilityMap.put("name", product.getAvailability().getName());
+                            availabilityMap.put("value", product.getAvailability().toString());
+                            return availabilityMap;
+                        }))
                                 .setHeader(resourceBundle.getString("availability"))
                                 .setComparator(Comparator
                                         .comparing(Product::getAvailability))

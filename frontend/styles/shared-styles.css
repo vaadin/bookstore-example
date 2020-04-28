@@ -56,10 +56,6 @@ body {
     color: var(--lumo-secondary-text-color);
 }
 
-.language-selector {
-    padding: 10px 42px;
-}
-
 .product-form {
     position: absolute;
     right: 0;
@@ -110,14 +106,14 @@ html[dir="rtl"] .product-form {
 }
 
 /* Color codes for the availability statuses of the products */
-.Available {
+.available {
     color: #2dd085;
 }
 
-.Coming {
+.coming {
     color: #ffc66e;
 }
 
-.Discontinued {
+.discontinued {
     color: #f54993;
 }

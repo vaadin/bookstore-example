@@ -33,7 +33,7 @@ public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
-    public final String VIEW_NAME = resourceBundle.getString("inventory");
+
     private final ProductGrid grid;
     private final ProductForm form;
     private TextField filter;

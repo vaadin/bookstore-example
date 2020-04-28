@@ -30,8 +30,6 @@ public class AdminView extends VerticalLayout {
 
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
-    public final String VIEW_NAME = resourceBundle.getString("admin");
-
     private final IronList<Category> categoriesListing;
     private final ListDataProvider<Category> dataProvider;
     private final Button newCategoryButton;

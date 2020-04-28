@@ -20,11 +20,18 @@ public class MockDataGenerator {
 
     private static ResourceBundle mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", UI.getCurrent().getLocale());
 
-    private static final String categoryNames[] = mockDataResource.getStringArray("categoryNames");
+    private static String categoryNames[] = mockDataResource.getStringArray("categoryNames");
 
-    private static String[] word1 = mockDataResource.getStringArray("word1");;
+    private static String[] word1 = mockDataResource.getStringArray("word1");
 
-    private static String[] word2 = mockDataResource.getStringArray("word2");;
+    private static String[] word2 = mockDataResource.getStringArray("word2");
+
+    static void generateData() {
+        mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", UI.getCurrent().getLocale());
+        categoryNames = mockDataResource.getStringArray("categoryNames");
+        word1 = mockDataResource.getStringArray("word1");
+        word2 = mockDataResource.getStringArray("word2");
+    }
 
     static List<Category> createCategories() {
         List<Category> categories = new ArrayList<Category>();
@@ -59,8 +66,12 @@ public class MockDataGenerator {
         p.setProductName(generateName());
 
         p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
-        p.setAvailability(Availability.values()[random.nextInt(Availability
-                .values().length)]);
+
+        Availability availability = Availability.values()[random.nextInt(Availability
+                .values().length)];
+
+        p.setAvailability(availability);
+        p.setAvailabilityClass(availability.getName());
         if (p.getAvailability() == Availability.AVAILABLE) {
             p.setStockCount(random.nextInt(523));
         }
