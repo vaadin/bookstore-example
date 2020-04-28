@@ -1,6 +1,5 @@
 package org.vaadin.example.bookstore.ui.inventory;
 
-import java.util.Locale;
 import java.util.Objects;
 
 import com.vaadin.flow.component.UI;
@@ -21,7 +20,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
     private String filterText = "";
 
     public ProductDataProvider() {
-        super(DataService.get().getAllProducts());
+        super(DataService.get(UI.getCurrent().getLocale()).getAllProducts());
     }
 
     /**
@@ -33,7 +32,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
     public void save(Product product) {
         final boolean newProduct = product.isNewProduct();
 
-        DataService.get().updateProduct(product);
+        DataService.get(UI.getCurrent().getLocale()).updateProduct(product);
         if (newProduct) {
             refreshAll();
         } else {
@@ -48,7 +47,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
      *            the product to be deleted
      */
     public void delete(Product product) {
-        DataService.get().deleteProduct(product.getId());
+        DataService.get(UI.getCurrent().getLocale()).deleteProduct(product.getId());
         refreshAll();
     }
 

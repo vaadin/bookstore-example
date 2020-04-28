@@ -38,7 +38,7 @@ public class AdminView extends VerticalLayout {
         categoriesListing = new IronList<>();
 
         dataProvider = new ListDataProvider<Category>(
-                new ArrayList<>(DataService.get().getAllCategories()));
+                new ArrayList<>(DataService.get(UI.getCurrent().getLocale()).getAllCategories()));
         categoriesListing.setDataProvider(dataProvider);
         categoriesListing.setRenderer(
                 new ComponentRenderer<>(this::createCategoryEditor));
@@ -68,7 +68,7 @@ public class AdminView extends VerticalLayout {
                             resourceBundle.getString("confirm_header"),
                             resourceBundle.getString("confirm_msg"),
                             resourceBundle.getString("delete"), () -> {
-                                DataService.get()
+                                DataService.get(UI.getCurrent().getLocale())
                                         .deleteCategory(category.getId());
                                 dataProvider.getItems().remove(category);
                                 dataProvider.refreshAll();
@@ -86,7 +86,7 @@ public class AdminView extends VerticalLayout {
         binder.setBean(category);
         binder.addValueChangeListener(event -> {
             if (binder.isValid()) {
-                DataService.get().updateCategory(category);
+                DataService.get(UI.getCurrent().getLocale()).updateCategory(category);
                 deleteButton.setEnabled(true);
                 newCategoryButton.setEnabled(true);
                 Notification.show(resourceBundle.getString("category_saved"));

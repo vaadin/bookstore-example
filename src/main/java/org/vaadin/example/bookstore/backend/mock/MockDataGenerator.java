@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import com.vaadin.flow.component.UI;
 import org.vaadin.example.bookstore.backend.data.Availability;
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
@@ -18,16 +18,16 @@ public class MockDataGenerator {
     private static int nextProductId = 1;
     private static final Random random = new Random(1);
 
-    private static ResourceBundle mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", UI.getCurrent().getLocale());
+    private static ResourceBundle mockDataResource;
 
-    private static String categoryNames[] = mockDataResource.getStringArray("categoryNames");
+    private static String categoryNames[];
 
-    private static String[] word1 = mockDataResource.getStringArray("word1");
+    private static String[] word1;
 
-    private static String[] word2 = mockDataResource.getStringArray("word2");
+    private static String[] word2;
 
-    static void generateData() {
-        mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", UI.getCurrent().getLocale());
+    static void generateData(Locale locale) {
+        mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", locale);
         categoryNames = mockDataResource.getStringArray("categoryNames");
         word1 = mockDataResource.getStringArray("word1");
         word2 = mockDataResource.getStringArray("word2");

@@ -24,21 +24,20 @@ public class MockDataService extends DataService {
     private int nextProductId = 0;
     private int nextCategoryId = 0;
 
-    private MockDataService() {
-        MockDataGenerator.generateData();
+    private MockDataService(Locale locale) {
+        MockDataGenerator.generateData(locale);
         categories = MockDataGenerator.createCategories();
         products = MockDataGenerator.createProducts(categories);
         nextProductId = products.size() + 1;
         nextCategoryId = categories.size() + 1;
     }
 
-    public synchronized static DataService getInstance() {
-        Locale currentLocale = UI.getCurrent().getLocale();
-        MockDataService localeData = INSTANCES.get(currentLocale);
+    public synchronized static DataService getInstance(Locale locale) {
+        MockDataService localeData = INSTANCES.get(locale);
         if (localeData == null) {
-            INSTANCES.put(currentLocale, new MockDataService());
+            INSTANCES.put(locale, new MockDataService(locale));
         }
-        return INSTANCES.get(currentLocale);
+        return INSTANCES.get(locale);
     }
 
     @Override

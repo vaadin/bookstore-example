@@ -53,7 +53,7 @@ public class InventoryView extends HorizontalLayout
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
         form = new ProductForm(viewLogic);
-        form.setCategories(DataService.get().getAllCategories());
+        form.setCategories(DataService.get(UI.getCurrent().getLocale()).getAllCategories());
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);

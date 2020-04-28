@@ -143,7 +143,7 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
         if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)
                 && !RouteConfiguration.forSessionScope()
                         .isRouteRegistered(AdminView.class)) {
-            RouteConfiguration.forSessionScope().setRoute(resourceBundle.getString("admin"),
+            RouteConfiguration.forSessionScope().setRoute("admin",
                     AdminView.class, MainLayout.class);
             // as logout will purge the session route registry, no need to
             // unregister the view on logout

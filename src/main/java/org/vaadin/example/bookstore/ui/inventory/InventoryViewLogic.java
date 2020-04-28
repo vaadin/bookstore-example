@@ -90,7 +90,7 @@ public class InventoryViewLogic implements Serializable {
     }
 
     private Product findProduct(int productId) {
-        return DataService.get().getProductById(productId);
+        return DataService.get(UI.getCurrent().getLocale()).getProductById(productId);
     }
 
     public void saveProduct(Product product) {
