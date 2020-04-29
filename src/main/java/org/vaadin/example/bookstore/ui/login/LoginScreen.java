@@ -36,6 +36,8 @@ public class LoginScreen extends FlexLayout implements LocaleChangeObserver {
     private AccessControl accessControl;
 
     private Select<String> languageSelect;
+    private final static String PERSIAN = "فارسی";
+    private final static String ENGLISH = "English";
 
     public LoginScreen() {
         accessControl = AccessControlFactory.getInstance().createAccessControl();
@@ -73,13 +75,13 @@ public class LoginScreen extends FlexLayout implements LocaleChangeObserver {
 
         languageSelect = new Select<>();
         languageSelect.setLabel(resourceBundle.getString("language"));
-        languageSelect.setItems("English", "فارسی");
+        languageSelect.setItems(ENGLISH, PERSIAN);
 
-        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "فارسی");
+        languageSelect.setValue("en".equals(UI.getCurrent().getLocale().getLanguage()) ? ENGLISH : PERSIAN);
 
         languageSelect.addValueChangeListener(
                 event -> {
-                    if (event.getValue().equals("English")) {
+                    if (ENGLISH.equals(event.getValue())) {
                         VaadinSession.getCurrent().setLocale(Locale.ENGLISH);
                         UI.getCurrent().getPage().reload();
                     } else {
@@ -123,11 +125,11 @@ public class LoginScreen extends FlexLayout implements LocaleChangeObserver {
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        if (event.getLocale().getLanguage().equals("fa")) {
-            languageSelect.setValue("فارسی");
+        if ("fa".equals(event.getLocale().getLanguage())) {
+            languageSelect.setValue(PERSIAN);
             UI.getCurrent().setDirection(Direction.RIGHT_TO_LEFT);
         } else {
-            languageSelect.setValue("English");
+            languageSelect.setValue(ENGLISH);
             UI.getCurrent().setDirection(Direction.LEFT_TO_RIGHT);
         }
     }

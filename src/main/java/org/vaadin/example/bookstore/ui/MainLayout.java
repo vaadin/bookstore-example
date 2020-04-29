@@ -51,6 +51,8 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
     private final Button logoutButton;
 
     private Select<String> languageSelect;
+    private static final String PERSIAN = "فارسی";
+    private static final String ENGLISH = "English";
 
     public MainLayout() {
 
@@ -79,14 +81,14 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
 
         // Add language selector
         languageSelect = new Select<>();
-        languageSelect.setItems("English", "فارسی");
+        languageSelect.setItems(ENGLISH, PERSIAN);
         languageSelect.getElement().setAttribute("theme", "small");
 
-        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "فارسی");
+        languageSelect.setValue("en".equals(UI.getCurrent().getLocale().getLanguage()) ? ENGLISH : PERSIAN);
 
         languageSelect.addValueChangeListener(
                 event -> {
-                    if (event.getValue().equals("English")) {
+                    if (ENGLISH.equals(event.getValue())) {
                         VaadinSession.getCurrent().setLocale(Locale.ENGLISH);
                         UI.getCurrent().getPage().reload();
                     } else {
@@ -95,7 +97,7 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
                     }
                 });
 
-        languageSelect.setValue(UI.getCurrent().getLocale().getLanguage().equals("en") ? "English" : "فارسی");
+        languageSelect.setValue("en".equals(UI.getCurrent().getLocale().getLanguage()) ? ENGLISH : PERSIAN);
         top.add(languageSelect);
 
         addToNavbar(top);
@@ -178,14 +180,14 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
 
     @Override
     public void localeChange(LocaleChangeEvent event) {
-        if (event.getLocale().getLanguage().equals("fa")) {
+        if ("fa".equals(event.getLocale().getLanguage())) {
             if (languageSelect != null) {
-                languageSelect.setValue("فارسی");
+                languageSelect.setValue(PERSIAN);
             }
             UI.getCurrent().setDirection(Direction.RIGHT_TO_LEFT);
         } else {
             if (languageSelect != null) {
-                languageSelect.setValue("English");
+                languageSelect.setValue(ENGLISH);
             }
             UI.getCurrent().setDirection(Direction.LEFT_TO_RIGHT);
         }
