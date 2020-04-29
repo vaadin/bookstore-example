@@ -20,7 +20,7 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class InventoryViewLogic implements Serializable {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
     private final InventoryView view;
 
     public InventoryViewLogic(InventoryView simpleCrudView) {

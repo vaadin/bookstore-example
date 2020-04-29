@@ -46,7 +46,7 @@ import java.util.ResourceBundle;
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
 public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeObserver {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final Button logoutButton;
 

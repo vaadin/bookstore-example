@@ -23,7 +23,7 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class ProductGrid extends Grid<Product> {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     public ProductGrid() {
 

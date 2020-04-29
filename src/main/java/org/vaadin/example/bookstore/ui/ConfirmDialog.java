@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class ConfirmDialog extends Dialog {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     public ConfirmDialog(String caption, String text, String confirmButtonText,
             Runnable confirmListener) {

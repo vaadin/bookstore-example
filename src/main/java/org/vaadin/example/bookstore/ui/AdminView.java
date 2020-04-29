@@ -28,7 +28,7 @@ import org.vaadin.example.bookstore.backend.data.Category;
  */
 public class AdminView extends VerticalLayout {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final IronList<Category> categoriesListing;
     private final ListDataProvider<Category> dataProvider;

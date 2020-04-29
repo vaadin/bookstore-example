@@ -18,7 +18,7 @@ public class MockDataGenerator {
     private static int nextProductId = 1;
     private static final Random random = new Random(1);
 
-    private static ResourceBundle mockDataResource;
+    private static transient ResourceBundle mockDataResource;
 
     private static String categoryNames[];
 

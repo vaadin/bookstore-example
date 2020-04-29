@@ -35,7 +35,7 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class ProductForm extends Div {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final VerticalLayout content;
 

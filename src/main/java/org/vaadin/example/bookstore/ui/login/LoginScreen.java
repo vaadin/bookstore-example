@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 @CssImport("./styles/shared-styles.css")
 public class LoginScreen extends FlexLayout implements LocaleChangeObserver {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private AccessControl accessControl;
 

@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 @ParentLayout(MainLayout.class)
 public class ErrorView extends VerticalLayout implements HasErrorParameter<NotFoundException> {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
     private Span explanation;
 
     public ErrorView() {

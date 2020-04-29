@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
-    private ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final ProductGrid grid;
     private final ProductForm form;
