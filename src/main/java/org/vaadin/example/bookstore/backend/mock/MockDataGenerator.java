@@ -18,16 +18,14 @@ public class MockDataGenerator {
     private static int nextProductId = 1;
     private static final Random random = new Random(1);
 
-    private static transient ResourceBundle mockDataResource;
-
-    private static String categoryNames[];
+    private static String[] categoryNames;
 
     private static String[] word1;
 
     private static String[] word2;
 
     static void generateData(Locale locale) {
-        mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", locale);
+        ResourceBundle mockDataResource = ResourceBundle.getBundle("org.vaadin.example.bookstore.backend.resourcebundle.MockDataResource", locale);
         categoryNames = mockDataResource.getStringArray("categoryNames");
         word1 = mockDataResource.getStringArray("word1");
         word2 = mockDataResource.getStringArray("word2");
