@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import com.vaadin.flow.component.UI;
 import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
@@ -17,7 +16,7 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class MockDataService extends DataService {
 
-    private static Map<Locale, MockDataService> INSTANCES = new HashMap<>();
+    private static Map<Locale, MockDataService> instances = new HashMap<>();
 
     private List<Product> products;
     private List<Category> categories;
@@ -32,12 +31,12 @@ public class MockDataService extends DataService {
         nextCategoryId = categories.size() + 1;
     }
 
-    public synchronized static DataService getInstance(Locale locale) {
-        MockDataService localeData = INSTANCES.get(locale);
+    public static synchronized DataService getInstance(Locale locale) {
+        MockDataService localeData = instances.get(locale);
         if (localeData == null) {
-            INSTANCES.put(locale, new MockDataService(locale));
+            instances.put(locale, new MockDataService(locale));
         }
-        return INSTANCES.get(locale);
+        return instances.get(locale);
     }
 
     @Override
