@@ -2,7 +2,6 @@ package org.vaadin.example.bookstore.ui;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Direction;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.UI;
@@ -18,21 +17,18 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.i18n.LocaleChangeEvent;
-import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.vaadin.example.bookstore.authentication.AccessControl;
 import org.vaadin.example.bookstore.authentication.AccessControlFactory;
 import org.vaadin.example.bookstore.ui.about.AboutView;
 import org.vaadin.example.bookstore.ui.inventory.InventoryView;
+import org.vaadin.example.bookstore.ui.localization.LanguageSwitcher;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -44,15 +40,11 @@ import java.util.ResourceBundle;
 @PWA(name = "Bookstore", shortName = "Bookstore")
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
-public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeObserver {
+public class MainLayout extends AppLayout implements RouterLayout {
 
     private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final Button logoutButton;
-
-    private Select<String> languageSelect;
-    private static final String PERSIAN = "فارسی";
-    private static final String ENGLISH = "English";
 
     public MainLayout() {
 
@@ -80,25 +72,8 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
         top.add(title);
 
         // Add language selector
-        languageSelect = new Select<>();
-        languageSelect.setItems(ENGLISH, PERSIAN);
-        languageSelect.getElement().setAttribute("theme", "small");
-
-        languageSelect.setValue("en".equals(UI.getCurrent().getLocale().getLanguage()) ? ENGLISH : PERSIAN);
-
-        languageSelect.addValueChangeListener(
-                event -> {
-                    if (ENGLISH.equals(event.getValue())) {
-                        VaadinSession.getCurrent().setLocale(Locale.ENGLISH);
-                        UI.getCurrent().getPage().reload();
-                    } else {
-                        VaadinSession.getCurrent().setLocale(new Locale("fa", "IR"));
-                        UI.getCurrent().getPage().reload();
-                    }
-                });
-
-        languageSelect.setValue("en".equals(UI.getCurrent().getLocale().getLanguage()) ? ENGLISH : PERSIAN);
-        top.add(languageSelect);
+        top.add(new LanguageSwitcher(Locale.ENGLISH,
+                new Locale("fa","IR", "فارسی")));
 
         addToNavbar(top);
 
@@ -176,20 +151,5 @@ public class MainLayout extends AppLayout implements RouterLayout, LocaleChangeO
 
         // Finally, add logout button for all users
         addToDrawer(logoutButton);
-    }
-
-    @Override
-    public void localeChange(LocaleChangeEvent event) {
-        if ("fa".equals(event.getLocale().getLanguage())) {
-            if (languageSelect != null) {
-                languageSelect.setValue(PERSIAN);
-            }
-            UI.getCurrent().setDirection(Direction.RIGHT_TO_LEFT);
-        } else {
-            if (languageSelect != null) {
-                languageSelect.setValue(ENGLISH);
-            }
-            UI.getCurrent().setDirection(Direction.LEFT_TO_RIGHT);
-        }
     }
 }
