@@ -21,7 +21,7 @@ public class AboutView extends HorizontalLayout {
         add(VaadinIcon.INFO_CIRCLE.create());
         add(new Span(
                 resourceBundle.getString("application_sign_prefix")
-                + Version.getFullVersion() + resourceBundle.getString("application_sign_suffix")));
+                + Version.getFullVersion() + ' ' + resourceBundle.getString("application_sign_suffix")));
 
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
