@@ -26,6 +26,6 @@ public class AboutViewIT extends AbstractViewTest {
                 .last().$(SpanElement.class).last();
 
         Assert.assertTrue("Expected version text",
-                aboutSpan.getText().contains("Vaadin") || aboutSpan.getText().contains("SNAPSHOT"));
+                aboutSpan.getText().matches(".*(?=.+)(?!\\.)(\\d+(\\.\\d+)+)(?:[-.][a-zA-Z]+)?(?:\\d+)?.*"));
     }
 }
