@@ -1,8 +1,8 @@
 package org.vaadin.example.bookstore.ui.inventory;
 
-import java.util.Locale;
 import java.util.Objects;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Product;
@@ -20,7 +20,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
     private String filterText = "";
 
     public ProductDataProvider() {
-        super(DataService.get().getAllProducts());
+        super(DataService.get(UI.getCurrent().getLocale()).getAllProducts());
     }
 
     /**
@@ -32,7 +32,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
     public void save(Product product) {
         final boolean newProduct = product.isNewProduct();
 
-        DataService.get().updateProduct(product);
+        DataService.get(UI.getCurrent().getLocale()).updateProduct(product);
         if (newProduct) {
             refreshAll();
         } else {
@@ -47,7 +47,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
      *            the product to be deleted
      */
     public void delete(Product product) {
-        DataService.get().deleteProduct(product.getId());
+        DataService.get(UI.getCurrent().getLocale()).deleteProduct(product.getId());
         refreshAll();
     }
 
@@ -64,7 +64,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
         if (Objects.equals(this.filterText, filterText.trim())) {
             return;
         }
-        this.filterText = filterText.trim().toLowerCase(Locale.ENGLISH);
+        this.filterText = filterText.trim().toLowerCase(UI.getCurrent().getLocale());
 
         setFilter(product -> passesFilter(product.getProductName(), this.filterText)
                 || passesFilter(product.getAvailability(), this.filterText)
@@ -80,7 +80,7 @@ public class ProductDataProvider extends ListDataProvider<Product> {
     }
 
     private boolean passesFilter(Object object, String filterText) {
-        return object != null && object.toString().toLowerCase(Locale.ENGLISH)
+        return object != null && object.toString().toLowerCase(UI.getCurrent().getLocale())
                 .contains(filterText);
     }
 }

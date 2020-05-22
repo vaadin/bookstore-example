@@ -1,7 +1,10 @@
 package org.vaadin.example.bookstore.backend.mock;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Category;
@@ -13,25 +16,27 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class MockDataService extends DataService {
 
-    private static MockDataService INSTANCE;
+    private static Map<Locale, MockDataService> instances = new HashMap<>();
 
     private List<Product> products;
     private List<Category> categories;
     private int nextProductId = 0;
     private int nextCategoryId = 0;
 
-    private MockDataService() {
+    private MockDataService(Locale locale) {
+        MockDataGenerator.generateData(locale);
         categories = MockDataGenerator.createCategories();
         products = MockDataGenerator.createProducts(categories);
         nextProductId = products.size() + 1;
         nextCategoryId = categories.size() + 1;
     }
 
-    public synchronized static DataService getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new MockDataService();
+    public static synchronized DataService getInstance(Locale locale) {
+        MockDataService localeData = instances.get(locale);
+        if (localeData == null) {
+            instances.put(locale, new MockDataService(locale));
         }
-        return INSTANCE;
+        return instances.get(locale);
     }
 
     @Override

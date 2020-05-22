@@ -2,6 +2,7 @@ package org.vaadin.example.bookstore.ui.inventory;
 
 import java.text.DecimalFormat;
 import java.util.Comparator;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.AttachEvent;
@@ -10,6 +11,8 @@ import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
+import elemental.json.Json;
+import elemental.json.JsonObject;
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
 
@@ -20,11 +23,13 @@ import org.vaadin.example.bookstore.backend.data.Product;
  */
 public class ProductGrid extends Grid<Product> {
 
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+
     public ProductGrid() {
 
         setSizeFull();
 
-        addColumn(Product::getProductName).setHeader("Product name")
+        addColumn(Product::getProductName).setHeader(resourceBundle.getString("product_name"))
                 .setFlexGrow(20).setSortable(true).setKey("productname");
 
         // Format and add " €" to price
@@ -33,7 +38,7 @@ public class ProductGrid extends Grid<Product> {
         decimalFormat.setMinimumFractionDigits(2);
 
         addColumn(product -> decimalFormat.format(product.getPrice()) + " €")
-                .setHeader("Price").setTextAlign(ColumnTextAlign.END)
+                .setHeader(resourceBundle.getString("price")).setTextAlign(ColumnTextAlign.END)
                 .setComparator(Comparator.comparing(Product::getPrice))
                 .setFlexGrow(3).setKey("price");
 
@@ -42,25 +47,30 @@ public class ProductGrid extends Grid<Product> {
         // Available, Coming and Discontinued, are defined in shared-styles.css
         // and are
         // used here in availabilityTemplate.
-        final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability]]\"></iron-icon> [[item.availability]]";
+        final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability.name]]\"></iron-icon> [[item.availability.value]]";
         addColumn(TemplateRenderer.<Product>of(availabilityTemplate)
                 .withProperty("availability",
-                        product -> product.getAvailability().toString()))
-                                .setHeader("Availability")
+                        product -> {
+                            JsonObject availabilityMap = Json.createObject();
+                            availabilityMap.put("name", product.getAvailability().getName());
+                            availabilityMap.put("value", product.getAvailability().toString());
+                            return availabilityMap;
+                        }))
+                                .setHeader(resourceBundle.getString("availability"))
                                 .setComparator(Comparator
                                         .comparing(Product::getAvailability))
                                 .setFlexGrow(5).setKey("availability");
 
         addColumn(product -> product.getStockCount() == 0 ? "-"
                 : Integer.toString(product.getStockCount()))
-                        .setHeader("Stock count")
+                        .setHeader(resourceBundle.getString("stock_count"))
                         .setTextAlign(ColumnTextAlign.END)
                         .setComparator(
                                 Comparator.comparingInt(Product::getStockCount))
                         .setFlexGrow(3).setKey("stock");
 
         // Show all categories the product is in, separated by commas
-        addColumn(this::formatCategories).setHeader("Category").setFlexGrow(12)
+        addColumn(this::formatCategories).setHeader(resourceBundle.getString("category")).setFlexGrow(12)
                 .setKey("category");
 
         // If the browser window size changes, check if all columns fit on

@@ -1,7 +1,11 @@
 package org.vaadin.example.bookstore.backend.data;
 
+import com.vaadin.flow.component.UI;
+
+import java.util.ResourceBundle;
+
 public enum Availability {
-    COMING("Coming"), AVAILABLE("Available"), DISCONTINUED("Discontinued");
+    COMING("coming"), AVAILABLE("available"), DISCONTINUED("discontinued");
 
     private final String name;
 
@@ -9,8 +13,12 @@ public enum Availability {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return name;
+        return ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale()).getString(name);
     }
 }

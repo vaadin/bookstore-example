@@ -1,8 +1,10 @@
 package org.vaadin.example.bookstore.ui;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H2;
@@ -26,7 +28,7 @@ import org.vaadin.example.bookstore.backend.data.Category;
  */
 public class AdminView extends VerticalLayout {
 
-    public static final String VIEW_NAME = "Admin";
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
     private final IronList<Category> categoriesListing;
     private final ListDataProvider<Category> dataProvider;
@@ -36,19 +38,19 @@ public class AdminView extends VerticalLayout {
         categoriesListing = new IronList<>();
 
         dataProvider = new ListDataProvider<Category>(
-                new ArrayList<>(DataService.get().getAllCategories()));
+                new ArrayList<>(DataService.get(UI.getCurrent().getLocale()).getAllCategories()));
         categoriesListing.setDataProvider(dataProvider);
         categoriesListing.setRenderer(
                 new ComponentRenderer<>(this::createCategoryEditor));
 
-        newCategoryButton = new Button("Add New Category", event -> {
+        newCategoryButton = new Button(resourceBundle.getString("new_category"), event -> {
             final Category category = new Category();
             dataProvider.getItems().add(category);
             dataProvider.refreshAll();
         });
         newCategoryButton.setDisableOnClick(true);
 
-        add(new H2("Hello Admin"), new H4("Edit Categories"), newCategoryButton,
+        add(new H2(resourceBundle.getString("greeting") + " Admin"), new H4(resourceBundle.getString("edit_categories")), newCategoryButton,
                 categoriesListing);
     }
 
@@ -63,14 +65,14 @@ public class AdminView extends VerticalLayout {
 
                     // Ask for confirmation before deleting stuff
                     final ConfirmDialog dialog = new ConfirmDialog(
-                            "Please confirm",
-                            "Are you sure you want to delete the category? Books in this category will not be deleted.",
-                            "Delete", () -> {
-                                DataService.get()
+                            resourceBundle.getString("confirm_header"),
+                            resourceBundle.getString("confirm_msg"),
+                            resourceBundle.getString("delete"), () -> {
+                                DataService.get(UI.getCurrent().getLocale())
                                         .deleteCategory(category.getId());
                                 dataProvider.getItems().remove(category);
                                 dataProvider.refreshAll();
-                                Notification.show("Category Deleted.");
+                                Notification.show(resourceBundle.getString("category_deleted"));
                             });
 
                     dialog.open();
@@ -84,10 +86,10 @@ public class AdminView extends VerticalLayout {
         binder.setBean(category);
         binder.addValueChangeListener(event -> {
             if (binder.isValid()) {
-                DataService.get().updateCategory(category);
+                DataService.get(UI.getCurrent().getLocale()).updateCategory(category);
                 deleteButton.setEnabled(true);
                 newCategoryButton.setEnabled(true);
-                Notification.show("Category Saved.");
+                Notification.show(resourceBundle.getString("category_saved"));
             }
         });
         deleteButton.setEnabled(category.getId() > 0);

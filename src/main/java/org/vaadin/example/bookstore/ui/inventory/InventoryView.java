@@ -2,6 +2,7 @@ package org.vaadin.example.bookstore.ui.inventory;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -18,6 +19,8 @@ import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Product;
 import org.vaadin.example.bookstore.ui.MainLayout;
 
+import java.util.ResourceBundle;
+
 /**
  * A view for performing create-read-update-delete operations on products.
  *
@@ -29,7 +32,8 @@ import org.vaadin.example.bookstore.ui.MainLayout;
 public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
-    public static final String VIEW_NAME = "Inventory";
+    private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
+
     private final ProductGrid grid;
     private final ProductForm form;
     private TextField filter;
@@ -49,7 +53,7 @@ public class InventoryView extends HorizontalLayout
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
         form = new ProductForm(viewLogic);
-        form.setCategories(DataService.get().getAllCategories());
+        form.setCategories(DataService.get(UI.getCurrent().getLocale()).getAllCategories());
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);
@@ -66,14 +70,14 @@ public class InventoryView extends HorizontalLayout
 
     public HorizontalLayout createTopBar() {
         filter = new TextField();
-        filter.setPlaceholder("Filter name, availability or category");
+        filter.setPlaceholder(resourceBundle.getString("filter_placeholder"));
         // Apply the filter to grid's data provider. TextField value is never
         filter.addValueChangeListener(
                 event -> dataProvider.setFilter(event.getValue()));
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
-        newProduct = new Button("New product");
+        newProduct = new Button(resourceBundle.getString("new_product"));
         // Setting theme variant of new production button to LUMO_PRIMARY that
         // changes its background color to blue and its text color to white
         newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);

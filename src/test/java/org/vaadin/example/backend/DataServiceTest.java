@@ -7,6 +7,8 @@ import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Product;
 import org.vaadin.example.bookstore.backend.mock.MockDataService;
 
+import java.util.Locale;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -19,7 +21,7 @@ public class DataServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        service = MockDataService.getInstance();
+        service = MockDataService.getInstance(Locale.ENGLISH);
     }
 
     @Test

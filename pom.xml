@@ -17,7 +17,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>15.0.5</vaadin.version>
+        <vaadin.version>16.0.0.beta1</vaadin.version>
     </properties>
 
     <dependencyManagement>
@@ -105,7 +105,7 @@
             <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
             <snapshots>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
              
@@ -158,7 +158,7 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
-                <version>${vaadin.version}</version>
+                <version>16.0.0.beta1</version>
                 <executions>
                     <execution>
                         <goals>

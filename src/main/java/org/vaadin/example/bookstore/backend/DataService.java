@@ -2,6 +2,7 @@ package org.vaadin.example.bookstore.backend;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Locale;
 
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
@@ -26,8 +27,8 @@ public abstract class DataService implements Serializable {
 
     public abstract void deleteCategory(int categoryId);
 
-    public static DataService get() {
-        return MockDataService.getInstance();
+    public static DataService get(Locale locale) {
+        return MockDataService.getInstance(locale);
     }
 
 }
