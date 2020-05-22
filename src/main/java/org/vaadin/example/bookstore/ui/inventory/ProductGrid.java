@@ -104,7 +104,6 @@ public class ProductGrid extends Grid<Product> {
     }
 
     public Product getSelectedRow() {
-        Notification.show("asdasd");
         return asSingleSelect().getValue();
     }
 
