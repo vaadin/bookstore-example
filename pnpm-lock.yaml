@@ -10,7 +10,7 @@ dependencies:
   '@vaadin/vaadin-checkbox': 2.3.0
   '@vaadin/vaadin-combo-box': 5.1.1
   '@vaadin/vaadin-context-menu': 4.4.0
-  '@vaadin/vaadin-core-shrinkwrap': 16.0.0-rc2
+  '@vaadin/vaadin-core-shrinkwrap': 16.0.0
   '@vaadin/vaadin-custom-field': 1.1.0
   '@vaadin/vaadin-date-picker': 4.1.1
   '@vaadin/vaadin-date-time-picker': 1.1.0
@@ -1106,7 +1106,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-EtLfMN9i/gwToAEuW6E1OA2Q2i/4a+Il6tKkqE/0i7bgu3Xr1IITMcagQn9QSsp1Xkpr/nLtWWKRq7yZZkbHVg==
-  /@vaadin/vaadin-core-shrinkwrap/16.0.0-rc2:
+  /@vaadin/vaadin-core-shrinkwrap/16.0.0:
     dependencies:
       '@polymer/iron-a11y-announcer': 3.0.2
       '@polymer/iron-a11y-keys-behavior': 3.0.1
@@ -1161,7 +1161,7 @@ packages:
       '@webcomponents/shadycss': 1.9.4
     dev: false
     resolution:
-      integrity: sha512-l45awOrel0M5vD3/M7FQxieN+icZaCfv7iuAD+4a9Fi/3KJKurIHCXfJHqcK9wORtR9g0Hs5wwPDx99jWUvksA==
+      integrity: sha512-6O1QgH/zl5EbeR7LSDS9IUinEHKk2p4VfcXK9nyKv3qv1WbkDRoshquyZdTlXfT/3GjbMNbFGVNjzYpWdVp8hA==
   /@vaadin/vaadin-custom-field/1.1.0:
     dependencies:
       '@polymer/polymer': 3.2.0
@@ -6509,7 +6509,7 @@ specifiers:
   '@vaadin/vaadin-checkbox': 2.3.0
   '@vaadin/vaadin-combo-box': 5.1.1
   '@vaadin/vaadin-context-menu': 4.4.0
-  '@vaadin/vaadin-core-shrinkwrap': 16.0.0-rc2
+  '@vaadin/vaadin-core-shrinkwrap': 16.0.0
   '@vaadin/vaadin-custom-field': 1.1.0
   '@vaadin/vaadin-date-picker': 4.1.1
   '@vaadin/vaadin-date-time-picker': 1.1.0
