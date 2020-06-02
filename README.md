@@ -2,8 +2,6 @@
 
 A project example for a Vaadin application that only requires a Servlet 3.1 container to run (no other JEE dependencies). The UI is built with Java only.
 
-The easiest way of using it is via [https://vaadin.com/start](https://vaadin.com/start) - you can choose the package naming you want.
-
 ## Prerequisites
 
 The project can be imported into the IDE of your choice, with Java 8 or 11 installed, as a Maven project.
