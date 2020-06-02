@@ -7,10 +7,10 @@
     "@vaadin/router": "1.7.2",
     "@vaadin/flow-frontend": "./target/flow-frontend",
     "@vaadin/vaadin-icons": "4.3.1",
-    "@vaadin/vaadin-grid": "5.6.1",
+    "@vaadin/vaadin-grid": "5.6.2",
     "@vaadin/vaadin-split-layout": "4.2.0",
-    "@vaadin/vaadin-combo-box": "5.1.0",
-    "@vaadin/vaadin-core-shrinkwrap": "16.0.0-beta2",
+    "@vaadin/vaadin-combo-box": "5.1.1",
+    "@vaadin/vaadin-core-shrinkwrap": "16.0.0-rc2",
     "@vaadin/vaadin-upload": "4.3.0",
     "@vaadin/vaadin-dialog": "2.4.0",
     "@vaadin/vaadin-select": "2.2.0",
@@ -21,7 +21,7 @@
     "@vaadin/vaadin-ordered-layout": "1.3.0",
     "@vaadin/vaadin-login": "1.1.0",
     "@vaadin/vaadin-button": "2.3.0",
-    "@vaadin/vaadin-date-picker": "4.1.0",
+    "@vaadin/vaadin-date-picker": "4.1.1",
     "@vaadin/vaadin-text-field": "2.6.0",
     "@vaadin/vaadin-menu-bar": "1.1.0",
     "@vaadin/vaadin-custom-field": "1.1.0",
@@ -32,7 +32,7 @@
     "@vaadin/vaadin-checkbox": "2.3.0",
     "@vaadin/vaadin-details": "1.1.0",
     "@polymer/iron-icon": "3.0.1",
-    "@vaadin/vaadin-time-picker": "2.1.0",
+    "@vaadin/vaadin-time-picker": "2.1.1",
     "@vaadin/vaadin-context-menu": "4.4.0",
     "@vaadin/vaadin-radio-button": "1.3.0",
     "@vaadin/vaadin-tabs": "3.1.0",
@@ -55,17 +55,18 @@
     "typescript": "3.8.3",
     "terser": "4.6.7",
     "progress-webpack-plugin": "0.0.24",
-    "lit-element": "2.3.1"
+    "lit-element": "2.3.1",
+    "chokidar": "^3.4.0"
   },
   "vaadin": {
     "dependencies": {
       "@vaadin/router": "1.7.2",
       "@polymer/polymer": "3.2.0",
       "@vaadin/vaadin-icons": "4.3.1",
-      "@vaadin/vaadin-grid": "5.6.1",
+      "@vaadin/vaadin-grid": "5.6.2",
       "@vaadin/vaadin-split-layout": "4.2.0",
-      "@vaadin/vaadin-combo-box": "5.1.0",
-      "@vaadin/vaadin-core-shrinkwrap": "16.0.0-beta2",
+      "@vaadin/vaadin-combo-box": "5.1.1",
+      "@vaadin/vaadin-core-shrinkwrap": "16.0.0-rc2",
       "@vaadin/vaadin-upload": "4.3.0",
       "@vaadin/vaadin-dialog": "2.4.0",
       "@vaadin/vaadin-select": "2.2.0",
@@ -76,7 +77,7 @@
       "@vaadin/vaadin-ordered-layout": "1.3.0",
       "@vaadin/vaadin-login": "1.1.0",
       "@vaadin/vaadin-button": "2.3.0",
-      "@vaadin/vaadin-date-picker": "4.1.0",
+      "@vaadin/vaadin-date-picker": "4.1.1",
       "@vaadin/vaadin-text-field": "2.6.0",
       "@vaadin/vaadin-menu-bar": "1.1.0",
       "@vaadin/vaadin-custom-field": "1.1.0",
@@ -87,7 +88,7 @@
       "@vaadin/vaadin-checkbox": "2.3.0",
       "@vaadin/vaadin-details": "1.1.0",
       "@polymer/iron-icon": "3.0.1",
-      "@vaadin/vaadin-time-picker": "2.1.0",
+      "@vaadin/vaadin-time-picker": "2.1.1",
       "@vaadin/vaadin-context-menu": "4.4.0",
       "@vaadin/vaadin-radio-button": "1.3.0",
       "@vaadin/vaadin-tabs": "3.1.0",
@@ -110,8 +111,9 @@
       "webpack-dev-server": "3.10.3",
       "terser": "4.6.7",
       "progress-webpack-plugin": "0.0.24",
-      "lit-element": "2.3.1"
+      "lit-element": "2.3.1",
+      "chokidar": "^3.4.0"
     },
-    "hash": "d0a08be7935ce3592bd79b9bc793f8e17a311cabbd9e1be52db993a1d3e37629"
+    "hash": "465ac9b645bd86be375db3493fe1f25b2d7e5e880e4f9ed3f491484f8aec8c50"
   }
 }
