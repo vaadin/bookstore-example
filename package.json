@@ -10,9 +10,9 @@
     "@vaadin/vaadin-grid": "5.7.0",
     "@vaadin/vaadin-split-layout": "4.3.0",
     "@vaadin/vaadin-combo-box": "5.3.0",
-    "@vaadin/vaadin-core-shrinkwrap": "17.0.1",
+    "@vaadin/vaadin-core-shrinkwrap": "17.0.2",
     "@vaadin/vaadin-upload": "4.4.0",
-    "@vaadin/vaadin-dialog": "2.5.0",
+    "@vaadin/vaadin-dialog": "2.5.1",
     "@vaadin/vaadin-select": "2.3.0",
     "@vaadin/vaadin-app-layout": "2.2.0",
     "@vaadin/vaadin-item": "2.3.0-beta1",
@@ -71,9 +71,9 @@
       "@vaadin/vaadin-grid": "5.7.0",
       "@vaadin/vaadin-split-layout": "4.3.0",
       "@vaadin/vaadin-combo-box": "5.3.0",
-      "@vaadin/vaadin-core-shrinkwrap": "17.0.1",
+      "@vaadin/vaadin-core-shrinkwrap": "17.0.2",
       "@vaadin/vaadin-upload": "4.4.0",
-      "@vaadin/vaadin-dialog": "2.5.0",
+      "@vaadin/vaadin-dialog": "2.5.1",
       "@vaadin/vaadin-select": "2.3.0",
       "@vaadin/vaadin-app-layout": "2.2.0",
       "@vaadin/vaadin-item": "2.3.0-beta1",
@@ -123,6 +123,6 @@
       "lit-html": "1.2.1",
       "@types/validator": "10.11.3"
     },
-    "hash": "0eb88b6525f68af6768e0d8da8d69394e5ebf3a4aa87898034e84c4cd948eaf4"
+    "hash": "b0cbaa0d26f6b751c0bed73c7dd8bdafc5e7ee59640964b9a5e0ea04950eafe5"
   }
 }
