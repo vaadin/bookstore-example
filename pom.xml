@@ -105,6 +105,12 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>com.vaadin.example</groupId>
+            <artifactId>vaadin-demo-utilities</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <repositories>

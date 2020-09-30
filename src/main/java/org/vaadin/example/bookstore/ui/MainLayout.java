@@ -1,5 +1,6 @@
 package org.vaadin.example.bookstore.ui;
 
+import com.vaadin.example.corner.VaadinCorner;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
@@ -79,6 +80,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
         logoutButton.addClickListener(e -> logout());
         logoutButton.getElement().setAttribute("title", "Logout (Ctrl+L)");
 
+        addToNavbar(new VaadinCorner());
     }
 
     private void logout() {
