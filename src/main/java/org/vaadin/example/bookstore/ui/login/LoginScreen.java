@@ -1,5 +1,6 @@
 package org.vaadin.example.bookstore.ui.login;
 
+import com.vaadin.example.corner.VaadinCorner;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
@@ -53,6 +54,8 @@ public class LoginScreen extends FlexLayout {
 
         add(loginInformation);
         add(centeringLayout);
+
+        add(new VaadinCorner());
     }
 
     private Component buildLoginInformation() {

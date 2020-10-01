@@ -79,8 +79,6 @@ public class MainLayout extends AppLayout implements RouterLayout {
         logoutButton = createMenuButton("Logout", VaadinIcon.SIGN_OUT.create());
         logoutButton.addClickListener(e -> logout());
         logoutButton.getElement().setAttribute("title", "Logout (Ctrl+L)");
-
-        addToNavbar(new VaadinCorner());
     }
 
     private void logout() {
