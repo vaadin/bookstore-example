@@ -63,6 +63,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.0.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.example</groupId>
+            <artifactId>vaadin-demo-utilities</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
         <!-- Vaadin Testbench -->
         <dependency>

@@ -1,5 +1,13 @@
 package org.vaadin.example.bookstore.ui.login;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import org.vaadin.example.bookstore.authentication.AccessControl;
+import org.vaadin.example.bookstore.authentication.AccessControlFactory;
+import org.vaadin.example.bookstore.ui.localization.LanguageSwitcher;
+
+import com.vaadin.example.corner.VaadinCorner;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -12,12 +20,6 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.vaadin.example.bookstore.authentication.AccessControl;
-import org.vaadin.example.bookstore.authentication.AccessControlFactory;
-import org.vaadin.example.bookstore.ui.localization.LanguageSwitcher;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * UI content when the user is not logged in yet.
@@ -44,8 +46,7 @@ public class LoginScreen extends FlexLayout {
         LoginForm loginForm = new LoginForm();
         loginForm.setI18n(createLoginI18n());
         loginForm.addLoginListener(this::login);
-        loginForm.addForgotPasswordListener(
-                event -> Notification.show(resourceBundle.getString("login_hint")));
+        loginForm.addForgotPasswordListener(event -> Notification.show(resourceBundle.getString("login_hint")));
 
         // layout to center login form when there is sufficient screen space
         FlexLayout centeringLayout = new FlexLayout();
@@ -59,6 +60,8 @@ public class LoginScreen extends FlexLayout {
 
         add(loginInformation);
         add(centeringLayout);
+
+        add(new VaadinCorner());
     }
 
     private Component buildLoginInformation() {
@@ -71,9 +74,7 @@ public class LoginScreen extends FlexLayout {
         loginInfoText.setWidth("100%");
         loginInformation.add(loginInfoHeader);
         loginInformation.add(loginInfoText);
-        loginInformation.add(
-                new LanguageSwitcher(Locale.ENGLISH,
-                        new Locale("fa","IR", "فارسی")));
+        loginInformation.add(new LanguageSwitcher(Locale.ENGLISH, new Locale("fa", "IR", "فارسی")));
 
         return loginInformation;
     }
