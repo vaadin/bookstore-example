@@ -7,10 +7,10 @@
     "@vaadin/router": "1.7.2",
     "@vaadin/flow-frontend": "./target/flow-frontend",
     "@vaadin/vaadin-icons": "4.3.1",
-    "@vaadin/vaadin-grid": "5.7.4",
+    "@vaadin/vaadin-grid": "5.7.5",
     "@vaadin/vaadin-split-layout": "4.3.0",
     "@vaadin/vaadin-combo-box": "5.3.0",
-    "@vaadin/vaadin-core-shrinkwrap": "17.0.7",
+    "@vaadin/vaadin-core-shrinkwrap": "17.0.8",
     "@vaadin/vaadin-upload": "4.4.0",
     "@vaadin/vaadin-dialog": "2.5.2",
     "@vaadin/vaadin-select": "2.3.0",
@@ -45,9 +45,9 @@
   "devDependencies": {
     "webpack": "4.42.0",
     "webpack-cli": "3.3.11",
-    "webpack-dev-server": "3.10.3",
+    "webpack-dev-server": "3.11.0",
     "webpack-babel-multi-target-plugin": "2.3.3",
-    "copy-webpack-plugin": "5.1.1",
+    "copy-webpack-plugin": "5.1.2",
     "compression-webpack-plugin": "4.0.1",
     "webpack-merge": "4.2.2",
     "raw-loader": "4.0.0",
@@ -68,10 +68,10 @@
       "@vaadin/router": "1.7.2",
       "@polymer/polymer": "3.2.0",
       "@vaadin/vaadin-icons": "4.3.1",
-      "@vaadin/vaadin-grid": "5.7.4",
+      "@vaadin/vaadin-grid": "5.7.5",
       "@vaadin/vaadin-split-layout": "4.3.0",
       "@vaadin/vaadin-combo-box": "5.3.0",
-      "@vaadin/vaadin-core-shrinkwrap": "17.0.7",
+      "@vaadin/vaadin-core-shrinkwrap": "17.0.8",
       "@vaadin/vaadin-upload": "4.4.0",
       "@vaadin/vaadin-dialog": "2.5.2",
       "@vaadin/vaadin-select": "2.3.0",
@@ -104,7 +104,7 @@
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
-      "copy-webpack-plugin": "5.1.1",
+      "copy-webpack-plugin": "5.1.2",
       "compression-webpack-plugin": "4.0.1",
       "raw-loader": "4.0.0",
       "webpack-cli": "3.3.11",
@@ -114,7 +114,7 @@
       "awesome-typescript-loader": "5.2.1",
       "typescript": "3.8.3",
       "webpack-merge": "4.2.2",
-      "webpack-dev-server": "3.10.3",
+      "webpack-dev-server": "3.11.0",
       "terser": "4.6.7",
       "progress-webpack-plugin": "0.0.24",
       "lit-element": "2.3.1",
@@ -123,6 +123,6 @@
       "lit-html": "1.2.1",
       "@types/validator": "10.11.3"
     },
-    "hash": "b98a22173773a783fb840173925bc4f8562126daacebfbce766e56e0e5b0f8b7"
+    "hash": "ce3c9edd2d5f2e072649110e1f3aaf969201b51b9d7befc5940f7c882a70d9c6"
   }
 }
