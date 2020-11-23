@@ -7,11 +7,11 @@
     "@vaadin/router": "1.7.2",
     "@vaadin/flow-frontend": "./target/flow-frontend",
     "@vaadin/vaadin-icons": "4.3.1",
-    "@vaadin/vaadin-grid": "5.7.5",
+    "@vaadin/vaadin-grid": "5.7.6",
     "@vaadin/vaadin-split-layout": "4.3.0",
     "@vaadin/vaadin-combo-box": "5.3.0",
-    "@vaadin/vaadin-core-shrinkwrap": "17.0.9",
-    "@vaadin/vaadin-upload": "4.4.0",
+    "@vaadin/vaadin-core-shrinkwrap": "17.0.10",
+    "@vaadin/vaadin-upload": "4.4.1",
     "@vaadin/vaadin-dialog": "2.5.2",
     "@vaadin/vaadin-select": "2.3.0",
     "@vaadin/vaadin-app-layout": "2.2.0",
@@ -59,20 +59,20 @@
     "progress-webpack-plugin": "0.0.24",
     "lit-element": "2.3.1",
     "chokidar": "^3.4.0",
-    "validator": "12.0.0",
+    "validator": "13.1.17",
     "lit-html": "1.2.1",
-    "@types/validator": "10.11.3"
+    "@types/validator": "13.1.0"
   },
   "vaadin": {
     "dependencies": {
       "@vaadin/router": "1.7.2",
       "@polymer/polymer": "3.2.0",
       "@vaadin/vaadin-icons": "4.3.1",
-      "@vaadin/vaadin-grid": "5.7.5",
+      "@vaadin/vaadin-grid": "5.7.6",
       "@vaadin/vaadin-split-layout": "4.3.0",
       "@vaadin/vaadin-combo-box": "5.3.0",
-      "@vaadin/vaadin-core-shrinkwrap": "17.0.9",
-      "@vaadin/vaadin-upload": "4.4.0",
+      "@vaadin/vaadin-core-shrinkwrap": "17.0.10",
+      "@vaadin/vaadin-upload": "4.4.1",
       "@vaadin/vaadin-dialog": "2.5.2",
       "@vaadin/vaadin-select": "2.3.0",
       "@vaadin/vaadin-app-layout": "2.2.0",
@@ -119,10 +119,10 @@
       "progress-webpack-plugin": "0.0.24",
       "lit-element": "2.3.1",
       "chokidar": "^3.4.0",
-      "validator": "12.0.0",
+      "validator": "13.1.17",
       "lit-html": "1.2.1",
-      "@types/validator": "10.11.3"
+      "@types/validator": "13.1.0"
     },
-    "hash": "0b2331d22ff6c27a7a5bdbaa76c63f8688e4b505038d954c9d43a15aca12cc91"
+    "hash": "cea852b6264fae8f4af36cd7719d9fdfa1ac97dc557cfd2328eb67e561eead4c"
   }
 }
