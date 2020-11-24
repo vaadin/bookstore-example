@@ -30,7 +30,6 @@ import org.vaadin.example.bookstore.ui.inventory.InventoryView;
 /**
  * The main layout. Contains the navigation menu.
  */
-@Theme(value = Lumo.class)
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
 public class MainLayout extends AppLayout implements RouterLayout {
