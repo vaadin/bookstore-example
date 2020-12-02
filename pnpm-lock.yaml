@@ -12,7 +12,7 @@ dependencies:
   '@vaadin/vaadin-checkbox': 2.5.0
   '@vaadin/vaadin-combo-box': 5.4.6
   '@vaadin/vaadin-context-menu': 4.5.0
-  '@vaadin/vaadin-core-shrinkwrap': 18.0.0-rc2
+  '@vaadin/vaadin-core-shrinkwrap': 18.0.1
   '@vaadin/vaadin-custom-field': 1.3.0
   '@vaadin/vaadin-date-picker': 4.4.1
   '@vaadin/vaadin-date-time-picker': 1.4.0
@@ -1145,7 +1145,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-a0a+Hh99fQ5ueKTmY6F0i94jOfdOwKFS9ppNs0amfQwO+Js5ZC84naLnyVMVtY87K98FQ1vEYqpzxDYZy6duPw==
-  /@vaadin/vaadin-core-shrinkwrap/18.0.0-rc2:
+  /@vaadin/vaadin-core-shrinkwrap/18.0.1:
     dependencies:
       '@polymer/iron-a11y-announcer': 3.0.2
       '@polymer/iron-a11y-keys-behavior': 3.0.1
@@ -1201,7 +1201,7 @@ packages:
       '@webcomponents/shadycss': 1.9.4
     dev: false
     resolution:
-      integrity: sha512-9cgNL4Oanm3wwy8P2izzkwdw5wAhpVNnFKY062/8FRkd+oyzk6j7TWK2bsXl/Wd6HqEOCg4EjOn3FmylO3wPRQ==
+      integrity: sha512-1qURLyXrPKGiU8SoXV/CYCaM0RxDhrN5K0hhqnD2Va/H+iogZgxA5orkeXrfqOqz0dqjkYsL7qpgg6DEiiejfA==
   /@vaadin/vaadin-custom-field/1.3.0:
     dependencies:
       '@polymer/polymer': 3.2.0
@@ -3103,12 +3103,14 @@ packages:
   /debug/3.2.6:
     dependencies:
       ms: 2.1.2
+    deprecated: 'Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)'
     dev: true
     resolution:
       integrity: sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
   /debug/4.1.1:
     dependencies:
       ms: 2.1.2
+    deprecated: 'Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)'
     dev: true
     resolution:
       integrity: sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
@@ -7322,7 +7324,7 @@ specifiers:
   '@vaadin/vaadin-checkbox': 2.5.0
   '@vaadin/vaadin-combo-box': 5.4.6
   '@vaadin/vaadin-context-menu': 4.5.0
-  '@vaadin/vaadin-core-shrinkwrap': 18.0.0-rc2
+  '@vaadin/vaadin-core-shrinkwrap': 18.0.1
   '@vaadin/vaadin-custom-field': 1.3.0
   '@vaadin/vaadin-date-picker': 4.4.1
   '@vaadin/vaadin-date-time-picker': 1.4.0
