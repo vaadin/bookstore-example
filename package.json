@@ -6,11 +6,11 @@
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "@vaadin/router": "1.7.2",
     "@vaadin/flow-frontend": "./target/flow-frontend",
-    "@vaadin/vaadin-icons": "4.3.1",
+    "@vaadin/vaadin-icons": "4.3.2",
     "@vaadin/vaadin-grid": "5.7.7",
     "@vaadin/vaadin-split-layout": "4.3.0",
-    "@vaadin/vaadin-combo-box": "5.4.6",
-    "@vaadin/vaadin-core-shrinkwrap": "18.0.1",
+    "@vaadin/vaadin-combo-box": "5.4.7",
+    "@vaadin/vaadin-core-shrinkwrap": "18.0.2",
     "@vaadin/vaadin-upload": "4.4.1",
     "@vaadin/vaadin-dialog": "2.5.2",
     "@vaadin/vaadin-select": "2.4.0",
@@ -41,7 +41,7 @@
     "@vaadin/vaadin-date-time-picker": "1.4.0",
     "lit-element": "2.3.1",
     "@vaadin/form": "./target/flow-frontend/form",
-    "@vaadin/vaadin-avatar": "1.0.1"
+    "@vaadin/vaadin-avatar": "1.0.2"
   },
   "devDependencies": {
     "webpack": "4.42.0",
@@ -71,11 +71,11 @@
     "dependencies": {
       "@vaadin/router": "1.7.2",
       "@polymer/polymer": "3.2.0",
-      "@vaadin/vaadin-icons": "4.3.1",
+      "@vaadin/vaadin-icons": "4.3.2",
       "@vaadin/vaadin-grid": "5.7.7",
       "@vaadin/vaadin-split-layout": "4.3.0",
-      "@vaadin/vaadin-combo-box": "5.4.6",
-      "@vaadin/vaadin-core-shrinkwrap": "18.0.1",
+      "@vaadin/vaadin-combo-box": "5.4.7",
+      "@vaadin/vaadin-core-shrinkwrap": "18.0.2",
       "@vaadin/vaadin-upload": "4.4.1",
       "@vaadin/vaadin-dialog": "2.5.2",
       "@vaadin/vaadin-select": "2.4.0",
@@ -105,7 +105,7 @@
       "@vaadin/vaadin-material-styles": "1.3.2",
       "@vaadin/vaadin-date-time-picker": "1.4.0",
       "lit-element": "2.3.1",
-      "@vaadin/vaadin-avatar": "1.0.1"
+      "@vaadin/vaadin-avatar": "1.0.2"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",
@@ -131,6 +131,6 @@
       "lit-css-loader": "0.0.4",
       "extract-loader": "5.1.0"
     },
-    "hash": "67df4ba771d20525401d95586adc68851b11b340538a3f6c473f68aad53c716d"
+    "hash": "43f529bfba9fd172da935d9a9e196b5c0be6c88c1465a1bcce9fc65e44c0ce87"
   }
 }
