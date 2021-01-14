@@ -12,7 +12,7 @@ dependencies:
   '@vaadin/vaadin-checkbox': 3.0.0-alpha1
   '@vaadin/vaadin-combo-box': 6.0.0-alpha1
   '@vaadin/vaadin-context-menu': 5.0.0-alpha2
-  '@vaadin/vaadin-core-shrinkwrap': 19.0.0-alpha2
+  '@vaadin/vaadin-core-shrinkwrap': 19.0.0-alpha3
   '@vaadin/vaadin-custom-field': 2.0.0-alpha1
   '@vaadin/vaadin-date-picker': 5.0.0-alpha1
   '@vaadin/vaadin-date-time-picker': 2.0.0-alpha1
@@ -1245,7 +1245,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-oGsNaWbM6RisY1LkyWYtwnw+DtSRSpkFDbemEOtkYezj+Hhsd9+07LqILaUU4pB0zPaRq+uq+2tKba/TL3t23g==
-  /@vaadin/vaadin-core-shrinkwrap/19.0.0-alpha2:
+  /@vaadin/vaadin-core-shrinkwrap/19.0.0-alpha3:
     dependencies:
       '@polymer/iron-a11y-announcer': 3.0.2
       '@polymer/iron-a11y-keys-behavior': 3.0.1
@@ -1301,7 +1301,7 @@ packages:
       '@webcomponents/shadycss': 1.9.6
     dev: false
     resolution:
-      integrity: sha512-SHIcqVZufvf5OL9oPnCX47mRakfv979KSLi/ShATY43Ln9tOLDqRhpCXamh3Qf0w32Wh39pTydDoyR3miYb9pw==
+      integrity: sha512-DXSHzA2GkkEaCBe8jqLVfC4thOYb6IDcKNiaxeBqBE+IvvfxnMDKZdJCB+YW3SaD4UGAOawUX9I1/osNsfS6OQ==
   /@vaadin/vaadin-custom-field/2.0.0-alpha1:
     dependencies:
       '@polymer/polymer': 3.2.0
@@ -2177,7 +2177,7 @@ packages:
       integrity: sha1-NRV7EBQm/S/9PaP3XH0ekYNbv4o=
   /babel-plugin-dynamic-import-node/2.3.3:
     dependencies:
-      object.assign: 4.1.0
+      object.assign: 4.1.2
     dev: true
     resolution:
       integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==
@@ -3282,7 +3282,7 @@ packages:
     dependencies:
       is-arguments: 1.0.4
       is-date-object: 1.0.2
-      is-regex: 1.0.5
+      is-regex: 1.1.1
       object-is: 1.1.2
       object-keys: 1.1.1
       regexp.prototype.flags: 1.3.0
@@ -3566,11 +3566,11 @@ packages:
       function-bind: 1.1.1
       has: 1.0.3
       has-symbols: 1.0.1
-      is-callable: 1.1.5
-      is-regex: 1.0.5
-      object-inspect: 1.7.0
+      is-callable: 1.2.2
+      is-regex: 1.1.1
+      object-inspect: 1.9.0
       object-keys: 1.1.1
-      object.assign: 4.1.0
+      object.assign: 4.1.2
       string.prototype.trimleft: 2.1.2
       string.prototype.trimright: 2.1.2
     dev: true
@@ -4637,12 +4637,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
-  /is-callable/1.1.5:
-    dev: true
-    engines:
-      node: '>= 0.4'
-    resolution:
-      integrity: sha512-ESKv5sMCJB2jnHTWZ3O5itG+O128Hsus4K4Qh1h2/cgn2vbgnLSVqfV46AeJA9D5EeeLa9w81KUXMtn34zhX+Q==
   /is-callable/1.2.2:
     dev: true
     engines:
@@ -4799,14 +4793,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
-  /is-regex/1.0.5:
-    dependencies:
-      has: 1.0.3
-    dev: true
-    engines:
-      node: '>= 0.4'
-    resolution:
-      integrity: sha512-vlKW17SNq44owv5AQR3Cq0bQPEb8+kF3UKZ2fiZNOWtztYE5i0CzCZxFDwO58qAOWtxdBRVO/V5Qin1wjCqFYQ==
   /is-regex/1.1.1:
     dependencies:
       has-symbols: 1.0.1
@@ -5584,10 +5570,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-fn2Fi3gb18mRpBupde04EnVOmYw=
-  /object-inspect/1.7.0:
-    dev: true
-    resolution:
-      integrity: sha512-a7pEHdh1xKIAgTySUGgLMx/xwDZskN1Ud6egYYN3EdRW4ZMPNEDUTF+hwy2LUC+Bl+SyLXANnwz/jyh/qutKUw==
   /object-inspect/1.9.0:
     dev: true
     resolution:
@@ -5615,17 +5597,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-95xEk68MU3e1n+OdOV5BBC3QRbs=
-  /object.assign/4.1.0:
-    dependencies:
-      define-properties: 1.1.3
-      function-bind: 1.1.1
-      has-symbols: 1.0.1
-      object-keys: 1.1.1
-    dev: true
-    engines:
-      node: '>= 0.4'
-    resolution:
-      integrity: sha512-exHJeq6kBKj58mqGyTQ9DFvrZC/eR6OwxzoM9YRoGBqrXYonaFyGiFMuc9VZrXf7DarreEwMpurG3dd+CNyW5w==
   /object.assign/4.1.2:
     dependencies:
       call-bind: 1.0.0
@@ -7962,7 +7933,7 @@ specifiers:
   '@vaadin/vaadin-checkbox': 3.0.0-alpha1
   '@vaadin/vaadin-combo-box': 6.0.0-alpha1
   '@vaadin/vaadin-context-menu': 5.0.0-alpha2
-  '@vaadin/vaadin-core-shrinkwrap': 19.0.0-alpha2
+  '@vaadin/vaadin-core-shrinkwrap': 19.0.0-alpha3
   '@vaadin/vaadin-custom-field': 2.0.0-alpha1
   '@vaadin/vaadin-date-picker': 5.0.0-alpha1
   '@vaadin/vaadin-date-time-picker': 2.0.0-alpha1
