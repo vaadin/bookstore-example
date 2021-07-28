@@ -21,8 +21,6 @@ import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 import org.vaadin.example.bookstore.authentication.AccessControl;
 import org.vaadin.example.bookstore.authentication.AccessControlFactory;
 import org.vaadin.example.bookstore.ui.about.AboutView;
