@@ -158,7 +158,7 @@
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
-                <version>16.0.0.beta1</version>
+                <version>${vaadin.version}</version>
                 <executions>
                     <execution>
                         <goals>
