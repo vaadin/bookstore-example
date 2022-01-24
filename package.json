@@ -58,7 +58,7 @@
     "@vaadin/vaadin-checkbox": "22.0.3",
     "@vaadin/vaadin-combo-box": "22.0.3",
     "@vaadin/vaadin-context-menu": "22.0.3",
-    "@vaadin/vaadin-core-shrinkwrap": "22.0.3",
+    "@vaadin/vaadin-core-shrinkwrap": "22.0.4",
     "@vaadin/vaadin-custom-field": "22.0.3",
     "@vaadin/vaadin-date-picker": "22.0.3",
     "@vaadin/vaadin-date-time-picker": "22.0.3",
@@ -95,6 +95,7 @@
     "lit": "2.0.0"
   },
   "devDependencies": {
+    "@babel/core": "7.16.7",
     "@vaadin/application-theme-plugin": "./target/plugins/application-theme-plugin",
     "@vaadin/build-status-plugin": "./target/plugins/build-status-plugin",
     "@vaadin/theme-live-reload-plugin": "./target/plugins/theme-live-reload-plugin",
@@ -177,7 +178,7 @@
       "@vaadin/vaadin-checkbox": "22.0.3",
       "@vaadin/vaadin-combo-box": "22.0.3",
       "@vaadin/vaadin-context-menu": "22.0.3",
-      "@vaadin/vaadin-core-shrinkwrap": "22.0.3",
+      "@vaadin/vaadin-core-shrinkwrap": "22.0.4",
       "@vaadin/vaadin-custom-field": "22.0.3",
       "@vaadin/vaadin-date-picker": "22.0.3",
       "@vaadin/vaadin-date-time-picker": "22.0.3",
@@ -213,6 +214,7 @@
       "lit": "2.0.0"
     },
     "devDependencies": {
+      "@babel/core": "7.16.7",
       "chokidar": "^3.5.0",
       "compression-webpack-plugin": "4.0.1",
       "css-loader": "4.2.1",
@@ -234,6 +236,6 @@
       "workbox-precaching": "6.4.2",
       "workbox-webpack-plugin": "6.4.2"
     },
-    "hash": "20aab997300ab246d2635bb5ac87e442c6e853b25c76811a00094349b05c02b3"
+    "hash": "cbb32258cac2f408228f55b169ecfa6c1c7a0f07a37ce0f0f3c88ae1f0c87a70"
   }
 }
