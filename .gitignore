@@ -14,3 +14,4 @@ webpack.generated.js
 error-screenshots/
 .DS_Store
 pnpmfile.js
+frontend/generated/
