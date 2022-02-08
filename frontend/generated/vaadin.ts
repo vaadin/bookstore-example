@@ -1,1 +1,3 @@
-import '../../target/index';
+import './index';
+
+import '@vaadin/flow-frontend/VaadinDevmodeGizmo.js';

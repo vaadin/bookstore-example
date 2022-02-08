@@ -13,3 +13,5 @@ webpack.generated.js
 .driver
 error-screenshots/
 .DS_Store
+pnpmfile.js
+frontend/generated/
