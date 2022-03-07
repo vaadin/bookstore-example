@@ -10,7 +10,7 @@
     "@vaadin/vaadin-checkbox": "2.5.1",
     "@vaadin/vaadin-combo-box": "5.4.12",
     "@vaadin/vaadin-context-menu": "4.6.0",
-    "@vaadin/vaadin-core-shrinkwrap": "14.8.4",
+    "@vaadin/vaadin-core-shrinkwrap": "14.8.5",
     "@vaadin/vaadin-custom-field": "1.3.1",
     "@vaadin/vaadin-date-picker": "4.4.2",
     "@vaadin/vaadin-date-time-picker": "1.4.0",
@@ -30,10 +30,10 @@
     "@vaadin/vaadin-ordered-layout": "1.4.0",
     "@vaadin/vaadin-progress-bar": "1.3.0",
     "@vaadin/vaadin-radio-button": "1.5.4",
-    "@vaadin/vaadin-select": "2.4.2",
-    "@vaadin/vaadin-split-layout": "4.3.0",
+    "@vaadin/vaadin-select": "2.4.3",
+    "@vaadin/vaadin-split-layout": "4.3.1",
     "@vaadin/vaadin-tabs": "3.2.0",
-    "@vaadin/vaadin-text-field": "2.9.1",
+    "@vaadin/vaadin-text-field": "2.9.2",
     "@vaadin/vaadin-time-picker": "2.4.0",
     "@vaadin/vaadin-upload": "4.4.3",
     "@webcomponents/webcomponentsjs": "^2.2.10",
@@ -75,7 +75,7 @@
       "@vaadin/vaadin-checkbox": "2.5.1",
       "@vaadin/vaadin-combo-box": "5.4.12",
       "@vaadin/vaadin-context-menu": "4.6.0",
-      "@vaadin/vaadin-core-shrinkwrap": "14.8.4",
+      "@vaadin/vaadin-core-shrinkwrap": "14.8.5",
       "@vaadin/vaadin-custom-field": "1.3.1",
       "@vaadin/vaadin-date-picker": "4.4.2",
       "@vaadin/vaadin-date-time-picker": "1.4.0",
@@ -95,10 +95,10 @@
       "@vaadin/vaadin-ordered-layout": "1.4.0",
       "@vaadin/vaadin-progress-bar": "1.3.0",
       "@vaadin/vaadin-radio-button": "1.5.4",
-      "@vaadin/vaadin-select": "2.4.2",
-      "@vaadin/vaadin-split-layout": "4.3.0",
+      "@vaadin/vaadin-select": "2.4.3",
+      "@vaadin/vaadin-split-layout": "4.3.1",
       "@vaadin/vaadin-tabs": "3.2.0",
-      "@vaadin/vaadin-text-field": "2.9.1",
+      "@vaadin/vaadin-text-field": "2.9.2",
       "@vaadin/vaadin-time-picker": "2.4.0",
       "@vaadin/vaadin-upload": "4.4.3",
       "@webcomponents/webcomponentsjs": "^2.2.10",
@@ -126,6 +126,6 @@
       "webpack-dev-server": "3.11.0",
       "webpack-merge": "4.2.2"
     },
-    "hash": "019a5b8c758a59e0cd269f8b8002e0265f1f171bc57a6b2db598b90f5c5ffa42"
+    "hash": "e114d8fe5f9c194b11c9b55f51a41531c67049881c8e899cbd89d15289b620bb"
   }
 }
