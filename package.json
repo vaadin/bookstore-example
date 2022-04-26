@@ -116,7 +116,7 @@
     "@vaadin/virtual-list": "23.0.6",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "construct-style-sheets-polyfill": "3.0.4",
-    "date-fns": "2.23.0",
+    "date-fns": "2.28.0",
     "lit": "2.1.4"
   },
   "devDependencies": {
@@ -135,7 +135,7 @@
     "typescript": "4.5.3",
     "webpack": "4.46.0",
     "webpack-cli": "4.9.2",
-    "webpack-dev-server": "4.7.4",
+    "webpack-dev-server": "4.8.1",
     "webpack-merge": "4.2.2",
     "workbox-core": "6.5.0",
     "workbox-precaching": "6.5.0",
@@ -255,7 +255,7 @@
       "@vaadin/vertical-layout": "23.0.6",
       "@vaadin/virtual-list": "23.0.6",
       "construct-style-sheets-polyfill": "3.0.4",
-      "date-fns": "2.23.0",
+      "date-fns": "2.28.0",
       "lit": "2.1.4"
     },
     "devDependencies": {
@@ -274,13 +274,13 @@
       "typescript": "4.5.3",
       "webpack": "4.46.0",
       "webpack-cli": "4.9.2",
-      "webpack-dev-server": "4.7.4",
+      "webpack-dev-server": "4.8.1",
       "webpack-merge": "4.2.2",
       "workbox-core": "6.5.0",
       "workbox-precaching": "6.5.0",
       "workbox-webpack-plugin": "6.5.0"
     },
-    "hash": "7733ed6c5c1122b9ac1c8f53ebdf578c9e9ceb5577ff12448476bcb1c6f6558d"
+    "hash": "313d4014862266084b0ffad9a18deef6f259d80538968fe190908225d3525f4e"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
