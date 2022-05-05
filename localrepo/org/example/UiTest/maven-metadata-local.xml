@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>org.example</groupId>
-  <artifactId>JuntiBench</artifactId>
+  <artifactId>UiTest</artifactId>
   <versioning>
     <versions>
       <version>1.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20220503060304</lastUpdated>
+    <lastUpdated>20220505051552</lastUpdated>
   </versioning>
 </metadata>

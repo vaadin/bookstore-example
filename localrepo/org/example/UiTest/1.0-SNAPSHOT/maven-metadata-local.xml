@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
   <groupId>org.example</groupId>
-  <artifactId>JuntiBench</artifactId>
+  <artifactId>UiTest</artifactId>
   <version>1.0-SNAPSHOT</version>
   <versioning>
     <snapshot>
       <localCopy>true</localCopy>
     </snapshot>
-    <lastUpdated>20220503060304</lastUpdated>
+    <lastUpdated>20220505051552</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <classifier>sources</classifier>
         <extension>jar</extension>
         <value>1.0-SNAPSHOT</value>
-        <updated>20220503060304</updated>
+        <updated>20220505051552</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
         <value>1.0-SNAPSHOT</value>
-        <updated>20220503060304</updated>
+        <updated>20220505051552</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
         <value>1.0-SNAPSHOT</value>
-        <updated>20220503060304</updated>
+        <updated>20220505051552</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

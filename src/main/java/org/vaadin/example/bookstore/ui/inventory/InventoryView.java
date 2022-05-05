@@ -30,12 +30,12 @@ public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 
     public static final String VIEW_NAME = "Inventory";
-    private final ProductGrid grid;
-    private final ProductForm form;
+    final ProductGrid grid;
+    final ProductForm form;
     private TextField filter;
 
     private final InventoryViewLogic viewLogic = new InventoryViewLogic(this);
-    private Button newProduct;
+    Button newProduct;
 
     private final ProductDataProvider dataProvider = new ProductDataProvider();
 

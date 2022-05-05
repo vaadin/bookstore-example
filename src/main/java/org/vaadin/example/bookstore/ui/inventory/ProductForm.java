@@ -35,15 +35,15 @@ public class ProductForm extends Div {
 
     private final VerticalLayout content;
 
-    private final TextField productName;
-    private final TextField price;
-    private final TextField stockCount;
-    private final Select<Availability> availability;
-    private final CheckboxGroup<Category> category;
-    private Button save;
-    private Button discard;
-    private Button cancel;
-    private final Button delete;
+    final TextField productName;
+    final TextField price;
+    final TextField stockCount;
+    final Select<Availability> availability;
+    final CheckboxGroup<Category> category;
+    Button save;
+    Button discard;
+    Button cancel;
+    final Button delete;
 
     private final InventoryViewLogic viewLogic;
     private final Binder<Product> binder;
