@@ -14,9 +14,10 @@ import org.vaadin.junit.helpers.MenuHelper;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.Version;
-import com.vaadin.karibu.KaribuTest;
+import com.vaadin.testbench.ui.ComponentSearch;
+import com.vaadin.testbench.ui.UITest;
 
-public class AboutTest extends KaribuTest {
+public class AboutTest extends UITest {
 
     @BeforeEach
     public void login() {
@@ -27,15 +28,15 @@ public class AboutTest extends KaribuTest {
     @Test
     public void navigateToAboutViewWithRouterLink_showsFlowVersion() {
         // Find the menu link containing the text about and navigate to it.
-        final Optional<RouterLink> about = £(MainLayout.class).first()
-                .£(RouterLink.class).all().stream()
-                .filter(link -> MenuHelper.getMenuItemText(link)
+        final Optional<RouterLink> about = new ComponentSearch(
+                MainLayout.class).withFirst(RouterLink.class).all().stream()
+                .filter(link -> MenuHelper.getMenuItemText((RouterLink) link)
                         .equalsIgnoreCase("about")).findFirst();
         navigate(about.get());
 
         MatcherAssert.assertThat("Expected version text",
-                £(AboutView.class).first().£(Span.class).last().getComponent()
-                        .getText(), CoreMatchers.containsString(
+                search(AboutView.class).withFirst(Span.class).last()
+                        .getComponent().getText(), CoreMatchers.containsString(
                         "Vaadin version " + Version.getFullVersion()));
 
     }
@@ -46,8 +47,8 @@ public class AboutTest extends KaribuTest {
         navigate(AboutView.class);
 
         MatcherAssert.assertThat("Expected version text",
-                £(AboutView.class).first().£(Span.class).last().getComponent()
-                        .getText(), CoreMatchers.containsString(
+                search(AboutView.class).withFirst(Span.class).last()
+                        .getComponent().getText(), CoreMatchers.containsString(
                         "Vaadin version " + Version.getFullVersion()));
 
     }

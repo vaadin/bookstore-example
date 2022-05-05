@@ -1,5 +1,7 @@
 #NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Thu May 05 10:31:22 EEST 2022
+#Thu May 05 15:22:05 EEST 2022
 UiTest-1.0-SNAPSHOT.jar>=
+UiTest-1.0-SNAPSHOT.pom>localrepository=
 UiTest-1.0-SNAPSHOT-sources.jar>=
 UiTest-1.0-SNAPSHOT.pom>=
+UiTest-1.0-SNAPSHOT.jar>localrepository=

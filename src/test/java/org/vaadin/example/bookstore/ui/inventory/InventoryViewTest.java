@@ -19,7 +19,7 @@ class InventoryViewTest extends UITest {
         InventoryView view = navigate(InventoryView.class);
 
         // Can we get wrap to return the expected wrap implementation
-        final GridWrap grid = $(view.grid);
+        final GridWrap grid = (GridWrap) $(view.grid);
         grid.clickRow(0);
 
         Assert.assertFalse("Product form should not be visible",
@@ -31,16 +31,16 @@ class InventoryViewTest extends UITest {
         Login.loginAdmin();
         InventoryView view = navigate(InventoryView.class);
 
-        GridWrap grid = $(view.grid);
+        GridWrap grid = (GridWrap) $(view.grid);
         grid.clickRow(0);
 
         Assert.assertTrue("Product form should be visible",
                 view.form.isVisible());
 
         final String newTitle = "Cronan's Guide to Nanomixology";
-        TextFieldWrap tf = $(view.form.productName);
+        TextFieldWrap tf = (TextFieldWrap) $(view.form.productName);
         tf.setValue(newTitle);
-        ButtonWrap button = $(view.form.save);
+        ButtonWrap button = (ButtonWrap) $(view.form.save);
         button.click();
 
         Assert.assertEquals(newTitle, grid.getCellText(0, 0));
@@ -51,7 +51,7 @@ class InventoryViewTest extends UITest {
         Login.loginAdmin();
         InventoryView view = navigate(InventoryView.class);
 
-        ((ButtonWrap)$(view.newProduct)).click();
+        ((ButtonWrap) $(view.newProduct)).click();
 
         Assert.assertTrue("Product form should be visible",
                 view.form.isVisible());
@@ -60,7 +60,7 @@ class InventoryViewTest extends UITest {
         ((TextFieldWrap) $(view.form.productName)).setValue(newTitle);
         ((ButtonWrap) $(view.form.save)).click();
 
-        GridWrap grid = $(view.grid);
+        GridWrap grid = (GridWrap) $(view.grid);
         final boolean foundInGrid = IntStream.range(0, grid.size())
                 .mapToObj(row -> grid.getCellText(row, 0))
                 .anyMatch(title -> newTitle.equals(title));

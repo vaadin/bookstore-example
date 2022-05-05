@@ -1,11 +1,12 @@
 package org.vaadin.junit.helpers;
 
-import org.vaadin.example.bookstore.authentication.AccessControlFactory;
-
-import com.vaadin.karibu.locator.LoginFormLocator;
+import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.testbench.ui.ComponentSearch;
+import com.vaadin.testbench.ui.wrap.LoginFormWrap;
 
 /**
- * Helper class to login through the login form view that is shown on initial load.
+ * Helper class to login through the login form view that is shown on initial
+ * load.
  */
 public class Login {
 
@@ -13,13 +14,15 @@ public class Login {
      * Login as a normal user
      */
     public static void login() {
-        new LoginFormLocator().first().login("user","user");
+        new LoginFormWrap(new ComponentSearch<>(LoginForm.class).first()
+                .getComponent()).login("user", "user");
     }
 
     /**
      * Login as an administrator
      */
     public static void loginAdmin() {
-        new LoginFormLocator().first().login("admin","admin");
+        new LoginFormWrap(new ComponentSearch<>(LoginForm.class).first()
+                .getComponent()).login("admin", "admin");
     }
 }
