@@ -8,6 +8,7 @@ import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -19,6 +20,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.data.value.ValueChangeMode;
+
 import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Category;
 
@@ -44,7 +47,27 @@ public class AdminView extends VerticalLayout {
         categoriesListing.setRenderer(
                 new ComponentRenderer<>(this::createCategoryEditor));
 
+        Button openCategoryDialog = new Button("Open category dialog",
+                click -> {
+                    Dialog dialog = new Dialog();
+                    dialog.setHeaderTitle("Add a new category");
+                    TextField categoryName = new TextField("Category name");
+                    categoryName.setValueChangeMode(ValueChangeMode.EAGER);
+                    Button button = new Button("Add category", e -> {
+                        Notification.show("'Dialog add category' clicked");
+                        final Category category = new Category();
+                        category.setName(categoryName.getValue());
+                        DataService.get().updateCategory(category);
+                        dataProvider.refreshAll();
+                        dialog.close();
+                    });
+                    button.addClickShortcut(Key.KEY_N, KeyModifier.CONTROL);
+                    dialog.add(categoryName, button);
+                    dialog.open();
+                });
+
         newCategoryButton = new Button("Add New Category", event -> {
+            Notification.show("'Add New Category' clicked");
             final Category category = new Category();
             dataProvider.getItems().add(category);
             dataProvider.refreshAll();
@@ -61,7 +84,8 @@ public class AdminView extends VerticalLayout {
         });
 
         add(new H2("Hello Admin"), new H4("Edit Categories"),
-                newCategoryButton, showCategories, categoriesListing);
+                newCategoryButton, openCategoryDialog, showCategories,
+                categoriesListing);
     }
 
     private Component createCategoryEditor(Category category) {
