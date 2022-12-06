@@ -83,7 +83,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
 
     private RouterLink createMenuLink(Class<? extends Component> viewClass,
             String caption, Icon icon) {
-        final RouterLink routerLink = new RouterLink(null, viewClass);
+        final RouterLink routerLink = new RouterLink(viewClass);
         routerLink.setClassName("menu-link");
         routerLink.add(icon);
         routerLink.add(new Span(caption));
@@ -117,7 +117,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
         super.onAttach(attachEvent);
 
         // User can quickly activate logout with Ctrl+L
-        attachEvent.getUI().addShortcutListener(() -> logout(), Key.KEY_L,
+        attachEvent.getUI().addShortcutListener(this::logout, Key.KEY_L,
                 KeyModifier.CONTROL);
 
         // add the admin view menu item if user has admin role
