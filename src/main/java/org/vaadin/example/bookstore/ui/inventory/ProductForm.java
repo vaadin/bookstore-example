@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.ShortcutRegistration;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
@@ -156,7 +157,9 @@ public class ProductForm extends Div {
                 viewLogic.saveProduct(currentProduct);
             }
         });
-        save.addClickShortcut(Key.KEY_S, KeyModifier.CONTROL);
+        ShortcutRegistration saveShortcutRegistration =
+                save.addClickShortcut(Key.KEY_S, KeyModifier.CONTROL);
+        saveShortcutRegistration.listenOn(this);
 
         discard = new Button("Discard changes");
         discard.setWidth("100%");
