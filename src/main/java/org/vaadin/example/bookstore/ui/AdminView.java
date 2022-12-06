@@ -3,8 +3,11 @@ package org.vaadin.example.bookstore.ui;
 import java.util.ArrayList;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -35,7 +38,7 @@ public class AdminView extends VerticalLayout {
     public AdminView() {
         categoriesListing = new IronList<>();
 
-        dataProvider = new ListDataProvider<Category>(
+        dataProvider = new ListDataProvider<>(
                 new ArrayList<>(DataService.get().getAllCategories()));
         categoriesListing.setDataProvider(dataProvider);
         categoriesListing.setRenderer(
@@ -47,9 +50,18 @@ public class AdminView extends VerticalLayout {
             dataProvider.refreshAll();
         });
         newCategoryButton.setDisableOnClick(true);
+        newCategoryButton.addClickShortcut(Key.KEY_N, KeyModifier.CONTROL)
+                .bindLifecycleTo(categoriesListing);
 
-        add(new H2("Hello Admin"), new H4("Edit Categories"), newCategoryButton,
-                categoriesListing);
+        categoriesListing.setVisible(false);
+
+        Checkbox showCategories = new Checkbox("Show categories");
+        showCategories.addValueChangeListener(click -> {
+           categoriesListing.setVisible(click.getValue());
+        });
+
+        add(new H2("Hello Admin"), new H4("Edit Categories"),
+                newCategoryButton, showCategories, categoriesListing);
     }
 
     private Component createCategoryEditor(Category category) {
