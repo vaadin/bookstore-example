@@ -54,7 +54,6 @@ public class AdminView extends VerticalLayout {
                     TextField categoryName = new TextField("Category name");
                     categoryName.setValueChangeMode(ValueChangeMode.EAGER);
                     Button button = new Button("Add category", e -> {
-                        Notification.show("'Dialog add category' clicked");
                         final Category category = new Category();
                         category.setName(categoryName.getValue());
                         DataService.get().updateCategory(category);
@@ -67,7 +66,6 @@ public class AdminView extends VerticalLayout {
                 });
 
         newCategoryButton = new Button("Add New Category", event -> {
-            Notification.show("'Add New Category' clicked");
             final Category category = new Category();
             dataProvider.getItems().add(category);
             dataProvider.refreshAll();
