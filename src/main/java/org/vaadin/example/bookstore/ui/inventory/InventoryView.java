@@ -2,6 +2,8 @@ package org.vaadin.example.bookstore.ui.inventory;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.ShortcutRegistration;
+import com.vaadin.flow.component.Shortcuts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -58,6 +60,11 @@ public class InventoryView extends HorizontalLayout
         barAndGridLayout.setSizeFull();
         barAndGridLayout.expand(grid);
 
+        Shortcuts.addShortcutListener(barAndGridLayout, () ->
+                barAndGridLayout.getElement().getStyle().set("border",
+                        "2px solid blue"),
+                Key.KEY_F, KeyModifier.CONTROL).listenOn(barAndGridLayout);
+
         add(barAndGridLayout);
         add(form);
 
@@ -71,7 +78,8 @@ public class InventoryView extends HorizontalLayout
         filter.addValueChangeListener(
                 event -> dataProvider.setFilter(event.getValue()));
         // A shortcut to focus on the textField by pressing ctrl + F
-        filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
+        ShortcutRegistration shortcutRegistration =
+                filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
         newProduct = new Button("New product");
         // Setting theme variant of new production button to LUMO_PRIMARY that
@@ -87,6 +95,8 @@ public class InventoryView extends HorizontalLayout
         topLayout.add(newProduct);
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
+
+        shortcutRegistration.listenOn(topLayout).allowEventPropagation();
         return topLayout;
     }
 
@@ -96,7 +106,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Shows a temporary popup notification to the user.
-     * 
+     *
      * @see Notification#show(String)
      * @param msg
      */
@@ -106,7 +116,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Enables/Disables the new product button.
-     * 
+     *
      * @param enabled
      */
     public void setNewProductEnabled(boolean enabled) {
@@ -122,7 +132,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Selects a row
-     * 
+     *
      * @param row
      */
     public void selectRow(Product row) {
@@ -131,7 +141,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Updates a product in the list of products.
-     * 
+     *
      * @param product
      */
     public void updateProduct(Product product) {
@@ -140,7 +150,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Removes a product from the list of products.
-     * 
+     *
      * @param product
      */
     public void removeProduct(Product product) {
@@ -149,7 +159,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Displays user a form to edit a Product.
-     * 
+     *
      * @param product
      */
     public void editProduct(Product product) {
@@ -159,7 +169,7 @@ public class InventoryView extends HorizontalLayout
 
     /**
      * Shows and hides the new product form
-     * 
+     *
      * @param show
      */
     public void showForm(boolean show) {
