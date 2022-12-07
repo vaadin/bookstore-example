@@ -105,6 +105,7 @@ public class ProductForm extends Div {
         productName.setWidth("100%");
         productName.setRequired(true);
         productName.setValueChangeMode(ValueChangeMode.EAGER);
+        productName.addFocusShortcut(Key.KEY_P).allowBrowserDefault();
         content.add(productName);
 
         price = new TextField("Price");
