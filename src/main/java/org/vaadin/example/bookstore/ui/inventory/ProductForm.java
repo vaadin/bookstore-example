@@ -112,6 +112,8 @@ public class ProductForm extends Div {
         price.setSuffixComponent(new Span("€"));
         price.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
         price.setValueChangeMode(ValueChangeMode.EAGER);
+        price.addFocusShortcut(Key.KEY_P, KeyModifier.CONTROL)
+                .listenOn(content).allowEventPropagation();
 
         stockCount = new TextField("In stock");
         stockCount.addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
@@ -186,6 +188,11 @@ public class ProductForm extends Div {
         });
 
         content.add(save, discard, delete, cancel);
+
+        Shortcuts.addShortcutListener(this, () ->
+                        this.getElement().getStyle().set("border",
+                                "3px solid red"),
+                Key.KEY_P, KeyModifier.CONTROL).listenOn(this);
     }
 
     public void setCategories(Collection<Category> categories) {

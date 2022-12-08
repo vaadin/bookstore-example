@@ -3,7 +3,6 @@ package org.vaadin.example.bookstore.ui.inventory;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.ShortcutRegistration;
-import com.vaadin.flow.component.Shortcuts;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -60,11 +59,6 @@ public class InventoryView extends HorizontalLayout
         barAndGridLayout.setSizeFull();
         barAndGridLayout.expand(grid);
 
-        Shortcuts.addShortcutListener(barAndGridLayout, () ->
-                barAndGridLayout.getElement().getStyle().set("border",
-                        "2px solid blue"),
-                Key.KEY_F, KeyModifier.CONTROL).listenOn(barAndGridLayout);
-
         add(barAndGridLayout);
         add(form);
 
@@ -87,8 +81,8 @@ public class InventoryView extends HorizontalLayout
         newProduct.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         newProduct.setIcon(VaadinIcon.PLUS_CIRCLE.create());
         newProduct.addClickListener(click -> viewLogic.newProduct());
-        // A shortcut to click the new product button by pressing ALT + N
-        newProduct.addClickShortcut(Key.KEY_N, KeyModifier.ALT);
+        // A shortcut to click the new product button by pressing CONTROL + N
+        newProduct.addClickShortcut(Key.KEY_N, KeyModifier.CONTROL);
         final HorizontalLayout topLayout = new HorizontalLayout();
         topLayout.setWidth("100%");
         topLayout.add(filter);
@@ -96,7 +90,6 @@ public class InventoryView extends HorizontalLayout
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
 
-        shortcutRegistration.listenOn(topLayout).allowEventPropagation();
         return topLayout;
     }
 
