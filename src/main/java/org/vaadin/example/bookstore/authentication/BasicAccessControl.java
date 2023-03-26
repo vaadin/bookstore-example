@@ -48,6 +48,7 @@ public class BasicAccessControl implements AccessControl {
     @Override
     public void signOut() {
         VaadinSession.getCurrent().getSession().invalidate();
+
         UI.getCurrent().navigate("");
     }
 }

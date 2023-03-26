@@ -8,8 +8,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.data.renderer.TemplateRenderer;
+import com.vaadin.flow.data.renderer.LitRenderer;
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
 
@@ -42,8 +41,8 @@ public class ProductGrid extends Grid<Product> {
         // Available, Coming and Discontinued, are defined in shared-styles.css
         // and are
         // used here in availabilityTemplate.
-        final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability]]\"></iron-icon> [[item.availability]]";
-        addColumn(TemplateRenderer.<Product>of(availabilityTemplate)
+        final String availabilityTemplate = "<vaadin-icon icon=\"vaadin:circle\" class=\"${item.availability}\"></vaadin-icon> ${item.availability}";
+        addColumn(LitRenderer.<Product>of(availabilityTemplate)
                 .withProperty("availability",
                         product -> product.getAvailability().toString()))
                                 .setHeader("Availability")
