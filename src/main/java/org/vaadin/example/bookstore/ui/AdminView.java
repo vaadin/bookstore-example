@@ -10,11 +10,11 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
@@ -30,12 +30,12 @@ public class AdminView extends VerticalLayout {
 
     private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
 
-    private final IronList<Category> categoriesListing;
+    private final VirtualList<Category> categoriesListing;
     private final ListDataProvider<Category> dataProvider;
     private final Button newCategoryButton;
 
     public AdminView() {
-        categoriesListing = new IronList<>();
+        categoriesListing = new VirtualList<>();
 
         dataProvider = new ListDataProvider<Category>(
                 new ArrayList<>(DataService.get(UI.getCurrent().getLocale()).getAllCategories()));

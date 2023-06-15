@@ -10,7 +10,7 @@ import com.vaadin.flow.router.HasErrorParameter;
 import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.router.ParentLayout;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.ResourceBundle;
 
 /**
