@@ -14,14 +14,14 @@
 import { Router } from '@vaadin/router';
 
 // import Flow module to enable navigation to Vaadin server-side views
-import { Flow } from '@vaadin/flow-frontend/Flow';
+import { Flow } from 'Frontend/generated/jar-resources/Flow.js';
 
 const { serverSideRoutes } = new Flow({
-  imports: () => import('../../target/frontend/generated-flow-imports')
+  imports: () => import('Frontend/generated/flow/generated-flow-imports.js')
 });
 
 const routes = [
-  // for client-side, place routes below (more info https://vaadin.com/docs/v15/flow/typescript/creating-routes.html)
+  // for client-side, place routes below (more info https://hilla.dev/docs/lit/guides/routing#initializing-the-router)
 
   // for server-side, the next magic line sends all unmatched routes:
   ...serverSideRoutes // IMPORTANT: this must be the last entry in the array
