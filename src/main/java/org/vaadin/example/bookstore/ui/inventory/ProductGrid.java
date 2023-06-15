@@ -10,7 +10,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.data.renderer.TemplateRenderer;
+import com.vaadin.flow.data.renderer.LitRenderer;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 import org.vaadin.example.bookstore.backend.data.Category;
@@ -48,7 +48,7 @@ public class ProductGrid extends Grid<Product> {
         // and are
         // used here in availabilityTemplate.
         final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability.name]]\"></iron-icon> [[item.availability.value]]";
-        addColumn(TemplateRenderer.<Product>of(availabilityTemplate)
+        addColumn(LitRenderer.<Product>of(availabilityTemplate)
                 .withProperty("availability",
                         product -> {
                             JsonObject availabilityMap = Json.createObject();
