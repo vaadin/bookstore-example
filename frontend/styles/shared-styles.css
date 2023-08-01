@@ -34,7 +34,6 @@ body {
 
 .menu-link {
     display: block;
-    margin: 0 auto;
     padding: 10px 37px;
     transition: transform 300ms;
     

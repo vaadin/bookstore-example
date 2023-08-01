@@ -143,7 +143,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>11.0.13</version>
                 <configuration>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <scan>2</scan>
                     <!-- Use war output directory to get the webpack files -->
                     <webAppConfig>
                         <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>

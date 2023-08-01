@@ -42,7 +42,7 @@ public class ProductGrid extends Grid<Product> {
         // Available, Coming and Discontinued, are defined in shared-styles.css
         // and are
         // used here in availabilityTemplate.
-        final String availabilityTemplate = "<iron-icon icon=\"vaadin:circle\" class-name=\"[[item.availability]]\"></iron-icon> [[item.availability]]";
+        final String availabilityTemplate = "<vaadin-icon icon=\"vaadin:circle\" class=\"${item.availability}\"></vaadin-icon> ${item.availability}";
         addColumn(LitRenderer.<Product>of(availabilityTemplate)
                 .withProperty("availability",
                         product -> product.getAvailability().toString()))
