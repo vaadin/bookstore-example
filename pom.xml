@@ -218,9 +218,8 @@
                         <configuration>
                             <stopPort>8081</stopPort>
                             <stopWait>5</stopWait>
-                            <daemon>false</daemon>
                             <stopKey>stopit</stopKey>
-                            <scanIntervalSeconds>-1</scanIntervalSeconds>
+                            <scan>-1</scan>
                         </configuration>
                         <executions>
                             <execution>
