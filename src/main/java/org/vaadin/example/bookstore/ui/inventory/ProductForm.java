@@ -26,6 +26,7 @@ import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
@@ -55,12 +56,12 @@ public class ProductForm extends Div {
     private static class PriceConverter implements Converter<BigDecimal, BigDecimal> {
         @Override
         public Result<BigDecimal> convertToModel(BigDecimal value, ValueContext context) {
-            return Result.ok(value.setScale(2, BigDecimal.ROUND_HALF_DOWN));
+            return Result.ok(value.setScale(2, RoundingMode.HALF_DOWN));
         }
 
         @Override
         public BigDecimal convertToPresentation(BigDecimal value, ValueContext context) {
-            return value.setScale(2, BigDecimal.ROUND_HALF_DOWN);
+            return value.setScale(2, RoundingMode.HALF_DOWN);
         }
     }
 
