@@ -11,7 +11,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -62,7 +62,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
                 "img/table-logo.png");
 
         final Image image = new Image(resolvedImage, "");
-        final Label title = new Label(resourceBundle.getString("bookstore"));
+        final NativeLabel title = new NativeLabel(resourceBundle.getString("bookstore"));
         top.add(image, title);
         top.add(title);
 
