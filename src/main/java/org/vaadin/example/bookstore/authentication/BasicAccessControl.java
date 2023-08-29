@@ -1,6 +1,7 @@
 package org.vaadin.example.bookstore.authentication;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinSession;
 
 /**
@@ -20,6 +21,8 @@ public class BasicAccessControl implements AccessControl {
             return false;
         }
 
+        VaadinServletRequest.getCurrent().getHttpServletRequest()
+                .changeSessionId();
         CurrentUser.set(username);
         return true;
     }
