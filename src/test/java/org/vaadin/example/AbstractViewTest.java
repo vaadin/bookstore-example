@@ -14,8 +14,6 @@ import com.vaadin.testbench.ScreenshotOnFailureRule;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.parallel.ParallelTest;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 /**
  * Base class for ITs
  * <p>
@@ -47,11 +45,6 @@ public abstract class AbstractViewTest extends ParallelTest {
     protected AbstractViewTest(String route, By rootSelector) {
         this.route = route;
         this.rootSelector = rootSelector;
-    }
-
-    @BeforeClass
-    public static void setupClass() {
-        WebDriverManager.chromedriver().setup();
     }
 
     @Before
