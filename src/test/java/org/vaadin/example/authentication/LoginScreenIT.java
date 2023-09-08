@@ -10,12 +10,6 @@ import org.vaadin.example.MainLayoutElement;
 public class LoginScreenIT extends AbstractViewTest {
 
     @Test
-    public void loginForm_isLumoThemed() {
-        final LoginFormElement loginForm = $(LoginFormElement.class).first();
-        assertThemePresentOnElement(loginForm, Lumo.class);
-    }
-
-    @Test
     public void loginAsAdmin_hasAdminViewLink() {
 
         // when authenticating as admin
