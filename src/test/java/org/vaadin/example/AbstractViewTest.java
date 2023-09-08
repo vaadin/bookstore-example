@@ -71,29 +71,6 @@ public abstract class AbstractViewTest extends ParallelTest {
     }
 
     /**
-     * Asserts that the given {@code element} is rendered using a theme
-     * identified by {@code themeClass}. If the theme is not found, JUnit
-     * assert will fail the test case.
-     *
-     * @param element       web element to check for the theme
-     * @param themeClass    theme class (such as {@code Lumo.class}
-     */
-    protected void assertThemePresentOnElement(
-            WebElement element, Class<? extends AbstractTheme> themeClass) {
-        String themeName = themeClass.getSimpleName().toLowerCase();
-        Boolean hasStyle = (Boolean) executeScript("" +
-                "var styles = Array.from(arguments[0]._template.content" +
-                ".querySelectorAll('style'))" +
-                ".filter(style => style.textContent.indexOf('" +
-                themeName + "') > -1);" +
-                "return styles.length > 0;", element);
-
-        Assert.assertTrue("Element '" + element.getTagName() + "' should have" +
-                        " had theme '" + themeClass.getSimpleName() + "'.",
-                hasStyle);
-    }
-
-    /**
      * Property set to true when running on a test hub.
      */
     private static final String USE_HUB_PROPERTY = "test.use.hub";
