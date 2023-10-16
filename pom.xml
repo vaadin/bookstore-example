@@ -17,7 +17,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>24.1.12</vaadin.version>
+        <vaadin.version>24.2.0</vaadin.version>
     </properties>
 
     <dependencyManagement>
