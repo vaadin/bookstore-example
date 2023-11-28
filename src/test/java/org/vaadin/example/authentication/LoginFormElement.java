@@ -12,6 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class LoginFormElement extends TestBenchElement {
 
     public void login(String username, String password) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
         waitUntil(ExpectedConditions.presenceOfElementLocated(By.id("vaadinLoginUsername")));
 
         $(TextFieldElement.class).id("vaadinLoginUsername")
