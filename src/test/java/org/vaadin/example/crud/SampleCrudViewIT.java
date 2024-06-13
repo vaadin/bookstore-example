@@ -68,7 +68,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
         mainElem.clickMenuLink("Inventory");
 
         // when clicking the "New product" button
-        $(ButtonElement.class).attribute("theme", "primary").first().click();
+        $(ButtonElement.class).withAttribute("theme", "primary").first().click();
 
         // when entering new product data and saving the product
         final ProductFormElement prodForm = $(ProductFormElement.class).first();
