@@ -133,7 +133,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>11.0.13</version>
+                <version>11.0.15</version>
                 <configuration>
                     <scan>2</scan>
                 </configuration>
