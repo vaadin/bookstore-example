@@ -3,15 +3,15 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@polymer/polymer": "3.5.1",
-    "@vaadin/bundles": "24.4.1",
+    "@vaadin/bundles": "24.4.2",
     "@vaadin/common-frontend": "0.0.19",
-    "@vaadin/polymer-legacy-adapter": "24.4.1",
-    "@vaadin/react-components": "24.4.1",
+    "@vaadin/polymer-legacy-adapter": "24.4.2",
+    "@vaadin/react-components": "24.4.2",
     "@vaadin/router": "1.7.5",
     "@vaadin/vaadin-development-mode-detector": "2.0.7",
-    "@vaadin/vaadin-lumo-styles": "24.4.1",
-    "@vaadin/vaadin-material-styles": "24.4.1",
-    "@vaadin/vaadin-themable-mixin": "24.4.1",
+    "@vaadin/vaadin-lumo-styles": "24.4.2",
+    "@vaadin/vaadin-material-styles": "24.4.2",
+    "@vaadin/vaadin-themable-mixin": "24.4.2",
     "@vaadin/vaadin-usage-statistics": "2.1.2",
     "construct-style-sheets-polyfill": "3.1.0",
     "date-fns": "2.29.3",
@@ -43,15 +43,15 @@
   "vaadin": {
     "dependencies": {
       "@polymer/polymer": "3.5.1",
-      "@vaadin/bundles": "24.4.1",
+      "@vaadin/bundles": "24.4.2",
       "@vaadin/common-frontend": "0.0.19",
-      "@vaadin/polymer-legacy-adapter": "24.4.1",
-      "@vaadin/react-components": "24.4.1",
+      "@vaadin/polymer-legacy-adapter": "24.4.2",
+      "@vaadin/react-components": "24.4.2",
       "@vaadin/router": "1.7.5",
       "@vaadin/vaadin-development-mode-detector": "2.0.7",
-      "@vaadin/vaadin-lumo-styles": "24.4.1",
-      "@vaadin/vaadin-material-styles": "24.4.1",
-      "@vaadin/vaadin-themable-mixin": "24.4.1",
+      "@vaadin/vaadin-lumo-styles": "24.4.2",
+      "@vaadin/vaadin-material-styles": "24.4.2",
+      "@vaadin/vaadin-themable-mixin": "24.4.2",
       "@vaadin/vaadin-usage-statistics": "2.1.2",
       "construct-style-sheets-polyfill": "3.1.0",
       "date-fns": "2.29.3",
@@ -80,7 +80,7 @@
       "workbox-core": "7.1.0",
       "workbox-precaching": "7.1.0"
     },
-    "hash": "49ae7387ca93cef7a83226237068afd263fdf71e66741badb0460a5018d8b1e2"
+    "hash": "877205fee82413a3ee2995d3c48c09ffbe0c72c6bc970aa2a5de7dbff3b75b34"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
