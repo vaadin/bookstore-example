@@ -3,22 +3,22 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@polymer/polymer": "3.5.1",
-    "@vaadin/bundles": "24.4.7",
+    "@vaadin/bundles": "24.4.9",
     "@vaadin/common-frontend": "0.0.19",
-    "@vaadin/polymer-legacy-adapter": "24.4.7",
-    "@vaadin/react-components": "24.4.7",
+    "@vaadin/polymer-legacy-adapter": "24.4.9",
+    "@vaadin/react-components": "24.4.9",
     "@vaadin/router": "1.7.5",
     "@vaadin/vaadin-development-mode-detector": "2.0.7",
-    "@vaadin/vaadin-lumo-styles": "24.4.7",
-    "@vaadin/vaadin-material-styles": "24.4.7",
-    "@vaadin/vaadin-themable-mixin": "24.4.7",
+    "@vaadin/vaadin-lumo-styles": "24.4.9",
+    "@vaadin/vaadin-material-styles": "24.4.9",
+    "@vaadin/vaadin-themable-mixin": "24.4.9",
     "@vaadin/vaadin-usage-statistics": "2.1.3",
     "construct-style-sheets-polyfill": "3.1.0",
     "date-fns": "2.29.3",
     "lit": "3.1.4",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.26.1"
+    "react-router-dom": "6.26.2"
   },
   "devDependencies": {
     "@babel/preset-react": "7.24.7",
@@ -43,22 +43,22 @@
   "vaadin": {
     "dependencies": {
       "@polymer/polymer": "3.5.1",
-      "@vaadin/bundles": "24.4.7",
+      "@vaadin/bundles": "24.4.9",
       "@vaadin/common-frontend": "0.0.19",
-      "@vaadin/polymer-legacy-adapter": "24.4.7",
-      "@vaadin/react-components": "24.4.7",
+      "@vaadin/polymer-legacy-adapter": "24.4.9",
+      "@vaadin/react-components": "24.4.9",
       "@vaadin/router": "1.7.5",
       "@vaadin/vaadin-development-mode-detector": "2.0.7",
-      "@vaadin/vaadin-lumo-styles": "24.4.7",
-      "@vaadin/vaadin-material-styles": "24.4.7",
-      "@vaadin/vaadin-themable-mixin": "24.4.7",
+      "@vaadin/vaadin-lumo-styles": "24.4.9",
+      "@vaadin/vaadin-material-styles": "24.4.9",
+      "@vaadin/vaadin-themable-mixin": "24.4.9",
       "@vaadin/vaadin-usage-statistics": "2.1.3",
       "construct-style-sheets-polyfill": "3.1.0",
       "date-fns": "2.29.3",
       "lit": "3.1.4",
       "react": "18.3.1",
       "react-dom": "18.3.1",
-      "react-router-dom": "6.26.1"
+      "react-router-dom": "6.26.2"
     },
     "devDependencies": {
       "@babel/preset-react": "7.24.7",
@@ -80,7 +80,7 @@
       "workbox-core": "7.1.0",
       "workbox-precaching": "7.1.0"
     },
-    "hash": "6b2604d60cf53e20ba883b88f9e0f0148dbdb41b43885db3bef3ebba52616a53"
+    "hash": "6073e4d625a79da91460a298a269e418eb35ab4836e6949f3eef591675ebe7a5"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
