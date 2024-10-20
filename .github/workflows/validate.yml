@@ -1,19 +1,20 @@
-name: Validate
+name: Verify
 on:
   push:
-  branches: [v24]
+    branches: [v24]
   workflow_dispatch:
   pull_request:
+permissions:
+  contents: read
 jobs:
-  validate:
+  verify:
     runs-on: windows-latest
+    permissions:
+      issues: read
+      checks: write
+      pull-requests: write
     steps:
-      - run: |
-          # INSTALL LICENSE
-          mkdir -p ~/.vaadin/
-          echo '{"username":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f1`'","proKey":"'`echo ${{secrets.TB_LICENSE}} | cut -d / -f2`'"}' > ~/.vaadin/proKey
-          echo "${{secrets.SS_LICENSE}}" > ~/vaadin.spreadsheet.developer.license
-        shell: bash
+      - uses: actions/checkout@v4
       - uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
@@ -27,19 +28,29 @@ jobs:
       - uses: stCarolas/setup-maven@v5
         with:
           maven-version: '3.9.0'
-      - run: |
-          mvn -ntp -B clean install -Pproduction,it \
-            -Dcom.vaadin.testbench.Parameters.testsInParallel=2 \
-            -Dmaven.test.redirectTestOutputToFile=true \
-            -Dcom.vaadin.testbench.Parameters.headless=true -Dheadless \
-            -Dmaven.compiler.showDeprecation
-        env:
-            MAVEN_ARGS: ${{env.MAVEN_ARGS}}
+      - name: Set TB License
+        run: |
+          TBL=${{ secrets.TB_LICENSE }}
+          [ -z "$TBL" ] && echo "No TB license provided" && exit 1
+          mkdir -p ~/.vaadin/
+          echo '{"username":"'`echo $TBL | cut -d / -f1`'","proKey":"'`echo $TBL | cut -d / -f2`'"}' > ~/.vaadin/proKey
         shell: bash
-      - if: ${{failure()}}
-        uses: actions/upload-artifact@v3.1.1
+      - name: Verify
+        run: |
+          mvn -B -V -ntp package -Pit,production \
+            -Dcom.vaadin.testbench.Parameters.headless=true -Dheadless \
+            -Dcom.vaadin.testbench.Parameters.testsInParallel=2
+        shell: bash
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          name: failed-outputs
-          path: target
-          if-no-files-found: warn
+          files: "**/target/*-reports/TEST*.xml"
+          check_run_annotations: all tests, skipped tests
+          check_run_annotations_branch: v24
+      - if: ${{always()}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: files
+          path: |
+            **/error-screenshots
           retention-days: 7
