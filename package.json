@@ -3,15 +3,15 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@polymer/polymer": "3.5.2",
-    "@vaadin/bundles": "24.5.1",
+    "@vaadin/bundles": "24.5.2",
     "@vaadin/common-frontend": "0.0.19",
-    "@vaadin/polymer-legacy-adapter": "24.5.1",
-    "@vaadin/react-components": "24.5.1",
+    "@vaadin/polymer-legacy-adapter": "24.5.2",
+    "@vaadin/react-components": "24.5.2",
     "@vaadin/router": "2.0.0",
     "@vaadin/vaadin-development-mode-detector": "2.0.7",
-    "@vaadin/vaadin-lumo-styles": "24.5.1",
-    "@vaadin/vaadin-material-styles": "24.5.1",
-    "@vaadin/vaadin-themable-mixin": "24.5.1",
+    "@vaadin/vaadin-lumo-styles": "24.5.2",
+    "@vaadin/vaadin-material-styles": "24.5.2",
+    "@vaadin/vaadin-themable-mixin": "24.5.2",
     "@vaadin/vaadin-usage-statistics": "2.1.3",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "construct-style-sheets-polyfill": "3.1.0",
@@ -39,21 +39,21 @@
     "vite": "5.4.9",
     "vite-plugin-checker": "0.8.0",
     "workbox-build": "7.1.1",
-    "workbox-core": "7.1.0",
-    "workbox-precaching": "7.1.0"
+    "workbox-core": "7.3.0",
+    "workbox-precaching": "7.3.0"
   },
   "vaadin": {
     "dependencies": {
       "@polymer/polymer": "3.5.2",
-      "@vaadin/bundles": "24.5.1",
+      "@vaadin/bundles": "24.5.2",
       "@vaadin/common-frontend": "0.0.19",
-      "@vaadin/polymer-legacy-adapter": "24.5.1",
-      "@vaadin/react-components": "24.5.1",
+      "@vaadin/polymer-legacy-adapter": "24.5.2",
+      "@vaadin/react-components": "24.5.2",
       "@vaadin/router": "2.0.0",
       "@vaadin/vaadin-development-mode-detector": "2.0.7",
-      "@vaadin/vaadin-lumo-styles": "24.5.1",
-      "@vaadin/vaadin-material-styles": "24.5.1",
-      "@vaadin/vaadin-themable-mixin": "24.5.1",
+      "@vaadin/vaadin-lumo-styles": "24.5.2",
+      "@vaadin/vaadin-material-styles": "24.5.2",
+      "@vaadin/vaadin-themable-mixin": "24.5.2",
       "@vaadin/vaadin-usage-statistics": "2.1.3",
       "construct-style-sheets-polyfill": "3.1.0",
       "date-fns": "2.29.3",
@@ -80,10 +80,10 @@
       "vite": "5.4.9",
       "vite-plugin-checker": "0.8.0",
       "workbox-build": "7.1.1",
-      "workbox-core": "7.1.0",
-      "workbox-precaching": "7.1.0"
+      "workbox-core": "7.3.0",
+      "workbox-precaching": "7.3.0"
     },
-    "hash": "b3fa8cfb1a92068aa3d89ada1ca6eb90224343684971748fe332d5864d9aae87"
+    "hash": "ba2528d2428b35bbc1637d03d63018ae5b8cb06b001d61f5a0c65652ef9e021e"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
