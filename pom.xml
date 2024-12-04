@@ -131,9 +131,9 @@
             </plugin>
 
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>11.0.13</version>
+                <groupId>org.eclipse.jetty.ee10</groupId>
+                <artifactId>jetty-ee10-maven-plugin</artifactId>
+                <version>12.0.15</version>
                 <configuration>
                     <scan>2</scan>
                     <!-- Use war output directory to get the webpack files -->
@@ -205,8 +205,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
+                        <groupId>org.eclipse.jetty.ee10</groupId>
+                        <artifactId>jetty-ee10-maven-plugin</artifactId>
                         <configuration>
                             <stopPort>8081</stopPort>
                             <stopWait>5</stopWait>
