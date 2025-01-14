@@ -17,6 +17,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     @Test
     public void userSelectsProduct_cannotEditProductInformation() {
 
+        waitUntil(driver->$(LoginFormElement.class).exists());
         // given authenticated as a regular user
         $(LoginFormElement.class).first().login("user", "user");
 
