@@ -17,6 +17,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     @Test
     public void userSelectsProduct_cannotEditProductInformation() {
 
+        waitUntil(driver->$(LoginFormElement.class).exists());
         // given authenticated as a regular user
         $(LoginFormElement.class).first().login("user", "user");
 
@@ -36,6 +37,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     @Test
     public void adminSelectsProduct_canUpdateProductInformation() {
 
+        waitUntil(driver->$(LoginFormElement.class).exists());
         // given authenticated as an admin
         $(LoginFormElement.class).first().login("admin", "admin");
 
@@ -60,6 +62,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
 
     @Test
     public void adminCreatesNewProduct_productIsAvailableInGird() {
+        waitUntil(driver->$(LoginFormElement.class).exists());
         // given authenticated as an admin
         $(LoginFormElement.class).first().login("admin", "admin");
 
