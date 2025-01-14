@@ -12,6 +12,7 @@ public class LoginScreenIT extends AbstractViewTest {
     @Test
     public void loginAsAdmin_hasAdminViewLink() {
 
+        waitUntil(driver->$(LoginFormElement.class).exists());
         // when authenticating as admin
         $(LoginFormElement.class).first().login("admin", "admin");
 
