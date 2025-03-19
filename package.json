@@ -3,14 +3,14 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@polymer/polymer": "3.5.2",
-    "@vaadin/bundles": "24.6.7",
+    "@vaadin/bundles": "24.7.1",
     "@vaadin/common-frontend": "0.0.19",
-    "@vaadin/polymer-legacy-adapter": "24.6.7",
-    "@vaadin/react-components": "24.6.7",
+    "@vaadin/polymer-legacy-adapter": "24.7.1",
+    "@vaadin/react-components": "24.7.1",
     "@vaadin/vaadin-development-mode-detector": "2.0.7",
-    "@vaadin/vaadin-lumo-styles": "24.6.7",
-    "@vaadin/vaadin-material-styles": "24.6.7",
-    "@vaadin/vaadin-themable-mixin": "24.6.7",
+    "@vaadin/vaadin-lumo-styles": "24.7.1",
+    "@vaadin/vaadin-material-styles": "24.7.1",
+    "@vaadin/vaadin-themable-mixin": "24.7.1",
     "@vaadin/vaadin-usage-statistics": "2.1.3",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "construct-style-sheets-polyfill": "3.1.0",
@@ -18,7 +18,7 @@
     "lit": "3.2.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.29.0"
+    "react-router": "7.2.0"
   },
   "devDependencies": {
     "@babel/preset-react": "7.26.3",
@@ -29,13 +29,13 @@
     "@types/react-dom": "18.3.5",
     "@vitejs/plugin-react": "4.3.4",
     "async": "3.2.6",
-    "glob": "10.4.5",
+    "glob": "11.0.1",
     "rollup-plugin-brotli": "3.1.0",
     "rollup-plugin-visualizer": "5.14.0",
     "strip-css-comments": "5.0.0",
     "transform-ast": "2.4.4",
     "typescript": "5.7.3",
-    "vite": "6.0.11",
+    "vite": "6.2.2",
     "vite-plugin-checker": "0.8.0",
     "workbox-build": "7.3.0",
     "workbox-core": "7.3.0",
@@ -44,21 +44,21 @@
   "vaadin": {
     "dependencies": {
       "@polymer/polymer": "3.5.2",
-      "@vaadin/bundles": "24.6.7",
+      "@vaadin/bundles": "24.7.1",
       "@vaadin/common-frontend": "0.0.19",
-      "@vaadin/polymer-legacy-adapter": "24.6.7",
-      "@vaadin/react-components": "24.6.7",
+      "@vaadin/polymer-legacy-adapter": "24.7.1",
+      "@vaadin/react-components": "24.7.1",
       "@vaadin/vaadin-development-mode-detector": "2.0.7",
-      "@vaadin/vaadin-lumo-styles": "24.6.7",
-      "@vaadin/vaadin-material-styles": "24.6.7",
-      "@vaadin/vaadin-themable-mixin": "24.6.7",
+      "@vaadin/vaadin-lumo-styles": "24.7.1",
+      "@vaadin/vaadin-material-styles": "24.7.1",
+      "@vaadin/vaadin-themable-mixin": "24.7.1",
       "@vaadin/vaadin-usage-statistics": "2.1.3",
       "construct-style-sheets-polyfill": "3.1.0",
       "date-fns": "2.29.3",
       "lit": "3.2.1",
       "react": "18.3.1",
       "react-dom": "18.3.1",
-      "react-router-dom": "6.29.0"
+      "react-router": "7.2.0"
     },
     "devDependencies": {
       "@babel/preset-react": "7.26.3",
@@ -69,19 +69,19 @@
       "@types/react-dom": "18.3.5",
       "@vitejs/plugin-react": "4.3.4",
       "async": "3.2.6",
-      "glob": "10.4.5",
+      "glob": "11.0.1",
       "rollup-plugin-brotli": "3.1.0",
       "rollup-plugin-visualizer": "5.14.0",
       "strip-css-comments": "5.0.0",
       "transform-ast": "2.4.4",
       "typescript": "5.7.3",
-      "vite": "6.0.11",
+      "vite": "6.2.2",
       "vite-plugin-checker": "0.8.0",
       "workbox-build": "7.3.0",
       "workbox-core": "7.3.0",
       "workbox-precaching": "7.3.0"
     },
-    "hash": "463eebbf04105ad836cb162685a51c288e5716967bab05a6f7de5ca62916f3ad"
+    "hash": "d609a9c549f4e133456223aa0996dd979bc0ddf1e5eacebfcc41ff9f861dc4d1"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -99,8 +99,8 @@
     "lit": "$lit",
     "@vaadin/react-components": "$@vaadin/react-components",
     "react-dom": "$react-dom",
-    "react-router-dom": "$react-router-dom",
-    "react": "$react"
+    "react": "$react",
+    "react-router": "$react-router"
   },
   "type": "module"
 }
