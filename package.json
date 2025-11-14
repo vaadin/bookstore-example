@@ -39,7 +39,8 @@
     "vite-plugin-checker": "0.10.3",
     "workbox-build": "7.3.0",
     "workbox-core": "7.3.0",
-    "workbox-precaching": "7.3.0"
+    "workbox-precaching": "7.3.0",
+    "@types/node": "24.10.0"
   },
   "vaadin": {
     "dependencies": {
@@ -79,7 +80,8 @@
       "vite-plugin-checker": "0.10.3",
       "workbox-build": "7.3.0",
       "workbox-core": "7.3.0",
-      "workbox-precaching": "7.3.0"
+      "workbox-precaching": "7.3.0",
+      "@types/node": "24.10.0"
     },
     "hash": "f0463a0c09163d0a8f31accc8612e7ee341a4bc6b729c65bca95e69b3ab4e5ed"
   },
