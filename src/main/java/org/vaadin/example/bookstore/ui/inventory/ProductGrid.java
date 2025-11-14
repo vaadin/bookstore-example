@@ -11,10 +11,11 @@ import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.renderer.LitRenderer;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import com.vaadin.flow.internal.JacksonUtils;
+
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Grid of products, handling the visual presentation and filtering of a set of
@@ -51,7 +52,7 @@ public class ProductGrid extends Grid<Product> {
         addColumn(LitRenderer.<Product>of(availabilityTemplate)
                 .withProperty("availability",
                         product -> {
-                            JsonObject availabilityMap = Json.createObject();
+                            ObjectNode availabilityMap = JacksonUtils.createObjectNode();
                             availabilityMap.put("name", product.getAvailability().getName());
                             availabilityMap.put("value", product.getAvailability().toString());
                             return availabilityMap;
