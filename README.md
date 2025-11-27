@@ -6,7 +6,7 @@ The easiest way of using it is via [https://vaadin.com/start](https://vaadin.com
 
 ## Prerequisites
 
-The project can be imported into the IDE of your choice, with Java 8 or 11 installed, as a Maven project.
+The project can be imported into the IDE of your choice, with Java 21 installed, as a Maven project.
 
 ## Project Structure
 
@@ -26,9 +26,9 @@ Other basic workflow steps:
   - run `mvn`
   - open http://localhost:8080/
 - creating a production mode war
-  - run `mvn package -Pproduction` 
+  - run `mvn package` 
 - running in production mode
-  - run `mvn jetty:run -Pproduction`
+  - run `mvn jetty:run-war`
   - open http://localhost:8080/
 
 ### Running Integration Tests
@@ -48,4 +48,4 @@ Profile `it` adds the following parameters to run integration tests:
 If you would like to run a separate test make sure you have added these parameters to VM Options of JUnit run configuration
 
 ### Branching information:
-* `master` the latest version of the starter, using the latest platform version
+* `vX` where X is the largest number is the latest version of the starter, using the latest platform version
