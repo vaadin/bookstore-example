@@ -74,11 +74,11 @@ public class InventoryViewLogic implements Serializable {
                 newProduct();
             } else {
                 // Ensure this is selected even if coming directly here from
-                // login
+                // login or browser history navigation
                 try {
                     final int pid = Integer.parseInt(productId);
                     final Product product = findProduct(pid);
-                    view.selectRow(product);
+                    view.editProduct(product);
                 } catch (final NumberFormatException e) {
                 }
             }
