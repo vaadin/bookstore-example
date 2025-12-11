@@ -8,13 +8,18 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.startup.ApplicationRouteRegistry;
+
+import java.util.List;
+import java.util.Optional;
 import org.vaadin.example.bookstore.authentication.AccessControl;
 import org.vaadin.example.bookstore.authentication.AccessControlFactory;
-import org.vaadin.example.bookstore.ui.AdminView;
-import org.vaadin.example.bookstore.ui.MainLayout;
 
 /**
  * UI content when the user is not logged in yet.
@@ -22,9 +27,12 @@ import org.vaadin.example.bookstore.ui.MainLayout;
 @Route("Login")
 @PageTitle("Login")
 @CssImport("./styles/shared-styles.css")
-public class LoginScreen extends FlexLayout {
+public class LoginScreen extends FlexLayout implements BeforeEnterObserver {
+
+    public static final String REDIRECT_PARAM = "redirect";
 
     private AccessControl accessControl;
+    private String redirectPath;
 
     public LoginScreen() {
         accessControl = AccessControlFactory.getInstance().createAccessControl();
@@ -74,9 +82,27 @@ public class LoginScreen extends FlexLayout {
 
     private void login(LoginForm.LoginEvent event) {
         if (accessControl.signIn(event.getUsername(), event.getPassword())) {
-            getUI().get().navigate("");
+            UI ui = getUI().get();
+            ApplicationRouteRegistry registry = ApplicationRouteRegistry.getInstance(
+                    VaadinService.getCurrent().getContext());
+            Optional<Class<? extends Component>> navigationTarget =
+                    registry.getNavigationTarget(redirectPath != null ? redirectPath : "");
+            if (navigationTarget.isPresent()) {
+                ui.navigate(navigationTarget.get());
+            } else {
+                ui.navigate("");
+            }
         } else {
             event.getSource().setError(true);
+        }
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+        List<String> redirectParams = event.getLocation().getQueryParameters()
+                .getParameters().get(REDIRECT_PARAM);
+        if (redirectParams != null && !redirectParams.isEmpty()) {
+            redirectPath = redirectParams.get(0);
         }
     }
 }
