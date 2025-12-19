@@ -1,5 +1,7 @@
 package org.vaadin.example.bookstore.ui;
 
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
@@ -35,6 +37,7 @@ import java.util.ResourceBundle;
  */
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
+@AnonymousAllowed
 public class MainLayout extends AppLayout implements RouterLayout {
 
     private transient ResourceBundle resourceBundle = ResourceBundle.getBundle("MockDataWords", UI.getCurrent().getLocale());
