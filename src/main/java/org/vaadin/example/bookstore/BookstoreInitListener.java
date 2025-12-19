@@ -1,10 +1,12 @@
 package org.vaadin.example.bookstore;
 
+import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.vaadin.example.bookstore.authentication.AccessControl;
 import org.vaadin.example.bookstore.authentication.AccessControlFactory;
 import org.vaadin.example.bookstore.ui.login.LoginScreen;
+
 
 /**
  * This class is used to listen to BeforeEnter event of all UIs in order to
@@ -21,8 +23,12 @@ public class BookstoreInitListener implements VaadinServiceInitListener {
         initEvent.getSource().addUIInitListener(uiInitEvent -> {
             uiInitEvent.getUI().addBeforeEnterListener(enterEvent -> {
                 if (!accessControl.isUserSignedIn() && !LoginScreen.class
-                        .equals(enterEvent.getNavigationTarget()))
-                    enterEvent.rerouteTo(LoginScreen.class);
+                        .equals(enterEvent.getNavigationTarget())) {
+                    String redirectPath = enterEvent.getLocation().getPath();
+                    QueryParameters queryParameters = QueryParameters.of(
+                            LoginScreen.REDIRECT_PARAM, redirectPath);
+                    enterEvent.rerouteTo(LoginScreen.class, queryParameters);
+                }
             });
         });
     }
