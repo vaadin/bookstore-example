@@ -1,14 +1,14 @@
 package org.vaadin.example.backend;
 
-import org.junit.Before;
-import org.junit.Test;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Product;
 import org.vaadin.example.bookstore.backend.mock.MockDataService;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Simple unit test for the back-end data service.
@@ -17,7 +17,7 @@ public class DataServiceTest {
 
     private DataService service;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         service = MockDataService.getInstance();
     }

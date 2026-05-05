@@ -22,7 +22,7 @@ public class LoginFormElement extends TestBenchElement {
                 .setValue(username);
         $(PasswordFieldElement.class).id("vaadinLoginPassword")
                 .setValue(password);
-        $(ButtonElement.class).first()
+        $(ButtonElement.class).single()
                 .click();
     }
 }

@@ -17,7 +17,33 @@
         <maven.compiler.target>21</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>25.0.7</vaadin.version>
+        <vaadin.version>25.2.0-alpha4</vaadin.version>
+        <testbench.version>10.2.0-alpha4</testbench.version>
+
+        <!-- Local server configuration (used in default profile) -->
+        <app.port>8080</app.port>
+        <management.port>8082</management.port>
+        <proxy.port>6000</proxy.port>
+
+        <!-- Remote server configuration (used in remote profile) -->
+        <k6.appHost>localhost</k6.appHost>
+        <k6.appPort>8080</k6.appPort>
+
+        <!-- K6 test configuration -->
+        <k6.vus>10</k6.vus>
+        <k6.duration>5s</k6.duration>
+        <k6.testDir>${project.build.directory}/k6/tests</k6.testDir>
+
+        <!-- Combined scenario weights (percentage of VUs for each scenario) -->
+        <k6.combineScenarios>true</k6.combineScenarios>
+        <k6.scenarioWeights>aboutView:40,sampleCrudView:30,loginScreen:30</k6.scenarioWeights>
+
+        <!-- Enable Vaadin-specific metrics collection (requires VaadinActuator in demo app) -->
+        <k6.collectVaadinMetrics>false</k6.collectVaadinMetrics>
+
+        <!-- Skip flags for flexible execution -->
+        <k6.skipRecord>false</k6.skipRecord>
+        <k6.skipRun>false</k6.skipRun>
     </properties>
 
     <dependencyManagement>
@@ -69,16 +95,36 @@
             <version>8.0.0.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.14.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.14.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Vaadin Testbench -->
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-testbench</artifactId>
+            <artifactId>vaadin-testbench-junit5</artifactId>
             <scope>test</scope>
             <!-- Test-scoped dependencies are always considered "optional", but
             their transitive dependencies may conflict with those from regular
             optional dependencies if not explicitly marked as optional here. -->
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>testbench-loadtest-support</artifactId>
+            <version>${testbench.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <repositories>
@@ -201,6 +247,196 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <!--
+            DEFAULT PROFILE: Local Development Workflow
+            - Starts the application server locally
+            - Records TestBench scenarios through proxy
+            - Runs a quick load test to verify the recording
+
+            Usage: mvn verify -Plocal
+        -->
+        <profile>
+            <id>local</id>
+            <build>
+                <plugins>
+                    <!-- Orchestrate local server lifecycle -->
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <configuration>
+                            <stopPort>8085</stopPort>
+                            <stopWait>5</stopWait>
+                            <stopKey>stopit</stopKey>
+                            <scan>-1</scan>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start-jetty</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop-jetty</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- K6 TestBench Converter Plugin -->
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>testbench-converter-plugin</artifactId>
+                        <version>${testbench.version}</version>
+                        <executions>
+                            <!-- Record TestBench scenarios -->
+                            <execution>
+                                <id>record-scenarios</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>record</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${k6.skipRecord}</skip>
+                                    <testClasses>
+                                        <testClass>AboutViewIT</testClass>
+                                        <testClass>LoginScreenIT</testClass>
+                                        <testClass>SampleCrudViewIT</testClass>
+                                    </testClasses>
+                                    <proxyPort>${proxy.port}</proxyPort>
+                                    <appPort>${app.port}</appPort>
+                                    <testWorkDir>${project.basedir}</testWorkDir>
+                                    <harDir>${project.build.directory}</harDir>
+                                    <outputDir>${project.build.directory}/k6/tests</outputDir>
+                                </configuration>
+                            </execution>
+
+                            <!-- Run k6 load tests -->
+                            <execution>
+                                <id>run-load-tests</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${k6.skipRun}</skip>
+                                    <testDir>${k6.testDir}</testDir>
+                                    <virtualUsers>${k6.vus}</virtualUsers>
+                                    <duration>${k6.duration}</duration>
+                                    <appPort>${app.port}</appPort>
+                                    <managementPort>${management.port}</managementPort>
+                                    <combineScenarios>${k6.combineScenarios}</combineScenarios>
+                                    <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
+                                    <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+            REMOTE PROFILE: Production Load Testing
+            - Does NOT start any server (assumes server is running elsewhere)
+            - Runs pre-recorded k6 tests against a configurable remote target
+            - Designed to run from a dedicated load generation machine
+
+            Usage:
+              mvn verify -Premote -Dk6.appHost=staging.example.com
+              mvn verify -Premote -Dk6.appHost=10.0.1.50 -Dk6.appPort=8080 -Dk6.vus=100 -Dk6.duration=5m
+        -->
+        <profile>
+            <id>remote</id>
+            <build>
+                <plugins>
+                    <!-- Validate remote server is accessible -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>check-remote-server</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>bash</executable>
+                                    <arguments>
+                                        <argument>-c</argument>
+                                        <argument>
+                                            echo "=============================================="
+                                            echo "Remote Load Test Configuration"
+                                            echo "=============================================="
+                                            echo "  Target: http://${k6.appHost}:${k6.appPort}"
+                                            echo "  Tests:  ${k6.testDir}"
+                                            echo "  VUs:    ${k6.vus}"
+                                            echo "  Duration: ${k6.duration}"
+                                            echo "=============================================="
+                                            echo ""
+                                            echo "Checking if remote server is accessible..."
+                                            if curl -s -o /dev/null --connect-timeout 10 "http://${k6.appHost}:${k6.appPort}"; then
+                                            echo "Remote server is accessible!"
+                                            else
+                                            echo "ERROR: Cannot reach http://${k6.appHost}:${k6.appPort}"
+                                            echo "Make sure the application is running on the target server."
+                                            exit 1
+                                            fi
+                                        </argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- K6 load tests against remote server -->
+                    <plugin>
+                        <groupId>com.vaadin</groupId>
+                        <artifactId>testbench-converter-plugin</artifactId>
+                        <version>${testbench.version}</version>
+                        <executions>
+                            <execution>
+                                <id>run-remote-load-tests</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <testDir>${k6.testDir}</testDir>
+                                    <virtualUsers>${k6.vus}</virtualUsers>
+                                    <duration>${k6.duration}</duration>
+                                    <appIp>${k6.appHost}</appIp>
+                                    <appPort>${k6.appPort}</appPort>
+                                    <combineScenarios>${k6.combineScenarios}</combineScenarios>
+                                    <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
+                                    <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+            RECORD-ONLY PROFILE: Just record scenarios without running load test
+            Useful when preparing tests for later execution on remote infrastructure
+
+            Usage: mvn verify -Precord-only
+        -->
+        <profile>
+            <id>record-only</id>
+            <properties>
+                <k6.skipRun>true</k6.skipRun>
+            </properties>
         </profile>
     </profiles>
 </project>

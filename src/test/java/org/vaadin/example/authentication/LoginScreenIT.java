@@ -1,32 +1,33 @@
 package org.vaadin.example.authentication;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.vaadin.flow.theme.lumo.Lumo;
+import org.junit.jupiter.api.Assertions;
 import org.vaadin.example.AbstractViewTest;
 import org.vaadin.example.MainLayoutElement;
 
+import com.vaadin.testbench.BrowserTest;
+
 public class LoginScreenIT extends AbstractViewTest {
 
-    @Test
+    @BrowserTest
     public void loginAsAdmin_hasAdminViewLink() {
 
         // when authenticating as admin
-        $(LoginFormElement.class).first().login("admin", "admin");
+        $(LoginFormElement.class).single().login("admin", "admin");
 
         // then there is a link to admin's view
-        Assert.assertTrue("Expected link to admin view",
-                $(MainLayoutElement.class).first().hasMenuLink("admin"));
+        Assertions.assertTrue(
+                $(MainLayoutElement.class).single().hasMenuLink("admin"),
+                "Expected link to admin view");
     }
 
-    @Test
+    @BrowserTest
     public void loginAsUser_noAdminViewLink() {
         // when authenticating as a regular user
-        $(LoginFormElement.class).first().login("user", "user");
+        $(LoginFormElement.class).single().login("user", "user");
 
         // then there is no link to admin's view
-        Assert.assertFalse("Expected no link to admin view",
-                $(MainLayoutElement.class).first().hasMenuLink("admin"));
+        Assertions.assertFalse(
+                $(MainLayoutElement.class).single().hasMenuLink("admin"),
+                "Expected no link to admin view");
     }
 }
