@@ -5,9 +5,15 @@
 
     <groupId>com.vaadin</groupId>
     <artifactId>bookstore-example</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>bookstore-example</name>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.4</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,7 +45,7 @@
         <k6.scenarioWeights>aboutView:40,sampleCrudView:30,loginScreen:30</k6.scenarioWeights>
 
         <!-- Enable Vaadin-specific metrics collection (requires VaadinActuator in demo app) -->
-        <k6.collectVaadinMetrics>false</k6.collectVaadinMetrics>
+        <k6.collectVaadinMetrics>true</k6.collectVaadinMetrics>
 
         <!-- Skip flags for flexible execution -->
         <k6.skipRecord>false</k6.skipRecord>
@@ -66,27 +72,38 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dev</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!-- Added to provide logging output as Vaadin uses -->
-        <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
-            <scope>provided</scope>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
+
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <!-- Bean validation implementation -->
         <dependency>
@@ -95,23 +112,10 @@
             <version>8.0.0.Final</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.14.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.14.0</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Vaadin Testbench -->
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-testbench-junit5</artifactId>
+            <artifactId>vaadin-testbench-junit6</artifactId>
             <scope>test</scope>
             <!-- Test-scoped dependencies are always considered "optional", but
             their transitive dependencies may conflict with those from regular
@@ -122,7 +126,10 @@
             <groupId>com.vaadin</groupId>
             <artifactId>testbench-loadtest-support</artifactId>
             <version>${testbench.version}</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
     </dependencies>
@@ -155,43 +162,21 @@
     </pluginRepositories>
 
     <build>
-        <defaultGoal>jetty:run</defaultGoal>
+        <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>11.0.24</version>
-                <configuration>
-                    <scan>2</scan>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-            </plugin>
-
-            <!--
-                Take care of synchronizing java dependencies and imports.
-            -->
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${vaadin.version}</version>
                 <executions>
                     <execution>
-                        <id>package-for-production</id>
                         <goals>
                             <goal>build-frontend</goal>
                         </goals>
-                        <phase>prepare-package</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -204,24 +189,18 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
-                        <configuration>
-                            <stopPort>8081</stopPort>
-                            <stopWait>5</stopWait>
-                            <stopKey>stopit</stopKey>
-                            <scan>-1</scan>
-                        </configuration>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>start-jetty</id>
+                                <id>start-spring-boot</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
                                     <goal>start</goal>
                                 </goals>
                             </execution>
                             <execution>
-                                <id>stop-jetty</id>
+                                <id>stop-spring-boot</id>
                                 <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>stop</goal>
@@ -229,9 +208,11 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!-- Runs the integration tests (*IT) after the server is started -->
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.22.2</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -261,40 +242,25 @@
             <id>local</id>
             <build>
                 <plugins>
-                    <!-- Orchestrate local server lifecycle -->
-                    <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
-                        <configuration>
-                            <stopPort>8085</stopPort>
-                            <stopWait>5</stopWait>
-                            <stopKey>stopit</stopKey>
-                            <scan>-1</scan>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>start-jetty</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>start</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>stop-jetty</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>stop</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
                     <!-- K6 TestBench Converter Plugin -->
                     <plugin>
                         <groupId>com.vaadin</groupId>
                         <artifactId>testbench-converter-plugin</artifactId>
                         <version>${testbench.version}</version>
                         <executions>
+                            <!-- Start the application server -->
+                            <execution>
+                                <id>start-server</id>
+                                <goals>
+                                    <goal>start-server</goal>
+                                </goals>
+                                <configuration>
+                                    <serverJar>${project.build.directory}/bookstore-example-1.0-SNAPSHOT.jar</serverJar>
+                                    <serverPort>${app.port}</serverPort>
+                                    <managementPort>8082</managementPort>
+                                </configuration>
+                            </execution>
+
                             <!-- Record TestBench scenarios -->
                             <execution>
                                 <id>record-scenarios</id>
@@ -335,6 +301,14 @@
                                     <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
                                     <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
                                 </configuration>
+                            </execution>
+
+                            <!-- Stop the application server -->
+                            <execution>
+                                <id>stop-server</id>
+                                <goals>
+                                    <goal>stop-server</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>

@@ -1,14 +1,13 @@
 package org.vaadin.example.authentication;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.vaadin.example.AbstractViewTest;
 import org.vaadin.example.MainLayoutElement;
 
-import com.vaadin.testbench.BrowserTest;
-
 public class LoginScreenIT extends AbstractViewTest {
 
-    @BrowserTest
+    @Test
     public void loginAsAdmin_hasAdminViewLink() {
 
         // when authenticating as admin
@@ -20,7 +19,7 @@ public class LoginScreenIT extends AbstractViewTest {
                 "Expected link to admin view");
     }
 
-    @BrowserTest
+    @Test
     public void loginAsUser_noAdminViewLink() {
         // when authenticating as a regular user
         $(LoginFormElement.class).single().login("user", "user");

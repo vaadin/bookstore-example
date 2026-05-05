@@ -3,21 +3,26 @@ package org.vaadin.example.bookstore.backend.data;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Category implements Serializable {
 
-    @NotNull
-    private int id = -1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Size(min = 2, message = "Category name must be at least two characters")
     private String name;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,18 +45,18 @@ public class Category implements Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || id == -1) {
+        if (obj == null || id == null) {
             return false;
         }
         if (obj instanceof Category) {
-            return id == ((Category) obj).id;
+            return id.equals(((Category) obj).id);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        if (id == -1) {
+        if (id == null) {
             return super.hashCode();
         }
 

@@ -5,8 +5,8 @@ import java.io.Serializable;
 import com.vaadin.flow.component.UI;
 import org.vaadin.example.bookstore.authentication.AccessControl;
 import org.vaadin.example.bookstore.authentication.AccessControlFactory;
-import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Product;
+import org.vaadin.example.bookstore.backend.services.DataService;
 
 /**
  * This class provides an interface for the logical operations between the CRUD
@@ -20,9 +20,12 @@ import org.vaadin.example.bookstore.backend.data.Product;
 public class InventoryViewLogic implements Serializable {
 
     private final InventoryView view;
+    private final DataService dataService;
 
-    public InventoryViewLogic(InventoryView simpleCrudView) {
+    public InventoryViewLogic(InventoryView simpleCrudView,
+            DataService dataService) {
         view = simpleCrudView;
+        this.dataService = dataService;
     }
 
     /**
@@ -65,7 +68,7 @@ public class InventoryViewLogic implements Serializable {
      * with the given productId and shows its data in the form fields so the
      * user can edit them.
      *
-     * 
+     *
      * @param productId
      */
     public void enter(String productId) {
@@ -76,7 +79,7 @@ public class InventoryViewLogic implements Serializable {
                 // Ensure this is selected even if coming directly here from
                 // login or browser history navigation
                 try {
-                    final int pid = Integer.parseInt(productId);
+                    final Long pid = Long.parseLong(productId);
                     final Product product = findProduct(pid);
                     view.editProduct(product);
                 } catch (final NumberFormatException e) {
@@ -87,8 +90,8 @@ public class InventoryViewLogic implements Serializable {
         }
     }
 
-    private Product findProduct(int productId) {
-        return DataService.get().getProductById(productId);
+    private Product findProduct(Long productId) {
+        return dataService.getProductById(productId);
     }
 
     public void saveProduct(Product product) {

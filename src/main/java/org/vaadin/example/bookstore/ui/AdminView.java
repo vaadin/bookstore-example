@@ -16,8 +16,8 @@ import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import org.vaadin.example.bookstore.backend.DataService;
 import org.vaadin.example.bookstore.backend.data.Category;
+import org.vaadin.example.bookstore.backend.services.DataService;
 
 /**
  * Admin view that is registered dynamically on admin user login.
@@ -31,12 +31,14 @@ public class AdminView extends VerticalLayout {
     private final VirtualList<Category> categoriesListing;
     private final ListDataProvider<Category> dataProvider;
     private final Button newCategoryButton;
+    private final DataService dataService;
 
-    public AdminView() {
+    public AdminView(DataService dataService) {
+        this.dataService = dataService;
         categoriesListing = new VirtualList<>();
 
         dataProvider = new ListDataProvider<Category>(
-                new ArrayList<>(DataService.get().getAllCategories()));
+                new ArrayList<>(dataService.getAllCategories()));
         categoriesListing.setDataProvider(dataProvider);
         categoriesListing.setRenderer(
                 new ComponentRenderer<>(this::createCategoryEditor));
@@ -54,7 +56,7 @@ public class AdminView extends VerticalLayout {
 
     private Component createCategoryEditor(Category category) {
         final TextField nameField = new TextField();
-        if (category.getId() < 0) {
+        if (category.getId() == null) {
             nameField.focus();
         }
 
@@ -66,8 +68,7 @@ public class AdminView extends VerticalLayout {
                             "Please confirm",
                             "Are you sure you want to delete the category? Books in this category will not be deleted.",
                             "Delete", () -> {
-                                DataService.get()
-                                        .deleteCategory(category.getId());
+                                dataService.deleteCategory(category.getId());
                                 dataProvider.getItems().remove(category);
                                 dataProvider.refreshAll();
                                 Notification.show("Category Deleted.");
@@ -84,13 +85,13 @@ public class AdminView extends VerticalLayout {
         binder.setBean(category);
         binder.addValueChangeListener(event -> {
             if (binder.isValid()) {
-                DataService.get().updateCategory(category);
+                dataService.updateCategory(category);
                 deleteButton.setEnabled(true);
                 newCategoryButton.setEnabled(true);
                 Notification.show("Category Saved.");
             }
         });
-        deleteButton.setEnabled(category.getId() > 0);
+        deleteButton.setEnabled(category.getId() != null);
 
         final HorizontalLayout layout = new HorizontalLayout(nameField,
                 deleteButton);

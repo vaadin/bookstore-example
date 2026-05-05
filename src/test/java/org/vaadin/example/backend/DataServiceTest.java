@@ -1,11 +1,12 @@
 package org.vaadin.example.backend;
 
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.vaadin.example.bookstore.backend.DataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.vaadin.example.bookstore.backend.data.Product;
-import org.vaadin.example.bookstore.backend.mock.MockDataService;
+import org.vaadin.example.bookstore.backend.services.DataService;
+import org.vaadin.example.bookstore.Application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,14 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Simple unit test for the back-end data service.
  */
+@SpringBootTest(classes = Application.class)
 public class DataServiceTest {
 
+    @Autowired
     private DataService service;
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        service = MockDataService.getInstance();
-    }
 
     @Test
     public void testDataServiceCanFetchProducts() throws Exception {
@@ -37,7 +35,7 @@ public class DataServiceTest {
         Product p = service.getAllProducts().iterator().next();
         p.setProductName("My Test Name");
         service.updateProduct(p);
-        Product p2 = service.getAllProducts().iterator().next();
+        Product p2 = service.getProductById(p.getId());
         assertEquals("My Test Name", p2.getProductName());
     }
 }

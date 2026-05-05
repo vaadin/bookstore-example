@@ -1,5 +1,13 @@
 package org.vaadin.example.bookstore.ui.inventory;
 
+import java.util.Locale;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
+import org.vaadin.example.bookstore.backend.data.Product;
+import org.vaadin.example.bookstore.backend.services.DataService;
+import org.vaadin.example.bookstore.ui.MainLayout;
+
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
@@ -14,9 +22,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import org.vaadin.example.bookstore.backend.DataService;
-import org.vaadin.example.bookstore.backend.data.Product;
-import org.vaadin.example.bookstore.ui.MainLayout;
+import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 
 /**
  * A view for performing create-read-update-delete operations on products.
@@ -34,22 +40,38 @@ public class InventoryView extends HorizontalLayout
     private final ProductForm form;
     private TextField filter;
 
-    private final InventoryViewLogic viewLogic = new InventoryViewLogic(this);
+    private final InventoryViewLogic viewLogic;
     private Button newProduct;
 
-    private final ProductDataProvider dataProvider = new ProductDataProvider();
+    private final DataService dataService;
 
-    public InventoryView() {
+    public InventoryView(DataService dataService) {
+        this.dataService = dataService;
+        viewLogic = new InventoryViewLogic(this, dataService);
         // Sets the width and the height of InventoryView to "100%".
         setSizeFull();
         final HorizontalLayout topLayout = createTopBar();
         grid = new ProductGrid();
-        grid.setDataProvider(dataProvider);
+        // Configure Grid with filtering support
+        grid.setItems(query -> {
+            Specification<Product> spec = Specification.unrestricted();
+            String filterText = filter.getValue();
+            if (filterText != null && !filterText.isEmpty()) {
+                spec = spec.and((root, criteriaQuery,
+                                 criteriaBuilder) -> criteriaBuilder.like(
+                        criteriaBuilder.lower(root.get("productName")),
+                        "%" + filterText.toLowerCase(Locale.ENGLISH) + "%"));
+            }
+            return dataService.list(
+                    PageRequest.of(query.getPage(), query.getPageSize(),
+                            VaadinSpringDataHelpers.toSpringDataSort(query)),
+                    spec).stream();
+        });
         // Allows user to select a single row in the grid.
         grid.asSingleSelect().addValueChangeListener(
                 event -> viewLogic.rowSelected(event.getValue()));
         form = new ProductForm(viewLogic);
-        form.setCategories(DataService.get().getAllCategories());
+        form.setCategories(dataService.getAllCategories());
         final VerticalLayout barAndGridLayout = new VerticalLayout();
         barAndGridLayout.add(topLayout);
         barAndGridLayout.add(grid);
@@ -66,10 +88,11 @@ public class InventoryView extends HorizontalLayout
 
     public HorizontalLayout createTopBar() {
         filter = new TextField();
+        filter.setId("grid-filter");
         filter.setPlaceholder("Filter name, availability or category");
         // Apply the filter to grid's data provider. TextField value is never
         filter.addValueChangeListener(
-                event -> dataProvider.setFilter(event.getValue()));
+                event -> grid.getDataProvider().refreshAll());
         // A shortcut to focus on the textField by pressing ctrl + F
         filter.addFocusShortcut(Key.KEY_F, KeyModifier.CONTROL);
 
@@ -135,7 +158,14 @@ public class InventoryView extends HorizontalLayout
      * @param product
      */
     public void updateProduct(Product product) {
-        dataProvider.save(product);
+        final boolean newProduct = product.isNewProduct();
+
+        dataService.updateProduct(product);
+        if (newProduct) {
+            grid.getDataProvider().refreshAll();
+        } else {
+            grid.getDataProvider().refreshItem(product);
+        }
     }
 
     /**
@@ -144,7 +174,8 @@ public class InventoryView extends HorizontalLayout
      * @param product
      */
     public void removeProduct(Product product) {
-        dataProvider.delete(product);
+        dataService.deleteProduct(product.getId());
+        grid.getDataProvider().refreshAll();
     }
 
     /**

@@ -3,16 +3,16 @@ package org.vaadin.example.about;
 
 import com.vaadin.flow.component.html.testbench.SpanElement;
 import com.vaadin.flow.component.orderedlayout.testbench.HorizontalLayoutElement;
-import com.vaadin.testbench.BrowserTest;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.vaadin.example.AbstractViewTest;
 import org.vaadin.example.MainLayoutElement;
 import org.vaadin.example.authentication.LoginFormElement;
 
 public class AboutViewIT extends AbstractViewTest {
 
-    @BrowserTest
+    @Test
     public void openAboutView_showsFlowVersion() {
 
         // given authenticated as a regular user

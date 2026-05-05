@@ -35,17 +35,29 @@ Other basic workflow steps:
 
 Integration tests are implemented using TestBench. The tests take a few minutes to run and are therefore included in a separate Maven profile. To run the tests using Google Chrome, execute
 
-`mvn verify -Pit`
+```bash
+mvn verify -Pit
+```
 
 and make sure you have a valid TestBench license installed. If the tests fail because of an old Chrome Driver or you want to use a different browser, you'll need to update the webdrivers.xml file in the project root.
 
-Profile `it` adds the following parameters to run integration tests:
-```sh
--Dwebdriver.chrome.driver=path_to_driver
--Dcom.vaadin.testbench.Parameters.runLocally=chrome
+### Running Load Tests
+
+Record load tests with TestBench `testbench-converter-plugin` plugin and run
+tests locally:
+
+```bash
+mvn verify -Plocal
 ```
 
-If you would like to run a separate test make sure you have added these parameters to VM Options of JUnit run configuration
+Run recorded tests in remote server (requires `testbench-loadtest-support` on
+runtime):
+
+```bash
+mvn verify -Premote -Dk6.appHost=staging.example.com
+```
+
+Load Test summary and error log is written to `target/k6/tests/report/` folder.
 
 ### Branching information:
 * `vX` where X is the largest number is the latest version of the starter, using the latest platform version

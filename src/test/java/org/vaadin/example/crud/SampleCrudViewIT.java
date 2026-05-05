@@ -3,11 +3,12 @@ package org.vaadin.example.crud;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
-import com.vaadin.testbench.BrowserTest;
+import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import com.vaadin.testbench.loadtest.Destructive;
 
 import org.vaadin.example.AbstractViewTest;
@@ -16,7 +17,7 @@ import org.vaadin.example.authentication.LoginFormElement;
 
 public class SampleCrudViewIT extends AbstractViewTest {
 
-    @BrowserTest
+    @Test
     public void userSelectsProduct_cannotEditProductInformation() {
 
         // given authenticated as a regular user
@@ -37,14 +38,14 @@ public class SampleCrudViewIT extends AbstractViewTest {
     }
 
     @Destructive
-    @BrowserTest
+    @Test
     public void adminSelectsProduct_canUpdateProductInformation() {
 
         // given authenticated as an admin
         $(LoginFormElement.class).single().login("admin", "admin");
 
         // given "Inventory" is selected from the sidebar menu
-        final MainLayoutElement mainElem = $(MainLayoutElement.class).first();
+        final MainLayoutElement mainElem = $(MainLayoutElement.class).single();
         mainElem.clickMenuLink("Inventory");
 
         // when selecting an item from the product grid
@@ -63,7 +64,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     }
 
     @Destructive
-    @BrowserTest
+    @Test
     public void adminCreatesNewProduct_productIsAvailableInGird() {
         // given authenticated as an admin
         $(LoginFormElement.class).single().login("admin", "admin");
@@ -80,6 +81,11 @@ public class SampleCrudViewIT extends AbstractViewTest {
         final String newTitle = "Cronan's Guide to Nanomixology, 2nd ed.";
         prodForm.getProductNameElement().setValue(newTitle);
         prodForm.getSaveButtonElement().click();
+
+        // filter by new title
+        TextFieldElement filterField = $(TextFieldElement.class)
+                .withId("grid-filter").single();
+        filterField.setValue(newTitle);
 
         // then the new title is in the grid
         final GridElement grid = $(GridElement.class).single();

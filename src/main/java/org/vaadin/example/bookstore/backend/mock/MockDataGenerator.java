@@ -12,8 +12,6 @@ import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
 
 public class MockDataGenerator {
-    private static int nextCategoryId = 1;
-    private static int nextProductId = 1;
     private static final Random random = new Random(1);
     private static final String categoryNames[] = new String[] {
             "Children's books", "Best sellers", "Romance", "Mystery",
@@ -37,7 +35,7 @@ public class MockDataGenerator {
             "speaking to a big audience", "creating software", "giant needles",
             "elephants", "keeping your wife happy" };
 
-    static List<Category> createCategories() {
+    public static List<Category> createCategories() {
         List<Category> categories = new ArrayList<Category>();
         for (String name : categoryNames) {
             Category c = createCategory(name);
@@ -47,9 +45,9 @@ public class MockDataGenerator {
 
     }
 
-    static List<Product> createProducts(List<Category> categories) {
-        List<Product> products = new ArrayList<Product>();
-        for (int i = 0; i < 100; i++) {
+    public static List<Product> createProducts(List<Category> categories) {
+        List<Product> products = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
             Product p = createProduct(categories);
             products.add(p);
         }
@@ -59,14 +57,12 @@ public class MockDataGenerator {
 
     private static Category createCategory(String name) {
         Category c = new Category();
-        c.setId(nextCategoryId++);
         c.setName(name);
         return c;
     }
 
     private static Product createProduct(List<Category> categories) {
         Product p = new Product();
-        p.setId(nextProductId++);
         p.setProductName(generateName());
 
         p.setPrice(new BigDecimal((random.nextInt(250) + 50) / 10.0));
