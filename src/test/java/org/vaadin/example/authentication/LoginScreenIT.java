@@ -11,7 +11,7 @@ public class LoginScreenIT extends AbstractViewTest {
     public void loginAsAdmin_hasAdminViewLink() {
 
         // when authenticating as admin
-        $(LoginFormElement.class).single().login("admin", "admin");
+        $(LoginFormElement.class).single().login("admin", "password");
 
         // then there is a link to admin's view
         Assertions.assertTrue(
@@ -22,7 +22,7 @@ public class LoginScreenIT extends AbstractViewTest {
     @Test
     public void loginAsUser_noAdminViewLink() {
         // when authenticating as a regular user
-        $(LoginFormElement.class).single().login("user", "user");
+        $(LoginFormElement.class).single().login("user", "password");
 
         // then there is no link to admin's view
         Assertions.assertFalse(

@@ -21,7 +21,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     public void userSelectsProduct_cannotEditProductInformation() {
 
         // given authenticated as a regular user
-        $(LoginFormElement.class).single().login("user", "user");
+        $(LoginFormElement.class).single().login("user", "password");
 
         // given "Inventory" is selected from the sidebar menu
         final MainLayoutElement mainLayout = $(MainLayoutElement.class).single();
@@ -42,7 +42,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     public void adminSelectsProduct_canUpdateProductInformation() {
 
         // given authenticated as an admin
-        $(LoginFormElement.class).single().login("admin", "admin");
+        $(LoginFormElement.class).single().login("admin", "password");
 
         // given "Inventory" is selected from the sidebar menu
         final MainLayoutElement mainElem = $(MainLayoutElement.class).single();
@@ -67,7 +67,7 @@ public class SampleCrudViewIT extends AbstractViewTest {
     @Test
     public void adminCreatesNewProduct_productIsAvailableInGird() {
         // given authenticated as an admin
-        $(LoginFormElement.class).single().login("admin", "admin");
+        $(LoginFormElement.class).single().login("admin", "password");
 
         // given "Inventory" is selected from the sidebar menu
         final MainLayoutElement mainElem = $(MainLayoutElement.class).single();

@@ -1,5 +1,7 @@
 package org.vaadin.example.bookstore.ui.about;
 
+import jakarta.annotation.security.PermitAll;
+
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -10,6 +12,7 @@ import org.vaadin.example.bookstore.ui.MainLayout;
 
 @Route(value = "About", layout = MainLayout.class)
 @PageTitle("About")
+@PermitAll
 public class AboutView extends HorizontalLayout {
 
     public static final String VIEW_NAME = "About";

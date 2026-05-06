@@ -1,9 +1,9 @@
 package org.vaadin.example.bookstore.ui;
 
+import jakarta.annotation.security.PermitAll;
+
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -17,11 +17,10 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.RouteConfiguration;
-import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.VaadinService;
-import org.vaadin.example.bookstore.authentication.AccessControl;
-import org.vaadin.example.bookstore.authentication.AccessControlFactory;
+
+import org.vaadin.example.bookstore.security.SecurityService;
 import org.vaadin.example.bookstore.ui.about.AboutView;
 import org.vaadin.example.bookstore.ui.inventory.InventoryView;
 
@@ -30,11 +29,12 @@ import org.vaadin.example.bookstore.ui.inventory.InventoryView;
  */
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/menu-buttons.css", themeFor = "vaadin-button")
-public class MainLayout extends AppLayout implements RouterLayout {
+@PermitAll
+public class MainLayout extends AppLayout {
 
     private final Button logoutButton;
 
-    public MainLayout() {
+    public MainLayout(SecurityService securityService) {
 
         // Header of the menu (the navbar)
 
@@ -70,17 +70,13 @@ public class MainLayout extends AppLayout implements RouterLayout {
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())
         logoutButton = createMenuButton("Logout", VaadinIcon.SIGN_OUT.create());
-        logoutButton.addClickListener(e -> logout());
-        logoutButton.getElement().setAttribute("title", "Logout (Ctrl+L)");
+        logoutButton.addClickListener(e -> securityService.logout());
+        logoutButton.getElement().setAttribute("title", "Logout");
 
-    }
-
-    private void logout() {
-        AccessControlFactory.getInstance().createAccessControl().signOut();
     }
 
     private RouterLink createMenuLink(Class<? extends Component> viewClass,
-            String caption, Icon icon) {
+                                      String caption, Icon icon) {
         final RouterLink routerLink = new RouterLink(viewClass);
         routerLink.setClassName("menu-link");
         routerLink.add(icon);
@@ -98,13 +94,12 @@ public class MainLayout extends AppLayout implements RouterLayout {
         return routerButton;
     }
 
-    private void registerAdminViewIfApplicable(AccessControl accessControl) {
+    private void registerAdminViewIfApplicable() {
         // register the admin view dynamically only for any admin user logged in
-        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)
+        if (SecurityService.hasAdminRole()
                 && !RouteConfiguration.forSessionScope()
-                        .isRouteRegistered(AdminView.class)) {
-            RouteConfiguration.forSessionScope().setRoute(AdminView.VIEW_NAME,
-                    AdminView.class, MainLayout.class);
+                .isRouteRegistered(AdminView.class)) {
+            RouteConfiguration.forSessionScope().setAnnotatedRoute(AdminView.class);
             // as logout will purge the session route registry, no need to
             // unregister the view on logout
         }
@@ -114,17 +109,11 @@ public class MainLayout extends AppLayout implements RouterLayout {
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
 
-        // User can quickly activate logout with Ctrl+L
-        attachEvent.getUI().addShortcutListener(() -> logout(), Key.KEY_L,
-                KeyModifier.CONTROL);
-
         // add the admin view menu item if user has admin role
-        final AccessControl accessControl = AccessControlFactory.getInstance()
-                .createAccessControl();
-        if (accessControl.isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
+        if (SecurityService.hasAdminRole()) {
 
             // Create extra navigation target for admins
-            registerAdminViewIfApplicable(accessControl);
+            registerAdminViewIfApplicable();
 
             // The link can only be created now, because the RouterLink checks
             // that the target is valid.

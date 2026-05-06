@@ -1,5 +1,6 @@
 package org.vaadin.example.bookstore.ui.inventory;
 
+import jakarta.annotation.security.RolesAllowed;
 import java.util.Locale;
 
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +33,7 @@ import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
  */
 @Route(value = "Inventory", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
+@RolesAllowed("USER")
 public class InventoryView extends HorizontalLayout
         implements HasUrlParameter<String> {
 

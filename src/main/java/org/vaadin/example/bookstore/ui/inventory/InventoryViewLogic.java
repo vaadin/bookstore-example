@@ -3,10 +3,9 @@ package org.vaadin.example.bookstore.ui.inventory;
 import java.io.Serializable;
 
 import com.vaadin.flow.component.UI;
-import org.vaadin.example.bookstore.authentication.AccessControl;
-import org.vaadin.example.bookstore.authentication.AccessControlFactory;
 import org.vaadin.example.bookstore.backend.data.Product;
 import org.vaadin.example.bookstore.backend.services.DataService;
+import org.vaadin.example.bookstore.security.SecurityService;
 
 /**
  * This class provides an interface for the logical operations between the CRUD
@@ -33,8 +32,7 @@ public class InventoryViewLogic implements Serializable {
      * buttons if the user doesn't have access.
      */
     public void init() {
-        if (!AccessControlFactory.getInstance().createAccessControl()
-                .isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
+        if (!SecurityService.hasAdminRole()) {
             view.setNewProductEnabled(false);
         }
     }
@@ -126,8 +124,7 @@ public class InventoryViewLogic implements Serializable {
     }
 
     public void rowSelected(Product product) {
-        if (AccessControlFactory.getInstance().createAccessControl()
-                .isUserInRole(AccessControl.ADMIN_ROLE_NAME)) {
+        if (SecurityService.hasAdminRole()) {
             editProduct(product);
         }
     }

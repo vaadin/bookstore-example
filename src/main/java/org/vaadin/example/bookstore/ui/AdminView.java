@@ -1,5 +1,6 @@
 package org.vaadin.example.bookstore.ui;
 
+import jakarta.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 
 import com.vaadin.flow.component.Component;
@@ -16,6 +17,8 @@ import com.vaadin.flow.component.virtuallist.VirtualList;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.router.Route;
+
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.services.DataService;
 
@@ -24,6 +27,8 @@ import org.vaadin.example.bookstore.backend.services.DataService;
  * <p>
  * Allows CRUD operations for the book categories.
  */
+@Route(value = "Admin", registerAtStartup = false, layout = MainLayout.class)
+@RolesAllowed("ADMIN")
 public class AdminView extends VerticalLayout {
 
     public static final String VIEW_NAME = "Admin";

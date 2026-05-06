@@ -16,7 +16,7 @@ public class AboutViewIT extends AbstractViewTest {
     public void openAboutView_showsFlowVersion() {
 
         // given authenticated as a regular user
-        $(LoginFormElement.class).single().login("user", "user");
+        $(LoginFormElement.class).single().login("user", "password");
 
         // when selecting "About" from the sidebar menu
         final MainLayoutElement mainElem = $(MainLayoutElement.class).single();
