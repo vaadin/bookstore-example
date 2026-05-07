@@ -50,6 +50,14 @@ tests locally:
 mvn verify -Plocal
 ```
 
+```bash
+# Record only without running load tests
+mvn verify -Plocal,record-only
+
+# record only with custom response check (response under 2s)
+mvn clean verify -Plocal,record-only -Dk6.checks.custom="ALL|response under 2s|(r) => r.timings.duration < 2000"
+```
+
 Run recorded tests in remote server (requires `testbench-loadtest-support` on
 runtime):
 
@@ -64,20 +72,27 @@ Try out how slow database affects the load test results by starting the server w
 ```bash
 # making a copy of jar to bookstore-example.jar
 cp target/bookstore-example-1.0-SNAPSHOT.jar target/bookstore-example.jar
-# start production jar package
-java -DsimulateSlowDB=true -jar target/bookstore-example.jar 
-# run load test
+# start production jar package simulating slow SampleCrudView
+java -DsimulateSlowDB=true -jar target/bookstore-example.jar
+```
+Load tests for SampleCrudView will fail due to threshold or custom checks. See examples below:
+```bash 
+# run load test on the server running on localhost
 mvn verify -Premote -Dk6.appHost=localhost
 
-# run with 100 VUs and 1m duration
+# run with 50 VUs and 1m duration
 mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m
 
 # run with 2s httpReqDurationP99 threshold 
 mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=2000
 
+# allow checks to fail without aborting the test 
+mvn verify -Premote -Dk6.appHost=localhost -Dk6.threshold.checksAbortOnFail=false
+
+# run with warmup iteration before the actual load test
+mvn verify -Premote -Dk6.appHost=localhost -Dwarmup=true
 ```
 
-Load tests for SampleCrudView will fail due to threshold configurations. 
 
 ### Branching information:
 * `vX` where X is the largest number is the latest version of the starter, using the latest platform version
