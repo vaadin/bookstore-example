@@ -70,10 +70,10 @@ java -DsimulateSlowDB=true -jar target/bookstore-example.jar
 mvn verify -Premote -Dk6.appHost=localhost
 
 # run with 100 VUs and 1m duration
-mvn verify -Premote -Dk6.appHost=localhost-Dk6.vus=100 -Dk6.duration=1m
+mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m
 
-# run with 3s httpReqDurationP99 threshold 
-mvn verify -Premote -Dk6.appHost=localhost-Dk6.vus=100 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=3000
+# run with 2s httpReqDurationP99 threshold 
+mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=2000
 
 ```
 
