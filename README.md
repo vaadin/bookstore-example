@@ -59,5 +59,25 @@ mvn verify -Premote -Dk6.appHost=staging.example.com
 
 Load Test summary and error log is written to `target/k6/tests/report/` folder.
 
+Try out how slow database affects the load test results by starting the server with `simulateSlowDB=true` system property.
+
+```bash
+# making a copy of jar to bookstore-example.jar
+cp target/bookstore-example-1.0-SNAPSHOT.jar target/bookstore-example.jar
+# start production jar package
+java -DsimulateSlowDB=true -jar target/bookstore-example.jar 
+# run load test
+mvn verify -Premote -Dk6.appHost=localhost
+
+# run with 100 VUs and 1m duration
+mvn verify -Premote -Dk6.appHost=localhost-Dk6.vus=100 -Dk6.duration=1m
+
+# run with 3s httpReqDurationP99 threshold 
+mvn verify -Premote -Dk6.appHost=localhost-Dk6.vus=100 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=3000
+
+```
+
+Load tests for SampleCrudView will fail due to threshold configurations. 
+
 ### Branching information:
 * `vX` where X is the largest number is the latest version of the starter, using the latest platform version

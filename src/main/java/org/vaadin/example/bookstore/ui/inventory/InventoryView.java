@@ -13,6 +13,7 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -44,6 +45,7 @@ public class InventoryView extends HorizontalLayout
 
     private final InventoryViewLogic viewLogic;
     private Button newProduct;
+    private Checkbox simulateSlowDatabase;
 
     private final DataService dataService;
 
@@ -56,6 +58,15 @@ public class InventoryView extends HorizontalLayout
         grid = new ProductGrid();
         // Configure Grid with filtering support
         grid.setItems(query -> {
+
+            if (simulateSlowDatabase.getValue()) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
             Specification<Product> spec = Specification.unrestricted();
             String filterText = filter.getValue();
             if (filterText != null && !filterText.isEmpty()) {
@@ -112,6 +123,11 @@ public class InventoryView extends HorizontalLayout
         topLayout.add(newProduct);
         topLayout.setVerticalComponentAlignment(Alignment.START, filter);
         topLayout.expand(filter);
+
+        simulateSlowDatabase = new Checkbox("Simulate Slow Database",
+                Boolean.getBoolean("simulateSlowDB"));
+        topLayout.add(simulateSlowDatabase);
+
         return topLayout;
     }
 

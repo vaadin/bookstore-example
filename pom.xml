@@ -16,6 +16,9 @@
     </parent>
 
     <properties>
+        <!-- Optionally simulate slow database connection to test how it affects load tests -->
+        <simulateSlowDB>false</simulateSlowDB>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8
         </project.reporting.outputEncoding>
@@ -42,7 +45,7 @@
 
         <!-- Combined scenario weights (percentage of VUs for each scenario) -->
         <k6.combineScenarios>true</k6.combineScenarios>
-        <k6.scenarioWeights>aboutView:40,sampleCrudView:30,loginScreen:30</k6.scenarioWeights>
+        <k6.scenarioWeights>aboutView:25,sampleCrudView:50,loginScreen:25</k6.scenarioWeights>
 
         <!-- Enable Vaadin-specific metrics collection (requires VaadinActuator in demo app) -->
         <k6.collectVaadinMetrics>true</k6.collectVaadinMetrics>
@@ -176,6 +179,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <simulateSlowDB>${simulateSlowDB}</simulateSlowDB>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.vaadin</groupId>

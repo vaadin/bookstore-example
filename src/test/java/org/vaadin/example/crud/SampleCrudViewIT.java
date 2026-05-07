@@ -37,6 +37,34 @@ public class SampleCrudViewIT extends AbstractViewTest {
                 "Product form should not be visible");
     }
 
+    @Test
+    public void userScrollsPageDownAndUp() {
+
+        // given authenticated as a regular user
+        $(LoginFormElement.class).single().login("user", "password");
+
+        // given "Inventory" is selected from the sidebar menu
+        final MainLayoutElement mainLayout = $(MainLayoutElement.class).single();
+        mainLayout.clickMenuLink("Inventory");
+
+        // when selecting an item from the product grid
+        final GridElement grid = $(GridElement.class).single();
+
+        String rowOneProductName = grid.getCell(0, 0).getText();
+        Assertions.assertNotNull(rowOneProductName);
+        Assertions.assertNotEquals("", rowOneProductName);
+
+        // scroll down to trigger fetch
+        grid.scrollToRow(1000);
+
+        Assertions.assertNotNull(grid.getCell(200, 0).getText());
+        Assertions.assertNotEquals("", grid.getCell(200, 0).getText());
+
+        // scroll back up
+        grid.scrollToRow(0);
+        Assertions.assertEquals(rowOneProductName, grid.getCell(0, 0).getText());
+    }
+
     @Destructive
     @Test
     public void adminSelectsProduct_canUpdateProductInformation() {
