@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.vaadin.testbench.AbstractBrowserDriverTestBase;
+import com.vaadin.testbench.Parameters;
 import com.vaadin.testbench.loadtest.LoadTestItHelper;
 
 /**
@@ -30,6 +31,9 @@ public abstract class AbstractViewTest extends AbstractBrowserDriverTestBase {
     public void open() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+
+        // force headless mode when recording via proxy
+        Parameters.setHeadless(true);
         setDriver(LoadTestItHelper.openWithProxy(new ChromeDriver(options),
                 LoadTestItHelper.getRootURL() + "/" + route));
     }
