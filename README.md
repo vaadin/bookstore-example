@@ -91,6 +91,9 @@ mvn verify -Premote -Dk6.appHost=localhost -Dk6.threshold.checksAbortOnFail=fals
 
 # run with warmup iteration before the actual load test
 mvn verify -Premote -Dk6.appHost=localhost -Dwarmup=true
+
+# run 2m stress test with 1000 VUs
+mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=1000 -Dk6.duration=2m -Dk6.loadPattern=stress -Dk6.threshold.checksAbortOnFail=false
 ```
 
 
