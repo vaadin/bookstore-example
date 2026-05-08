@@ -65,6 +65,32 @@ public class SampleCrudViewIT extends AbstractViewTest {
         Assertions.assertEquals(rowOneProductName, grid.getCell(0, 0).getText());
     }
 
+    @Test
+    public void adminSelectsProduct_cancelEdits() {
+
+        // given authenticated as an admin
+        $(LoginFormElement.class).single().login("admin", "password");
+
+        // given "Inventory" is selected from the sidebar menu
+        final MainLayoutElement mainElem = $(MainLayoutElement.class).single();
+        mainElem.clickMenuLink("Inventory");
+
+        // when selecting an item from the product grid
+        final GridElement grid = $(GridElement.class).single();
+        grid.getCell(0, 0).click();
+        String rowOneProductName = grid.getCell(0, 0).getText();
+
+        // when altering the product name and clicking the cancel button
+        final ProductFormElement prodForm = $(ProductFormElement.class).single();
+        prodForm.getProductNameElement().setValue("Cronan's Guide to Nanomixology");
+        prodForm.getCancelButtonElement().click();
+
+        // then grid cell stays unchanged
+        Assertions.assertEquals(rowOneProductName,
+                grid.getCell(0, 0).getText(), "Title in grid was updated after canceling");
+    }
+
+    // skip load test since edit changes behavior for the following VUs
     @Destructive
     @Test
     public void adminSelectsProduct_canUpdateProductInformation() {
@@ -91,9 +117,10 @@ public class SampleCrudViewIT extends AbstractViewTest {
                 grid.getCell(0, 0).getText(), "Title in grid not updated");
     }
 
+    // skip load test since edit changes behavior for the following VUs
     @Destructive
     @Test
-    public void adminCreatesNewProduct_productIsAvailableInGird() {
+    public void adminCreatesNewProduct_productIsAvailableInGrid() {
         // given authenticated as an admin
         $(LoginFormElement.class).single().login("admin", "password");
 

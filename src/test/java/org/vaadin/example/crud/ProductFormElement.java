@@ -11,12 +11,14 @@ import com.vaadin.testbench.elementsbase.Element;
 public class ProductFormElement extends TestBenchElement {
 
     public TextFieldElement getProductNameElement() {
-        return $(TextFieldElement.class).first();
+        return $(TextFieldElement.class).withLabel("Product name").single();
     }
 
     public ButtonElement getSaveButtonElement() {
-        return $(ButtonElement.class).first();
+        return $(ButtonElement.class).withCaption("Save").single();
     }
 
-
+    public ButtonElement getCancelButtonElement() {
+        return $(ButtonElement.class).withCaption("Cancel").single();
+    }
 }
