@@ -406,6 +406,7 @@
                                     <duration>${k6.duration}</duration>
                                     <appIp>${k6.appHost}</appIp>
                                     <appPort>${k6.appPort}</appPort>
+                                    <managementPort>${management.port}</managementPort>
                                     <combineScenarios>${k6.combineScenarios}</combineScenarios>
                                     <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
                                     <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
