@@ -1,8 +1,6 @@
 # Bookstore App Starter for Vaadin
 
-A project example for a Vaadin application that only requires a Servlet 3.1 container to run (no other JEE dependencies). The UI is built with Java only.
-
-The easiest way of using it is via [https://vaadin.com/start](https://vaadin.com/start) - you can choose the package naming you want.
+A project example for a Vaadin application built with Spring Boot. The UI is built with Java only.
 
 ## Prerequisites
 
@@ -10,25 +8,24 @@ The project can be imported into the IDE of your choice, with Java 21 installed,
 
 ## Project Structure
 
-The project is following the standard [Maven project layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
+The project follows the standard [Maven project layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
 ## Workflow
 
-To compile the entire project, run "mvn install" in the project root.
+To compile the entire project, run `mvn install` in the project root.
 
 Other basic workflow steps:
 
-- getting started
 - compiling the whole project
-  - run `mvn install` in project root
+  - run `mvn install` in the project root
 - developing the application
-  - edit code in src/main
-  - run `mvn`
+  - edit code in `src/main`
+  - run `mvn spring-boot:run`
   - open http://localhost:8080/
-- creating a production mode war
-  - run `mvn package` 
+- creating a production mode jar
+  - run `mvn package`
 - running in production mode
-  - run `mvn jetty:run-war`
+  - run `java -jar target/bookstore-example-1.0-SNAPSHOT.jar`
   - open http://localhost:8080/
 
 ### Running Integration Tests
