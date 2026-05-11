@@ -71,6 +71,8 @@ Starting the server with the `simulateSlowDB=true` system property slows down th
 cp target/bookstore-example-1.0-SNAPSHOT.jar target/bookstore-example.jar
 # start the production jar package simulating a slow SampleCrudView
 java -DsimulateSlowDB=true -jar target/bookstore-example.jar
+# or simulate memory leak in login view (+10MB per each login view instance)
+java -DsimulateMemoryLeak=true -jar target/bookstore-example.jar
 ```
 Load tests for SampleCrudView can fail due to threshold or custom checks. See examples below:
 ```bash
