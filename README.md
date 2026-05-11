@@ -36,7 +36,7 @@ Integration tests are implemented using TestBench. The tests take a few minutes 
 mvn verify -Pit
 ```
 
-and make sure you have a valid TestBench license installed. If the tests fail because of an old Chrome Driver or you want to use a different browser, you'll need to update the webdrivers.xml file in the project root.
+and make sure you have a valid TestBench license installed.
 
 ### Running Load Tests
 
