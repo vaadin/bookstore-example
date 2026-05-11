@@ -32,7 +32,10 @@ public abstract class AbstractViewTest extends AbstractBrowserDriverTestBase {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
 
-        // force headless mode when recording via proxy
+        // openWithProxy creates a new driver with its own ChromeOptions when
+        // proxy recording is active, so the "--headless" argument above is
+        // discarded. Setting headless via Parameters ensures the new driver
+        // created inside openWithProxy also runs headless.
         Parameters.setHeadless(true);
         setDriver(LoadTestItHelper.openWithProxy(new ChromeDriver(options),
                 LoadTestItHelper.getRootURL() + "/" + route));
