@@ -26,8 +26,8 @@
         <maven.compiler.target>21</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>25.2.0-alpha4</vaadin.version>
-        <testbench.version>10.2.0-alpha4</testbench.version>
+        <vaadin.version>25.2.0-alpha5</vaadin.version>
+        <testbench.version>10.2.0-alpha5</testbench.version>
 
         <!-- Local server configuration (used in default profile) -->
         <app.port>8080</app.port>
