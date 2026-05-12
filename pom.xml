@@ -410,6 +410,7 @@
                                     <combineScenarios>${k6.combineScenarios}</combineScenarios>
                                     <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
                                     <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
+                                    <httpReqDurationP99>2000</httpReqDurationP99>
                                 </configuration>
                             </execution>
                         </executions>

@@ -1,10 +1,10 @@
 # Bookstore App Starter for Vaadin
 
-A project example for a Vaadin application built with Spring Boot. The UI is built with Java only.
+An example project for a Vaadin application built with Spring Boot. The UI is built with Java only.
 
 ## Prerequisites
 
-The project can be imported into the IDE of your choice, with Java 21 installed, as a Maven project.
+The project can be imported into the IDE of your choice as a Maven project, with Java 21 installed.
 
 ## Project Structure
 
@@ -41,14 +41,14 @@ and make sure you have a valid TestBench license installed.
 ### Running Load Tests
 
 Record load tests with the TestBench `testbench-converter-plugin` plugin and run
-tests locally:
+them locally:
 
 ```bash
 mvn verify -Plocal
 ```
 
 ```bash
-# Record only, without running load tests
+# record only, without running load tests
 mvn verify -Plocal,record-only
 
 # record only with custom response check (response under 2s)
@@ -64,7 +64,7 @@ mvn verify -Premote -Dk6.appHost=staging.example.com
 
 The load test summary and error log are written to the `target/k6/tests/report/` folder.
 
-Starting the server with the `simulateSlowDB=true` system property slows down the inventory listing view, making response times higher, which affects the load test results.
+Starting the server with the `simulateSlowDB=true` system property slows down the inventory listing view, resulting in higher response times, which affects the load test results.
 
 ```bash
 # making a copy of the jar as bookstore-example.jar
@@ -74,7 +74,7 @@ java -DsimulateSlowDB=true -jar target/bookstore-example.jar
 # or simulate memory leak in login view (+10MB per each login view instance)
 java -DsimulateMemoryLeak=true -jar target/bookstore-example.jar
 ```
-Load tests for SampleCrudView can fail due to threshold or custom checks. See examples below:
+Load tests for SampleCrudView can fail due to threshold or custom check failures. See the examples below:
 ```bash
 # run the load test on the server running on localhost
 mvn verify -Premote -Dk6.appHost=localhost
@@ -82,9 +82,19 @@ mvn verify -Premote -Dk6.appHost=localhost
 # run with 50 VUs and 1m duration
 mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m
 
-# run with a 2s httpReqDurationP99 threshold
-mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=2000
+# run with a 1s httpReqDurationP99 threshold
+mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=1000
 ```
+
+Example response times with `simulateSlowDB=true` and 10 VUs. All tests run simultaneously, keeping average response time low at the beginning and in the middle, and high at the end when the slow inventory view is still fetching data (simulated with a 2s thread sleep):  
+![report_response_times_sim.png](img/report_response_times_sim.png)
+
+The 2s request duration threshold check fails the test with `k6.threshold.httpReqDurationP99=2000`.
+![report_thresholds_sim.png](img/report_thresholds_sim.png)
+
+Some requests show high request duration for the inventory view:
+![report_requests_sim.png](img/report_requests_sim.png)
+
 Other example runs:
 ```bash
 # allow checks to fail without aborting the test
@@ -96,7 +106,6 @@ mvn verify -Premote -Dk6.appHost=localhost -Dwarmup=true
 # run a 2m stress test with 1000 VUs
 mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=1000 -Dk6.duration=2m -Dk6.loadPattern=stress -Dk6.threshold.checksAbortOnFail=false
 ```
-
 
 ### Branching information:
 * `vX` where X is the largest number is the latest version of the starter, using the latest platform version
