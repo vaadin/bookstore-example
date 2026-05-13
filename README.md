@@ -86,7 +86,7 @@ mvn verify -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m
 mvn verify -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=1000
 ```
 
-Example response times with `simulateSlowDB=true` and 10 VUs. All tests run simultaneously, keeping average response time low at the beginning and in the middle, and high at the end when the slow inventory view is still fetching data (simulated with a 2s thread sleep):  
+Example response times with `simulateSlowDB=true` and 10 VUs. Using a default ramp load pattern that gradually increases virtual users to max count, sustains the load, then ramps back down. All test scenarios run simultaneously based on configured weights like "aboutView:25,sampleCrudView:50,loginScreen:25". Average response time is low at the beginning and in the middle due to a higher number of requests, and high at the end when the slow inventory view test is still fetching data after quicker tests are done (slowness is simulated with a 2s thread sleep). Test normally takes ramp up + defined duration + ramp down duration in total, where ramp time (up and down) is 10s max. With a quick 5s default duration, slow tests actually extend the total length to 34s:  
 ![report_response_times_sim.png](img/report_response_times_sim.png)
 
 The 2s request duration threshold check fails the test with `k6.threshold.httpReqDurationP99=2000`.
