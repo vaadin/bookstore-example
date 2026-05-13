@@ -92,7 +92,7 @@ Example response times with `simulateSlowDB=true` and 10 VUs. All tests run simu
 The 2s request duration threshold check fails the test with `k6.threshold.httpReqDurationP99=2000`.
 ![report_thresholds_sim.png](img/report_thresholds_sim.png)
 
-Some requests show high request duration for the inventory view:
+UIDL requests fetching the next page of rows for the grid in the inventory view take a long time. The simulation adds a 2s delay per page fetch, which can add up when fetching more than once per request:
 ![report_requests_sim.png](img/report_requests_sim.png)
 
 Other example runs:
