@@ -51,7 +51,7 @@
 
         <!-- Skip flags for flexible execution -->
         <k6.skipRecord>false</k6.skipRecord>
-        <k6.skipRun>false</k6.skipRun>
+        <k6.skipRun>true</k6.skipRun>
     </properties>
 
     <dependencyManagement>
@@ -247,15 +247,15 @@
         </profile>
 
         <!--
-            DEFAULT PROFILE: Local Development Workflow
+            Local Development Workflow
             - Starts the application server locally
             - Records TestBench scenarios through proxy
-            - Runs a quick load test to verify the recording
+            - Runs a quick load test to verify the recording (skip by default)
 
-            Usage: mvn verify -Plocal
+            Usage: mvn verify -Precord
         -->
         <profile>
-            <id>local</id>
+            <id>record</id>
             <build>
                 <plugins>
                     <!-- K6 TestBench Converter Plugin -->
@@ -308,7 +308,7 @@
                                 </goals>
                                 <configuration>
                                     <skip>${k6.skipRun}</skip>
-                                    <testDir>${project.basedir}/../target/k6/tests/</testDir>
+                                    <testDir>${project.build.directory}/k6/tests/</testDir>
                                     <virtualUsers>${k6.vus}</virtualUsers>
                                     <duration>${k6.duration}</duration>
                                     <appPort>${app.port}</appPort>
@@ -333,15 +333,15 @@
         </profile>
 
         <!--
-            RECORD-ONLY PROFILE: Just record scenarios without running load test
-            Useful when preparing tests for later execution on remote infrastructure
+            Record scenarios and run load test locally
 
-            Usage: mvn verify -Precord-only
+            Usage: mvn verify -Precord,run
         -->
         <profile>
-            <id>record-only</id>
+            <id>run</id>
             <properties>
-                <k6.skipRun>true</k6.skipRun>
+                <k6.skipRecord>false</k6.skipRecord>
+                <k6.skipRun>false</k6.skipRun>
             </properties>
         </profile>
     </profiles>

@@ -44,15 +44,15 @@ Record load tests with the TestBench `testbench-converter-plugin` plugin and run
 them locally:
 
 ```bash
-mvn verify -Plocal
+mvn verify -Precord,run
 ```
 
 ```bash
 # record only, without running load tests
-mvn verify -Plocal,record-only
+mvn verify -Precord
 
 # record only with custom response check (response under 2s)
-mvn clean verify -Plocal,record-only -Dk6.checks.custom="ALL|response under 2s|(r) => r.timings.duration < 2000"
+mvn clean verify -Precord -Dk6.checks.custom="ALL|response under 2s|(r) => r.timings.duration < 2000"
 ```
 
 Run recorded tests on a remote server (requires `testbench-loadtest-support` at
