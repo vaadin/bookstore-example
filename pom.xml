@@ -41,7 +41,6 @@
         <!-- K6 test configuration -->
         <k6.vus>10</k6.vus>
         <k6.duration>5s</k6.duration>
-        <k6.testDir>${project.build.directory}/k6/tests</k6.testDir>
 
         <!-- Combined scenario weights (percentage of VUs for each scenario) -->
         <k6.combineScenarios>true</k6.combineScenarios>
@@ -309,7 +308,7 @@
                                 </goals>
                                 <configuration>
                                     <skip>${k6.skipRun}</skip>
-                                    <testDir>${k6.testDir}</testDir>
+                                    <testDir>${project.basedir}/../target/k6/tests/</testDir>
                                     <virtualUsers>${k6.vus}</virtualUsers>
                                     <duration>${k6.duration}</duration>
                                     <appPort>${app.port}</appPort>
@@ -326,92 +325,6 @@
                                 <goals>
                                     <goal>stop-server</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!--
-            REMOTE PROFILE: Production Load Testing
-            - Does NOT start any server (assumes server is running elsewhere)
-            - Runs pre-recorded k6 tests against a configurable remote target
-            - Designed to run from a dedicated load generation machine
-
-            Usage:
-              mvn verify -Premote -Dk6.appHost=staging.example.com
-              mvn verify -Premote -Dk6.appHost=10.0.1.50 -Dk6.appPort=8080 -Dk6.vus=100 -Dk6.duration=5m
-        -->
-        <profile>
-            <id>remote</id>
-            <build>
-                <plugins>
-                    <!-- Validate remote server is accessible -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.1.1</version>
-                        <executions>
-                            <execution>
-                                <id>check-remote-server</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>bash</executable>
-                                    <arguments>
-                                        <argument>-c</argument>
-                                        <argument>
-                                            echo "=============================================="
-                                            echo "Remote Load Test Configuration"
-                                            echo "=============================================="
-                                            echo "  Target: http://${k6.appHost}:${k6.appPort}"
-                                            echo "  Tests:  ${k6.testDir}"
-                                            echo "  VUs:    ${k6.vus}"
-                                            echo "  Duration: ${k6.duration}"
-                                            echo "=============================================="
-                                            echo ""
-                                            echo "Checking if remote server is accessible..."
-                                            if curl -s -o /dev/null --connect-timeout 10 "http://${k6.appHost}:${k6.appPort}"; then
-                                            echo "Remote server is accessible!"
-                                            else
-                                            echo "ERROR: Cannot reach http://${k6.appHost}:${k6.appPort}"
-                                            echo "Make sure the application is running on the target server."
-                                            exit 1
-                                            fi
-                                        </argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- K6 load tests against remote server -->
-                    <plugin>
-                        <groupId>com.vaadin</groupId>
-                        <artifactId>testbench-converter-plugin</artifactId>
-                        <version>${testbench.version}</version>
-                        <executions>
-                            <execution>
-                                <id>run-remote-load-tests</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <testDir>${k6.testDir}</testDir>
-                                    <virtualUsers>${k6.vus}</virtualUsers>
-                                    <duration>${k6.duration}</duration>
-                                    <appIp>${k6.appHost}</appIp>
-                                    <appPort>${k6.appPort}</appPort>
-                                    <managementPort>${management.port}</managementPort>
-                                    <combineScenarios>${k6.combineScenarios}</combineScenarios>
-                                    <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
-                                    <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
-                                    <httpReqDurationP99>2000</httpReqDurationP99>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

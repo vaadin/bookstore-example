@@ -59,7 +59,8 @@ Run recorded tests on a remote server (requires `testbench-loadtest-support` at
 runtime):
 
 ```bash
-mvn verify -Premote -Dk6.appHost=staging.example.com
+cd loadttest
+mvn verify -Dk6.appHost=staging.example.com
 ```
 
 The load test summary and error log are written to the `target/k6/tests/report/` folder.
@@ -67,23 +68,22 @@ The load test summary and error log are written to the `target/k6/tests/report/`
 Starting the server with the `simulateSlowDB=true` system property slows down the inventory listing view, resulting in higher response times, which affects the load test results.
 
 ```bash
-# making a copy of the jar as bookstore-example.jar
-cp target/bookstore-example-1.0-SNAPSHOT.jar target/bookstore-example.jar
 # start the production jar package simulating a slow SampleCrudView
-java -DsimulateSlowDB=true -jar target/bookstore-example.jar
+java -DsimulateSlowDB=true -jar target/bookstore-example-1.0-SNAPSHOT.jar
 # or simulate memory leak in login view (+10MB per each login view instance)
-java -DsimulateMemoryLeak=true -jar target/bookstore-example.jar
+java -DsimulateMemoryLeak=true -jar target/bookstore-example-1.0-SNAPSHOT.jar
 ```
 Load tests for SampleCrudView can fail due to threshold or custom check failures. See the examples below:
 ```bash
+cd loadtest
 # run the load test on the server running on localhost
-mvn verify -Premote -Dk6.appHost=localhost
+mvn verify -Dk6.appHost=localhost
 
 # run with 50 VUs and 1m duration
-mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m
+mvn verify -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m
 
 # run with a 1s httpReqDurationP99 threshold
-mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=1000
+mvn verify -Dk6.appHost=localhost -Dk6.vus=50 -Dk6.duration=1m -Dk6.threshold.httpReqDurationP99=1000
 ```
 
 Example response times with `simulateSlowDB=true` and 10 VUs. All tests run simultaneously, keeping average response time low at the beginning and in the middle, and high at the end when the slow inventory view is still fetching data (simulated with a 2s thread sleep):  
@@ -97,14 +97,15 @@ Some requests show high request duration for the inventory view:
 
 Other example runs:
 ```bash
+cd  loadtest
 # allow checks to fail without aborting the test
-mvn verify -Premote -Dk6.appHost=localhost -Dk6.threshold.checksAbortOnFail=false
+mvn verify -Dk6.appHost=localhost -Dk6.threshold.checksAbortOnFail=false
 
 # run with a warmup iteration before the actual load test
-mvn verify -Premote -Dk6.appHost=localhost -Dwarmup=true
+mvn verify -Dk6.appHost=localhost -Dwarmup=true
 
 # run a 2m stress test with 1000 VUs
-mvn verify -Premote -Dk6.appHost=localhost -Dk6.vus=1000 -Dk6.duration=2m -Dk6.loadPattern=stress -Dk6.threshold.checksAbortOnFail=false
+mvn verify -Dk6.appHost=localhost -Dk6.vus=1000 -Dk6.duration=2m -Dk6.loadPattern=stress -Dk6.threshold.checksAbortOnFail=false
 ```
 
 ### Branching information:
