@@ -273,7 +273,7 @@
                                 <configuration>
                                     <serverJar>${project.build.directory}/bookstore-example-1.0-SNAPSHOT.jar</serverJar>
                                     <serverPort>${app.port}</serverPort>
-                                    <managementPort>8082</managementPort>
+                                    <managementPort>${management.port}</managementPort>
                                 </configuration>
                             </execution>
 
