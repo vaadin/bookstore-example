@@ -11,11 +11,9 @@ import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.renderer.LitRenderer;
-import com.vaadin.flow.internal.JacksonUtils;
 
 import org.vaadin.example.bookstore.backend.data.Category;
 import org.vaadin.example.bookstore.backend.data.Product;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Grid of products, handling the visual presentation and filtering of a set of
@@ -48,15 +46,12 @@ public class ProductGrid extends Grid<Product> {
         // Available, Coming and Discontinued, are defined in shared-styles.css
         // and are
         // used here in availabilityTemplate.
-        final String availabilityTemplate = "<vaadin-icon icon=\"vaadin:circle\" class=\"${item.availability.name}\"></vaadin-icon> ${item.availability.value}";
+        final String availabilityTemplate = "<vaadin-icon icon=\"vaadin:circle\" class=\"${item.availabilityValue}\"></vaadin-icon> ${item.availabilityName}";
         addColumn(LitRenderer.<Product>of(availabilityTemplate)
-                .withProperty("availability",
-                        product -> {
-                            ObjectNode availabilityMap = JacksonUtils.createObjectNode();
-                            availabilityMap.put("name", product.getAvailability().getName());
-                            availabilityMap.put("value", product.getAvailability().toString());
-                            return availabilityMap;
-                        }))
+                .withProperty("availabilityName",
+                        product -> product.getAvailability().getName())
+                .withProperty("availabilityValue",
+                        product -> product.getAvailability().toString()))
                                 .setHeader(resourceBundle.getString("availability"))
                                 .setComparator(Comparator
                                         .comparing(Product::getAvailability))
