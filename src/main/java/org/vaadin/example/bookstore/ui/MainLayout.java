@@ -71,7 +71,7 @@ public class MainLayout extends AppLayout implements RouterLayout {
 
         // Add language selector
         top.add(new LanguageSwitcher(Locale.ENGLISH,
-                new Locale.Builder().setLanguage("fa").setRegion("IR").setVariant("فارسی").build()));
+                Locale.of("fa", "IR", "فارسی")));
 
         addToNavbar(top);
 

@@ -73,7 +73,7 @@ public class LoginScreen extends FlexLayout {
         loginInformation.add(loginInfoText);
         loginInformation.add(
                 new LanguageSwitcher(Locale.ENGLISH,
-                        new Locale.Builder().setLanguage("fa").setRegion("IR").setVariant("فارسی").build()));
+                        Locale.of("fa", "IR", "فارسی")));
 
         return loginInformation;
     }
