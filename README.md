@@ -101,6 +101,9 @@ cd  loadtest
 # allow checks to fail without aborting the test
 mvn verify -Dk6.appHost=localhost -Dk6.threshold.checksAbortOnFail=false
 
+# allow threshold to fail without aborting the test
+mvn verify -Dk6.appHost=localhost -Dk6.failOnThreshold=false
+
 # run with a warmup iteration before the actual load test
 mvn verify -Dk6.appHost=localhost -Dwarmup=true
 
