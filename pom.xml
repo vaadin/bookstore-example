@@ -26,8 +26,8 @@
         <maven.compiler.target>21</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>25.2.0-alpha7</vaadin.version>
-        <testbench.version>10.2.0-alpha5</testbench.version>
+        <vaadin.version>25.2.0-beta1</vaadin.version>
+        <testbench.version>25.2.0-beta1</testbench.version>
 
         <!-- Local server configuration (used in default profile) -->
         <app.port>8080</app.port>
@@ -296,7 +296,7 @@
                                     <testWorkDir>${project.basedir}</testWorkDir>
                                     <harDir>${project.build.directory}</harDir>
                                     <outputDir>${project.build.directory}/k6/tests</outputDir>
-                                    <thinkTimeEnabled>false</thinkTimeEnabled>
+                                    <thinkTimeEnabled>true</thinkTimeEnabled>
                                 </configuration>
                             </execution>
 
