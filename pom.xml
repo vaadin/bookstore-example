@@ -30,7 +30,7 @@
         <testbench.version>10.2.0-alpha5</testbench.version>
         <!-- vaadin-micrometer is not yet part of vaadin-bom, so it is versioned
              explicitly. -->
-        <vaadin.micrometer.version>25.3-SNAPSHOT</vaadin.micrometer.version>
+        <vaadin.micrometer.version>${vaadin.version}</vaadin.micrometer.version>
 
         <!-- Local server configuration (used in default profile) -->
         <app.port>8080</app.port>
@@ -139,6 +139,20 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <!-- Distributed tracing: bridge Micrometer Observations (incl. the
+             vaadin.* spans) to OpenTelemetry and export them over OTLP to
+             Jaeger. These Spring Boot modules bring both the libraries
+             (micrometer-tracing-bridge-otel, opentelemetry-exporter-otlp) and
+             the auto-configuration that honours the management.otlp.tracing.*
+             properties. Versions are managed by the Spring Boot BOM. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-opentelemetry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-micrometer-tracing-opentelemetry</artifactId>
         </dependency>
 <dependency>
     <groupId>ch.qos.logback</groupId>
