@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.4</version>
+        <version>4.1.0-RC1</version>
     </parent>
 
     <properties>
@@ -26,32 +26,17 @@
         <maven.compiler.target>21</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-        <vaadin.version>25.2.0-beta1</vaadin.version>
-        <testbench.version>25.2.0-beta1</testbench.version>
+        <vaadin.version>25.3-SNAPSHOT</vaadin.version>
+        <testbench.version>10.2.0-alpha5</testbench.version>
+        <!-- vaadin-micrometer is not yet part of vaadin-bom, so it is versioned
+             explicitly. -->
+        <vaadin.micrometer.version>25.3-SNAPSHOT</vaadin.micrometer.version>
 
         <!-- Local server configuration (used in default profile) -->
         <app.port>8080</app.port>
         <management.port>8082</management.port>
         <proxy.port>6000</proxy.port>
 
-        <!-- Remote server configuration (used in remote profile) -->
-        <k6.appHost>localhost</k6.appHost>
-        <k6.appPort>8080</k6.appPort>
-
-        <!-- K6 test configuration -->
-        <k6.vus>10</k6.vus>
-        <k6.duration>5s</k6.duration>
-
-        <!-- Combined scenario weights (percentage of VUs for each scenario) -->
-        <k6.combineScenarios>true</k6.combineScenarios>
-        <k6.scenarioWeights>aboutView:25,sampleCrudView:50,loginScreen:25</k6.scenarioWeights>
-
-        <!-- Enable Vaadin-specific metrics collection (requires VaadinActuator in demo app) -->
-        <k6.collectVaadinMetrics>true</k6.collectVaadinMetrics>
-
-        <!-- Skip flags for flexible execution -->
-        <k6.skipRecord>false</k6.skipRecord>
-        <k6.skipRun>true</k6.skipRun>
     </properties>
 
     <dependencyManagement>
@@ -142,7 +127,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
+        <!-- Vaadin Flow instrumentation for Micrometer (vaadin.* metrics) -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-micrometer-spring-boot</artifactId>
+            <version>${vaadin.micrometer.version}</version>
+        </dependency>
+        <!-- Exposes the metrics in Prometheus scrape format via
+             /actuator/prometheus -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.5.32</version>
+</dependency>
     </dependencies>
 
     <repositories>
@@ -247,12 +249,12 @@
         </profile>
 
         <!--
-            Local Development Workflow
+            DEFAULT PROFILE: Local Development Workflow
             - Starts the application server locally
             - Records TestBench scenarios through proxy
-            - Runs a quick load test to verify the recording (skip by default)
+            - Runs a quick load test to verify the recording
 
-            Usage: mvn verify -Precord
+            Usage: mvn verify -Plocal
         -->
         <profile>
             <id>record</id>
@@ -273,7 +275,7 @@
                                 <configuration>
                                     <serverJar>${project.build.directory}/bookstore-example-1.0-SNAPSHOT.jar</serverJar>
                                     <serverPort>${app.port}</serverPort>
-                                    <managementPort>${management.port}</managementPort>
+                                    <managementPort>8082</managementPort>
                                 </configuration>
                             </execution>
 
@@ -285,7 +287,6 @@
                                     <goal>record</goal>
                                 </goals>
                                 <configuration>
-                                    <skip>${k6.skipRecord}</skip>
                                     <testClasses>
                                         <testClass>AboutViewIT</testClass>
                                         <testClass>LoginScreenIT</testClass>
@@ -293,30 +294,6 @@
                                     </testClasses>
                                     <proxyPort>${proxy.port}</proxyPort>
                                     <appPort>${app.port}</appPort>
-                                    <testWorkDir>${project.basedir}</testWorkDir>
-                                    <harDir>${project.build.directory}</harDir>
-                                    <outputDir>${project.build.directory}/k6/tests</outputDir>
-                                    <thinkTimeEnabled>true</thinkTimeEnabled>
-                                </configuration>
-                            </execution>
-
-                            <!-- Run k6 load tests -->
-                            <execution>
-                                <id>run-load-tests</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <skip>${k6.skipRun}</skip>
-                                    <testDir>${project.build.directory}/k6/tests/</testDir>
-                                    <virtualUsers>${k6.vus}</virtualUsers>
-                                    <duration>${k6.duration}</duration>
-                                    <appPort>${app.port}</appPort>
-                                    <managementPort>${management.port}</managementPort>
-                                    <combineScenarios>${k6.combineScenarios}</combineScenarios>
-                                    <scenarioWeights>${k6.scenarioWeights}</scenarioWeights>
-                                    <collectVaadinMetrics>${k6.collectVaadinMetrics}</collectVaadinMetrics>
                                 </configuration>
                             </execution>
 
@@ -331,19 +308,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-
-        <!--
-            Record scenarios and run load test locally
-
-            Usage: mvn verify -Precord,run
-        -->
-        <profile>
-            <id>run</id>
-            <properties>
-                <k6.skipRecord>false</k6.skipRecord>
-                <k6.skipRun>false</k6.skipRun>
-            </properties>
         </profile>
     </profiles>
 </project>

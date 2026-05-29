@@ -23,6 +23,7 @@ import com.vaadin.flow.server.VaadinService;
 import org.vaadin.example.bookstore.security.SecurityService;
 import org.vaadin.example.bookstore.ui.about.AboutView;
 import org.vaadin.example.bookstore.ui.inventory.InventoryView;
+import org.vaadin.example.bookstore.ui.metrics.MetricsView;
 
 /**
  * The main layout. Contains the navigation menu.
@@ -66,6 +67,9 @@ public class MainLayout extends AppLayout {
 
         addToDrawer(createMenuLink(AboutView.class, AboutView.VIEW_NAME,
                 VaadinIcon.INFO_CIRCLE.create()));
+
+        addToDrawer(createMenuLink(MetricsView.class, MetricsView.VIEW_NAME,
+                VaadinIcon.CHART.create()));
 
         // Create logout button but don't add it yet; admin view might be added
         // in between (see #onAttach())
