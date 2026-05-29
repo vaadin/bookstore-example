@@ -1,0 +1,6 @@
+scrape_configs:
+  - job_name: bookstore
+    metrics_path: /actuator/prometheus
+    static_configs:
+      # The app exposes actuator on the management port (management.server.port=8082)
+      - targets: [host.docker.internal:8082]
