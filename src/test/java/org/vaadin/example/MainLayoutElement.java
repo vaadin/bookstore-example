@@ -16,7 +16,10 @@ public class MainLayoutElement extends AppLayoutElement {
             this.getDrawerToggle().click();
         }
 
-        waitUntil(driver ->"Inventory".equals(findElements(By.className("menu-link")).get(0).getText()));
+        waitUntil(driver -> {
+            List<WebElement> links = driver.findElements(By.className("menu-link"));
+            return !links.isEmpty() && "Inventory".equals(links.get(0).getText());
+        });
         final List<WebElement> elements = new ArrayList<>();
         elements.addAll(findElements(By.className("menu-link")));
         elements.addAll(findElements(By.className("menu-button")));
